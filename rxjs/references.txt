@@ -1,1 +1,4 @@
 https://javascript.tutorialhorizon.com/2017/03/23/rxjs-subject-vs-observable/
+https://www.youtube.com/watch?v=Fc0YlRbtkdo
+
+https://www.learnrxjs.io/
