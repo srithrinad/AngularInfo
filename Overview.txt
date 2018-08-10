@@ -1,0 +1,5 @@
+1) Ssallback vs Promise vs Observables vs Async Await
+
+Async Await also return promise , in async function no need to use then for a promise functions and use await
+
+2) Hot vs Cold Observables
