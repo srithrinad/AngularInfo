@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <title>Angular Ngrx Store Tutorial - Learn Angular State Management</title>
+
+	    <meta name="keywords" content="angular ngrx store tutorial, angular 5 ngrx store tutorial, angular state management">
+	    <meta name="description" content="If you're developing a medium to large sized Angular application, you're going to want to learn NgRX Store.">
+
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="csrf-token" value="DCjha89gtfjKmJc2DF3wGxvArsEmGhR4CrgDrSqM">
+
+
+
+        <link media="all" type="text/css" rel="stylesheet" href="https://coursetro.com/css/app.css">
+
+        
+        <link media="all" type="text/css" rel="stylesheet" href="https://coursetro.com/css/courseview.css">
+
+        <link media="all" type="text/css" rel="stylesheet" href="https://coursetro.com/css/posts.css">
+
+        <link media="all" type="text/css" rel="stylesheet" href="https://coursetro.com/css/prism.css">
+
+        <script src="https://coursetro.com/js/prism.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <meta property="og:url"           content="https://coursetro.com/posts/code/151/Angular-Ngrx-Store-Tutorial---Learn-Angular-State-Management" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Angular Ngrx Store Tutorial - Learn Angular State Management" />
+    <meta property="og:description"   content="If you&#039;re developing a medium to large sized Angular application, you&#039;re going to want to learn NgRX Store." />
+    <meta property="og:image"         content="https://coursetro.com/images/post-code.png" />
+
+    </head>
+    <body>
+<!-- Load BSA FancyBar -->
+<script async type="text/javascript" src="//cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=coursetro" id="_fancybar_js"></script>
+
+<div class="columns large-9 small-12">
+            
+    <img src="https://s3.amazonaws.com/coursetro/posts/151-full.png" class="post-img-full">
+
+            <div class="inner-content">
+                
+    
+    <ul>
+<li><a href="https://github.com/designcourse/ngrx-tutorial">Find this project at Github</a></li>
+</ul>
+<p><strong>Ngrx Store</strong> is an RxJS powered state management solution for Angular apps. I recently created a <a href="/courses/25/A-Comprehensive-RxJS-Tutorial---Learn-ReactiveX-for-JavaScript-">Free RxJS Course</a> (ReactiveX) that you should definitely check out before attempting to learn Ngrx.&nbsp;</p>
+<p>Ngrx store helps you build more robust applications by better organizing your app's <em>state</em>&nbsp;-- or in other words, your app's data. Without a state management solution, dealing with complex data across multiple components can become quite difficult to handle and test.</p>
+<p>In this tutorial, I'm going to show you exactly how to get up and running with Ngrx store with a brand new Angular 5 project.</p>
+<p>So, let's get started!</p>
+<div class="in-add"><script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- In-Content Ad -->
+<ins class="adsbygoogle" style="display: block; height: 112px;" data-ad-client="ca-pub-0773983979886271" data-ad-slot="3149669428" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display: inline-table; border: none; height: 112px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 907px; background-color: transparent;"><ins id="aswift_1_anchor" style="display: block; border: none; height: 112px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 907px; background-color: transparent; overflow: hidden;"><iframe width="907" height="112" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left: 0px; position: absolute; top: 0px; width: 907px; height: 112px;"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></div><div class="inner-content"><h2>If you prefer watching a video..</h2>
+<p>Be sure to&nbsp;<a href="http://youtube.com/user/designcourse">Subscribe to the Official Coursetro Youtube Channel</a>&nbsp;for more videos.</p>
+<div class="videoWrapper"><iframe src="https://www.youtube.com/embed/9P5DTlg9oLc" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+</div><div class="inner-content"><h2>Starting the Project</h2>
+<p>I'm going to use the Angular CLI to start a new Angular 5 project:</p>
+<pre class=" language-markup"><code class=" language-markup">&gt; ng new ngrx-tutorial
+&gt; cd ngrx-tutorial</code></pre>
+<p>Once inside, we'll need to install Ngrx Store:</p>
+<pre class=" language-markup"><code class=" language-markup">&gt; yarn add @ngrx/store</code></pre>
+<p>Then, if you're using Visual Studio Code as an editor, run <em>code .</em>&nbsp;followed by:</p>
+<pre class=" language-markup"><code class=" language-markup">&gt; ng serve -o</code></pre>
+<p>This will open a new browser window at <em><a class="vglnk" href="http://localhost:4200" rel="nofollow"><span>http</span><span>://</span><span>localhost</span><span>:</span><span>4200</span></a></em>.</p>
+</div><div class="inner-content"><h2>Creating the Model</h2>
+<p>For our fictional little project, we're going to allow users to submit both a <em>name</em>&nbsp;and <em>url</em>&nbsp;of a tutorial using a simple form.&nbsp;</p>
+<p>We won't be persisting this data in a database, because that would extend the scope of this tutorial too much. We only want to focus on Ngrx/store.</p>
+<p>Being that we want to store 2 pieces of data (in the flavor of an array of objects), we will first define a model.</p>
+<p>Create the following folder and file: <strong>/src/app/models/tutorial.model.ts</strong>&nbsp;and place inside of it the following code:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">Tutorial</span> <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> string<span class="token punctuation">;</span>
+    url<span class="token punctuation">:</span> string<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Now that we've defined our model, we'll move onto creating an <em>action</em>.</p>
+</div><div class="inner-content"><h2>Creating an Action</h2>
+<p>An action in Ngrx/store is two things:</p>
+<ol>
+<li>A <em>type</em>&nbsp;in the form of a string. It describes what's happening.</li>
+<li>It contains an optional payload of data.</li>
+</ol>
+<p>So, think of an action as your mailman who delivers you a message "<em>Hey, add this package to your shelf.</em>" It's up to you to determine where and how you're going to add that package, which is called a <em>reducer</em>, (we'll get to that shortly).</p>
+<p>Create the following folder and file: <strong>/src/app/actions/tutorial.actions.ts</strong>&nbsp;with the following contents:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token comment" spellcheck="true">// Section 1</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Injectable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Action <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Tutorial <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./../models/tutorial.model'</span>
+
+<span class="token comment" spellcheck="true">// Section 2</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> ADD_TUTORIAL       <span class="token operator">=</span> <span class="token string">'[TUTORIAL] Add'</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> REMOVE_TUTORIAL    <span class="token operator">=</span> <span class="token string">'[TUTORIAL] Remove'</span>
+
+<span class="token comment" spellcheck="true">// Section 3</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AddTutorial</span> <span class="token keyword">implements</span> <span class="token class-name">Action</span> <span class="token punctuation">{</span>
+    readonly type <span class="token operator">=</span> ADD_TUTORIAL
+
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">public</span> payload<span class="token punctuation">:</span> Tutorial<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RemoveTutorial</span> <span class="token keyword">implements</span> <span class="token class-name">Action</span> <span class="token punctuation">{</span>
+    readonly type <span class="token operator">=</span> REMOVE_TUTORIAL
+
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">public</span> payload<span class="token punctuation">:</span> number<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// Section 4</span>
+<span class="token keyword">export</span> type Actions <span class="token operator">=</span> AddTutorial <span class="token operator">|</span> RemoveTutorial</code></pre>
+<p>I'm going to dissect the above 4 sections so that you can understand what's happening:</p>
+<ul>
+<li><strong>Seciton 1</strong><br>Here, we're simply importing our Tutorial model and <strong>Action</strong>&nbsp;from ngrx/store. This makse sense, being that we're working with <em>actions</em>.</li>
+<li><strong>Section 2</strong><br>We're defining the <em>type</em>&nbsp;of action, which is in the form of a string constant.</li>
+<li><strong>Section 3</strong><br>We're creating a class for each action with a constructor that allows us to pass in the payload. This isn't a required step, but it does provide you with strong typing.<br><br></li>
+<li><strong>Section 4</strong><br>We're exporting all of our action classes for use within our upcoming reducer.</li>
+</ul>
+</div><div class="inner-content"><h2>Creating a Reducer</h2>
+<p>Now that we have a model and our actions, we need to create a reducer. A reducer is what takes the incoming action and decides what to do with it. It takes the previous state and returns a new state based on the given action.&nbsp;</p>
+<p>Create the following folder and file: <strong>/src/app/reducers/tutorial.reducer.ts</strong>&nbsp;with the following contents:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Action <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Tutorial <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./../models/tutorial.model'</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> TutorialActions <span class="token keyword">from</span> <span class="token string">'./../actions/tutorial.actions'</span>
+
+<span class="token comment" spellcheck="true">// Section 1</span>
+<span class="token keyword">const</span> initialState<span class="token punctuation">:</span> Tutorial <span class="token operator">=</span> <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">'Initial Tutorial'</span><span class="token punctuation">,</span>
+    url<span class="token punctuation">:</span> <span class="token string">'<a class="vglnk" href="http://google.com" rel="nofollow"><span>http</span><span>://</span><span>google</span><span>.</span><span>com</span></a>'</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// Section 2</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">reducer</span><span class="token punctuation">(</span>state<span class="token punctuation">:</span> Tutorial<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>initialState<span class="token punctuation">]</span><span class="token punctuation">,</span> action<span class="token punctuation">:</span> TutorialActions<span class="token punctuation">.</span>Actions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">// Section 3</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> TutorialActions<span class="token punctuation">.</span>ADD_TUTORIAL<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token operator">...</span>state<span class="token punctuation">,</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Here's what's happening:</p>
+<ul>
+<li><strong>Section 1</strong><br>Here, we're defining an initial or default state. This isn't required if you don't want to define a state right out of the box.<br><br></li>
+<li><strong>Section 2</strong><br>This is our actual reducer. It takes in a state, which we're defining as a <em>Tutorial</em>&nbsp;type and we've optionally bound it to <em>initialState</em>. It also takes in the action from our <em>/actions/tutorial.actions</em>&nbsp;file.<br><br></li>
+<li><strong>Section&nbsp;3</strong><br>First, we use a switch to determine the type of action. In the <em>case</em>&nbsp;of adding a tutorial, we return the new state with the help of our <em>newState()</em>&nbsp;function. We're simply passing in the previous state in the first parameter, and then our action in the second.<br><br>In the event that the <em>action.type</em>&nbsp;does not match any cases, it will simply return the <em>state</em>, as provided in the first parameter of our reducer.</li>
+</ul>
+<p>&nbsp;Whew!</p>
+</div><div class="inner-content"><h2>Creating an App State</h2>
+<p>Don't worry, we're almost done with the setup work here. One last thing we need to do is to define an app state.</p>
+<p>Create the following file: <strong>/src/app/app.state.ts</strong>:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Tutorial <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./models/tutorial.model'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">AppState</span> <span class="token punctuation">{</span>
+  readonly tutorial<span class="token punctuation">:</span> Tutorial<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>We will import this file within the components that we wish to access ngrx.</p>
+</div><div class="inner-content"><h2>Updates to App.Module</h2>
+<p>We need to import <em>@ngrx/store</em>&nbsp;and our reducer.&nbsp;</p>
+<p>Open up <strong>/src/app/app.module.ts</strong>&nbsp;and update the following:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token comment" spellcheck="true">// Other imports removed for brevity</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> StoreModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> reducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./reducers/tutorial.reducer'</span><span class="token punctuation">;</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// Other code removed for brevity</span>
+  imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    BrowserModule<span class="token punctuation">,</span>
+    StoreModule<span class="token punctuation">.</span><span class="token function">forRoot</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      tutorial<span class="token punctuation">:</span> reducer
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// Other code removed for brevity</span></code></pre>
+</div><div class="inner-content"><h2>Generating Components</h2>
+<p>Let's go ahead and generate two components for handling reading from ngrx/store, and writing to it.&nbsp;</p>
+<p>In your console within the project, type:</p>
+<pre class=" language-markup"><code class=" language-markup">&gt; ng g c read
+&gt; ng g c create</code></pre>
+</div><div class="inner-content"><h2>Reading from Ngrx Store</h2>
+<p>Open up <strong>/src/app/read/read.component.ts</strong>&nbsp;and&nbsp;import the following:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'rxjs/Observable'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Tutorial <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./../models/tutorial.model'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AppState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./../app.state'</span><span class="token punctuation">;</span></code></pre>
+<p>Next, in the class:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ReadComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnInit</span> <span class="token punctuation">{</span>
+
+  <span class="token comment" spellcheck="true">// Section 1</span>
+  tutorials<span class="token punctuation">:</span> Observable<span class="token operator">&lt;</span>Tutorial<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Section 2</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> store<span class="token punctuation">:</span> Store<span class="token operator">&lt;</span>AppState<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">this</span><span class="token punctuation">.</span>tutorials <span class="token operator">=</span> store<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">'tutorial'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><strong>Section 1</strong>&nbsp;<br>We're defining an observable named <em>tutorials</em>&nbsp;which we will later display in the template.</li>
+<li><strong>Section 2</strong>&nbsp;<br>We're accessing the <em>store</em>&nbsp;from ngrx within the constructor, and then selecting&nbsp;<em>tutorial</em>&nbsp;which is defined as a the property from <em>app.module.ts</em>&nbsp;in <em>StoreModule.forRoot({})</em>. This calls the tutorial reducer and returns the tutorial state.</li>
+</ul>
+<p>Next, visit <strong>/src/app/read/read.component.html</strong>&nbsp;and paste the following HTML:</p>
+<pre class=" language-markup"><code class=" language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>right<span class="token punctuation">"</span></span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tutorials<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">&gt;</span></span>Tutorials<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">*ngFor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>let tutorial of tutorials | async<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[href]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tutorial.url<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>{{ tutorial.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>Then, visit <strong>/src/app/app.component.html</strong>&nbsp;and paste:</p>
+<pre class=" language-markup"><code class=" language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-create</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-create</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-read</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-read</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>And while we're dealing with non-ngrx stuff at the moment, visit <strong>/src/styles.css</strong>&nbsp;and paste the following CSS rulesets:</p>
+<pre class=" language-css"><code class=" language-css"><span class="token selector">body, html</span> <span class="token punctuation">{</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+    <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">'Arial'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.left, .right</span> <span class="token punctuation">{</span>
+    <span class="token property">float</span><span class="token punctuation">:</span>left<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span>50% - 6em<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 3em<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">input[type="text"]</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+    <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>At this point, if you save the project and view the browser, you should see some ugliness like this:</p>
+<p><img style="display: block; margin: 0 auto; text-align: center; max-width: 100%;" src="https://s3.amazonaws.com/coursetro/posts/content_images/1-1522947284187.png"></p>
+<p>Congrats! You've just read from <em>ngrx/store</em>!</p>
+</div><div class="inner-content"><h2>Writing to Ngrx Store</h2>
+<p>Now that we know how to read from Ngrx, let's write to it and actually call our <em>ADD_TUTORIAL</em>&nbsp;action.</p>
+<p>Visit <strong>/src/app/create/create.component.ts</strong>&nbsp;and import the following:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> OnInit <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AppState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./../app.state'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Tutorial <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./../models/tutorial.model'</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> TutorialActions <span class="token keyword">from</span> <span class="token string">'./../actions/tutorial.actions'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'rxjs/Observable'</span><span class="token punctuation">;</span>
+</code></pre>
+<p>In the class, specify:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">CreateComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnInit</span> <span class="token punctuation">{</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> store<span class="token punctuation">:</span> Store<span class="token operator">&lt;</span>AppState<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  <span class="token function">addTutorial</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> url<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">TutorialActions<span class="token punctuation">.</span>AddTutorial</span><span class="token punctuation">(</span><span class="token punctuation">{</span>name<span class="token punctuation">:</span> name<span class="token punctuation">,</span> url<span class="token punctuation">:</span> url<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The main area of focus is <strong>store.dispatch</strong>&nbsp;which takes in&nbsp;the object containing a name and url property.</p>
+<p>Open <strong>/src/app/create/create.component.html</strong>&nbsp;and paste the following:</p>
+<pre class=" language-markup"><code class=" language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>left<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>name<span class="token punctuation">"</span></span> <span class="token attr-name">#name</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>url<span class="token punctuation">"</span></span> <span class="token attr-name">#url</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">(click)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>addTutorial(name.value,url.value)<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Add a Tutorial<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>Normally, we would use Reactive Forms for this, but that would extend beyond the scope of this tutorial.</p>
+<p>Save the project and you will see the following:</p>
+<p><img style="display: block; margin: 0 auto; text-align: center; max-width: 100%;" src="https://s3.amazonaws.com/coursetro/posts/content_images/2-1522950583325.png"></p>
+<p>Try adding a tutorial:</p>
+<p><img style="display: block; margin: 0 auto; text-align: center; max-width: 100%;" src="https://s3.amazonaws.com/coursetro/posts/content_images/3-1522950604461.png"></p>
+<p>Awesome. As you can see, our observale on the right is updated with data we submitted to Ngrx store.</p>
+<p>Let's try dispatching another action that will allow us to remove a tutorial.</p>
+</div><div class="inner-content"><h2>Removing from Ngrx Store</h2>
+<p>To give us some more muscle memory, let's try removing tutorials on click.</p>
+<p>Visit <strong>/src/app/read/read.component.html</strong>&nbsp;and modify the <em>li</em>&nbsp;line to:</p>
+<pre class=" language-markup"><code class=" language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">(click)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>delTutorial(i)<span class="token punctuation">"</span></span> <span class="token attr-name">*ngFor</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>let tutorial of tutorials | async; let i <span class="token punctuation">=</span> index<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></code></pre>
+<p>This will pass the index of the currently clicked list item to a function called <em>delTutorial()</em>.</p>
+<p>Open <strong>read.component.ts</strong>&nbsp;and make the following adjustments:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token comment" spellcheck="true">// Import our actions at the top</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> TutorialActions <span class="token keyword">from</span> <span class="token string">'./../actions/tutorial.actions'</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// In the class, add:</span>
+  <span class="token function">delTutorial</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">TutorialActions<span class="token punctuation">.</span>RemoveTutorial</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span></code></pre>
+<p>This will call our <em>RemoveTutorial</em>&nbsp;action and pass in the index.</p>
+<p>Now, let's visit <strong>/src/app/reducers/tutorial.reducer.ts</strong>&nbsp;and add another case:</p>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">reducer</span><span class="token punctuation">(</span>state<span class="token punctuation">:</span> Tutorial<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>initialState<span class="token punctuation">]</span><span class="token punctuation">,</span> action<span class="token punctuation">:</span> TutorialActions<span class="token punctuation">.</span>Actions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> TutorialActions<span class="token punctuation">.</span>ADD_TUTORIAL<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token operator">...</span>state<span class="token punctuation">,</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">// Add this case:</span>
+        <span class="token keyword">case</span> TutorialActions<span class="token punctuation">.</span>REMOVE_TUTORIAL<span class="token punctuation">:</span>
+            state<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span>payload<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+            
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>We're simply using <em>.splice</em>&nbsp;to modify the state and then we return it.</p>
+<p>Now, try it out in the browser!&nbsp; Try clicking on (or to the right) of one of the list items, and it will be removed.</p>
+</div><div class="inner-content"><h2>Conclusion</h2>
+<p>That's Ngrx Store in a nutshell. Of course, there's a lot more to it, but you should have a basic understanding. Shortly, I will create a new tutorial that will take a look at using Ngrx Store for making actual API calls.</p>
+<br>
+
+        <!-- Your like button code -->
+    <div class="fb-like fb_iframe_widget" data-href="https://coursetro.com/posts/code/151/Angular-Ngrx-Store-Tutorial---Learn-Angular-State-Management" data-layout="standard" data-action="like" data-show-faces="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;container_width=907&amp;href=https%3A%2F%2Fcoursetro.com%2Fposts%2Fcode%2F151%2FAngular-Ngrx-Store-Tutorial---Learn-Angular-State-Management&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;show_faces=true"><span style="vertical-align: bottom; width: 450px; height: 20px;"><iframe name="f11cb01caa3883" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:like Facebook Social Plugin" src="https://www.facebook.com/plugins/like.php?action=like&amp;app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FQX17B8fU-Vm.js%3Fversion%3D42%23cb%3Df388bb50b2edab%26domain%3Dcoursetro.com%26origin%3Dhttps%253A%252F%252Fcoursetro.com%252Ff208652518ac184%26relation%3Dparent.parent&amp;container_width=907&amp;href=https%3A%2F%2Fcoursetro.com%2Fposts%2Fcode%2F151%2FAngular-Ngrx-Store-Tutorial---Learn-Angular-State-Management&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;show_faces=true" style="border: none; visibility: visible; width: 450px; height: 20px;" class=""></iframe></span></div>
+
+    <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 60px; height: 20px;" title="Twitter Tweet Button" src="https://platform.twitter.com/widgets/tweet_button.1025be460f33762a866ea882e1687ff4.en.html#dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=https%3A%2F%2Fcoursetro.com%2Fposts%2Fcode%2F151%2FAngular-Ngrx-Store-Tutorial---Learn-Angular-State-Management%23&amp;size=m&amp;text=Angular%20Ngrx%20Store%20Tutorial%20-%20Learn%20Angular%20State%20Management&amp;time=1534485355614&amp;type=share&amp;url=https%3A%2F%2Fcoursetro.com%2Fposts%2Fcode%2F151%2FAngular-Ngrx-Store-Tutorial---Learn-Angular-State-Management%23"></iframe><script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                <div id="bottom-anchor"></div>
+            </div>
+        </div>
+
+  </body>
+</html>
