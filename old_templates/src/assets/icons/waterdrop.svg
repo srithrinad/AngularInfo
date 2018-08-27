@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>waterdrop</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="waterdrop" fill-rule="nonzero" fill="#868686">
+            <g transform="translate(10.000000, 4.000000)" id="Shape">
+                <path d="M51.2,21.1 L30,0 L8.8,21.1 C-2.9,32.7 -2.9,51.6 8.8,63.3 C14.6,69.1 22.3,72 30,72 C37.7,72 45.4,69.1 51.2,63.3 C62.9,51.6 62.9,32.7 51.2,21.1 Z M48.4,60.4 C43.5,65.3 36.9,68 30,68 C23.1,68 16.5,65.3 11.6,60.4 C6.7,55.6 4,49.1 4,42.2 C4,35.3 6.7,28.8 11.6,23.9 L30,5.6 L48.4,23.9 C53.3,28.8 56,35.3 56,42.2 C56,49.1 53.3,55.6 48.4,60.4 Z"></path>
+                <path d="M30,60 C20.1,60 12,51.9 12,42 C12,40.9 11.1,40 10,40 C8.9,40 8,40.9 8,42 C8,54.2 17.8,64 30,64 C31.1,64 32,63.1 32,62 C32,60.9 31.1,60 30,60 Z"></path>
+            </g>
+        </g>
+    </g>
+</svg>

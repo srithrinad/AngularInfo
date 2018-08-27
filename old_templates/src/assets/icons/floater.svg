@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>floater</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="floater" fill-rule="nonzero" fill="#868686">
+            <g transform="translate(4.000000, 4.000000)" id="Shape">
+                <path d="M36,0 C16.1,0 0,16.1 0,36 C0,55.9 16.1,72 36,72 C55.9,72 72,55.9 72,36 C72,16.1 55.9,0 36,0 Z M36,4 C44.3,4 51.8,7.1 57.5,12.3 L46.1,23.6 C43.4,21.4 39.8,20 36,20 C32.3,20 28.9,21.3 26.2,23.4 L14.8,12 C20.4,7 27.8,4 36,4 Z M48,36 C48,42.6 42.6,48 36,48 C29.4,48 24,42.6 24,36 C24,29.4 29.4,24 36,24 C42.6,24 48,29.4 48,36 Z M4,36 C4,27.9 7,20.5 12,14.8 L23.4,26.2 C21.3,28.9 20,32.3 20,36 C20,39.8 21.4,43.4 23.6,46.1 L12.3,57.5 C7.1,51.8 4,44.3 4,36 Z M36,68 C28,68 20.8,65.1 15.2,60.3 L26.6,48.9 C29.3,50.9 32.5,52 36.1,52 C39.8,52 43.2,50.7 45.9,48.6 L57.2,60 C51.6,65 44.2,68 36,68 Z M60,57.2 L48.6,45.8 C50.7,43.1 52,39.7 52,36 C52,32.5 50.8,29.2 48.9,26.5 L60.3,15.2 C65.1,20.8 68,28 68,36 C68,44.1 65,51.5 60,57.2 Z"></path>
+            </g>
+        </g>
+    </g>
+</svg>

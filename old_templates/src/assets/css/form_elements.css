@@ -1,0 +1,260 @@
+.control {
+    font-size: 14px;
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.control__indicator {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 1px solid #AAA;
+    box-shadow: inset 0 0 0 1px transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control--radio .control__indicator {
+    border-radius: 50%;
+}
+
+
+/* Hover and focus states */
+
+.control:hover input:not([disabled])~.control__indicator,
+.control input:focus:not([disabled])~.control__indicator {
+    box-shadow: inset 0 0 0 1px #AAA;
+    border-color: #AAA!important;
+}
+
+.control:hover span,
+.control input:focus+span {
+    color: #666;
+}
+
+
+/* Checked state */
+
+.control input:checked~.control__indicator {
+    background: transparent;
+    border-color: #666;
+}
+
+.control--radio input:checked~.control__indicator::after {
+    display: block;
+    content: '';
+}
+
+
+/* Hover state whilst checked */
+
+.control:hover input:not([disabled]):checked~.control__indicator,
+.control input:checked:focus~.control__indicator {
+    background: transparent;
+}
+
+
+/* Disabled state */
+
+.control input:disabled~.control__indicator {
+    pointer-events: none;
+    opacity: .6;
+    border-color: #DFDBD8;
+}
+
+.control input:disabled+span {
+    color: #DFDBD8;
+}
+
+
+/* Check mark */
+
+.control__indicator i {
+    display: none;
+    font-size: 15px;
+    margin-left: 2px;
+    margin-top: 1.5px;
+    color: #0D5389;
+}
+
+
+/* Show check mark */
+
+.control input:checked~.control__indicator i {
+    display: block;
+}
+
+
+/* Disabled tick colour */
+
+.control--checkbox input:disabled~.control__indicator i {
+    color: #DFDBD8;
+}
+
+
+/* Radio button inner circle */
+
+.control--radio .control__indicator:after {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #0D5389;
+}
+
+
+/* Disabled circle colour */
+
+.control--radio input:disabled~.control__indicator:after {
+    background: #DFDBD8;
+}
+
+
+/***** SELECT BOXES *****/
+
+.select-box {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #AAA;
+    box-shadow: inset 0 0 0 3px transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    text-transform: none;
+    text-align: left;
+    position: relative;
+}
+
+.select-box.open {
+    border: 1px solid #0D5389;
+}
+
+.select-box.open {
+    border: 1px solid #0D5389;
+    box-shadow: inset 0 0 0 1px transparent;
+    height: auto;
+    display: block;
+}
+
+.select-box:focus {
+    outline: 0;
+}
+
+.select-box:hover {
+    box-shadow: inset 0 0 0 1px #AAA;
+}
+
+.select-box:disabled:hover {
+    box-shadow: inset 0 0 0 1px transparent;
+    border: 1px solid #DFDBD8;
+}
+
+.select-box.open:hover {
+    box-shadow: inset 0 0 0 1px transparent;
+}
+
+.select-box:disabled {
+    border: 1px solid #DFDBD8;
+}
+
+.select-box .selected {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: inset 0 0 0 1px transparent;
+}
+
+.select-box.open .selected {
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.select-box .selected:focus {
+    outline: 0;
+    box-shadow: inset 0 0 0 1px #AAA, 0 0 0 1px #AAA;
+}
+
+.select-box.open .selected:focus,
+.select-box .selected:focus:hover {
+    box-shadow: inset 0 0 0 1px transparent;
+}
+
+.select-box .selected div {
+    color: #666;
+    padding: 15px;
+    width: -webkit-calc(100% - 50px);
+    width: -moz-calc(100% - 50px);
+    width: -o-calc(100% - 50px);
+    width: calc(100% - 50px);
+}
+
+.select-box:disabled .selected div {
+    color: #DFDBD8;
+}
+
+.select-box .selected div:nth-child(2) {
+    width: 50px;
+    font-size: 20px;
+    margin: 0;
+    padding: 12px 15px 18px 15px;
+    color: #0D5389;
+}
+
+.select-box.open .selected div:nth-child(2) {
+    transform: rotateX(180deg);
+}
+
+.select-box:disabled .selected div:nth-child(2) {
+    color: #DFDBD8;
+}
+
+.select-box .options {
+    display: none;
+}
+
+.select-box.open .options {
+    display: block;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    background: #FFF;
+}
+
+.select-box.open .options .option {
+    border-bottom: 1px solid #F5F5F5;
+    cursor: pointer;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.select-box.open .options .option:hover {
+    color: #B19378;
+    background: #EFE9E4;
+}
+
+.select-box.open .options .option.active {
+    color: #B19378;
+}
+
+.select-box.open .options .option.active i {
+    margin-left: 15px;
+}

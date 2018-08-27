@@ -1,0 +1,74 @@
+<header></header>
+<div class="flex-container fill-height-or-more login-component">
+    <div class="welcome-img col-sm-6 flex-1 hidden-sm hidden-xs">
+    </div>
+    <div id="loginbox" class="mainbox col-md-6 col-sm-8 col-sm-offset-2 col-md-offset-0">
+        <div class="col-xs 12 col-md-10 col-md-offset-1">
+            <h1 class="color-gold">Welcome to Admin Portal</h1>
+
+            <div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Log In</a></li>                    
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="login">
+                        <div class="col-xs-12">
+                            <div class="form-warning notification trans warning color-error-red top" *ngIf='isRedirect'>
+                                Unauthorized! Please log in to continue.
+                            </div>
+                            <form (ngSubmit)='onLoginSubmit(loginForm)' #loginForm="ngForm" novalidate id="loginform" class="form-horizontal">
+                                <div>
+                                    <div class="form-group">
+                                        <label class="color-dark-gray" for="email">Email</label>
+                                        <input id="email"  type="text" class="form-control" name="email" required [pattern]='EMAIL_REGEXP' ngModel #email='ngModel' placeholder="Enter email" [ngClass]="{'error': email.errors && (email.dirty && email.touched || loginForm.submitted) && email.errors?.required, 'warning': email.errors && (email.dirty && email.touched || loginForm.submitted) && email.errors?.pattern}"
+                                        />
+                                        <div *ngIf="email.errors && ((email.touched && email.dirty) || loginForm.submitted)" class="form-warning">
+                                            <p [ngClass]="{'color-error-red': email.errors?.required, 'color-warning-yellow': email.errors.pattern}">
+                                                <i class="icon icon-warning"></i>
+                                                <span [hidden]="!email.errors?.required">Email is required</span>
+                                                <span [hidden]="!email.errors.pattern">Email Invalid</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label class="color-dark-gray" for="login-password">Password</label>
+                                        <input  id="login-password" type="password" class="form-control" name="password" placeholder="Password" ngModel #password='ngModel' required [ngClass]="{'error': password.errors && (password.dirty &&password.touched || loginForm.submitted)}"
+                                        />
+                                        <div *ngIf="password.errors && ((password.touched && password.dirty) || loginForm.submitted)" class="form-warning">
+                                            <p class="color-error-red">
+                                                <i class="icon icon-warning"></i>
+                                                <span [hidden]="!password.errors.required && loginLoading">Password is required</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <button class="primary block" id="login-button">Login </button>
+                                        <a class='' routerLink='/forgot/email'>Forgot password?</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class='notification warning' *ngIf='loginErr'>
+                                {{loginErr}}
+                                <div *ngIf='showLogout' class='login-center'>
+                                    <button class='button primary' (click)='logout()'>Logout</button>
+                                </div>
+                            </div>
+                        </div>                        
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 

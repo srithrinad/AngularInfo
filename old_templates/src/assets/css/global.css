@@ -1,0 +1,43 @@
+@import url('../../../node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url('../../../node_modules/material-design-lite/material.min.css');
+@import url('./buttons.css');
+
+@import url("./icons.css"); 
+
+@import url('./fonts.css');
+@import url('./typography.css');
+@import url('./colors.css');
+@import url('./forms.css');
+@import url('./form_elements.css');
+@import url('./ng-select.css');
+@import url('./flex-box.css');
+
+.welcome-img {
+    background-image: url('../images/image.png');
+    background-size: cover;
+    background-position: center bottom;
+}
+
+.res-main-img {
+    /* use [style.background] = "url()" when db is working*/
+    background-image: url('../images/image.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.res-barn-img {
+    background-image: url('../images/barn.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.link-button {
+    text-transform: none;
+    padding: 0px;
+    color: #0d5389;
+    text-decoration: none;
+    border-bottom: 1px solid #0d5389;
+    letter-spacing: 0.88px
+} 

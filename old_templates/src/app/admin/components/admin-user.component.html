@@ -1,0 +1,142 @@
+<div style="height:700px; width:1000px;">
+  <div class="topdiv">
+    <div class="topdivHeading"><h3>User Details</h3></div>
+    <div>
+      <table class="tbl">
+        <tr><td class="tblLabel">Name :</td><td class="tblData first-letter">{{ adminUserItem.Name }}</td></tr>
+        <tr><td class="tblLabel">Email :</td><td class="tblData">{{ adminUserItem.Email }}</td></tr>
+        <tr><td class="tblLabel">Marina :</td><td class="tblData">{{ adminUserItem.MarinaName }}</td></tr>
+        <tr>
+          <td class="tblLabel">Active :</td>
+          <td class="tblData">
+            <select [(ngModel)]="activeControl">
+              <option value="undefined">--Select--</option>
+              <option value="1">True</option>
+              <option value="0">False</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="bottonfooter">
+      <button type="button" pButton (click)="btnSaveUserDetails()" label="Save"></button>
+      <button type="button" pButton (click)="btnMeClose()" label="Close"></button>
+    </div>
+  </div>
+  <div class="topdiv">
+    <div style="width:100%"></div>
+    <div style="float:left;width:10%;" class="topdivHeading"><h3>Roles</h3></div>
+    <div style="float:left;width:60%; text-align:center; color:red; margin-top:8px;">{{statusMessage}}</div>
+    <div style="float:left;width:30%; " class="addRoleDiv">
+      &nbsp;<button type="button" pButton icon="fa-check" (click)="addNewAdminUser()" label="Add New Role"></button>
+    </div>
+    <div>
+      <div>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <td style="width:24%;">Marina</td>
+              <td style="width:15%;">Role</td>
+              <td style="width:15%;">Location</td>
+              <td style="width:13%;">Assigned Pos</td>
+              <td style="width:13%;">Current Pos</td>
+              <td style="width:20%;"></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of newUserList">
+              <td>
+                <select [(ngModel)]="data.marinaId" (change)="Search()" style="width:200px;">
+                  <option value="undefined">--Select--</option>
+                  <option *ngFor="let marina of marinaList"
+                          value={{marina.id}}>
+                    {{marina.name}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select [(ngModel)]="data.adminRoleId" (change)="Search()" style="width:110px;">
+                  <option value="undefined">--Select--</option>
+                  <option *ngFor="let role of rolesList"
+                          value={{role.id}}>
+                    {{role.roleName}}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="data.location" style="width:120px;" />
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="data.assignedPos" style="width:100px;" />
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="data.currentPos" style="width:100px;" />
+              </td>
+              <td>
+                <input type="button" value="Save" (click)="newAdminUserSave(data)" class="btn btn-success" /> &nbsp;
+                <input type="button" value="Cancel" (click)="newAdminUserCancel(data)" class="btn btn-warning" />
+              </td>
+            </tr>
+
+
+            <tr *ngFor="let data of adminUserList;index as i">
+              <ng-template [ngTemplateOutlet]="loadTemplate(data)" [ngTemplateOutletContext]="{ $implicit: data, idx: i }"></ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #readOnlyTemplate let-data>
+  <td class="itemDataLeft">{{data.marinaName}}</td>
+  <td class="itemDataLeft">{{data.adminRoleName}}</td>
+  <td class="itemDataLeft">{{data.location}}</td>
+  <td class="itemDataRight">{{data.assignedPos}}</td>
+  <td class="itemDataRight">{{data.currentPos}}</td>
+  <td>
+    <input type="button" value="Edit" class="btn btn-default" (click)="editExistingAdminUser(data)" /> &nbsp;
+    <input type="button" value="Delete" (click)="deleteExistingAdminUser(data)" class="btn btn-danger" />
+  </td>
+</ng-template>
+
+<ng-template #editTemplate let-data>
+  <td>
+    <select [(ngModel)]="data.marinaId" (change)="Search()" style="width:200px;">
+      <option value="undefined">--Select--</option>
+      <option *ngFor="let marina of marinaList"
+              value={{marina.id}}>
+        {{marina.name}}
+      </option>
+    </select>
+  </td>
+  <td>
+    <select [(ngModel)]="data.adminRoleId" (change)="Search()" style="width:110px;">
+      <option value="undefined">--Select--</option>
+      <option *ngFor="let role of rolesList"
+              value={{role.id}}>
+        {{role.roleName}}
+      </option>
+    </select>
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="data.location" maxlength="20" style="width:120px;" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="data.assignedPos" maxlength="3" style=" width:100px;" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="data.currentPos" maxlength="3" style=" width:100px;" />
+  </td>
+  <td>
+    <input type="button" value="Update" (click)="updateExistingAdminUser(data)" class="btn btn-success" />&nbsp;
+    <input type="button" value="Cancel" (click)="cancelExistingAdminUser(data)" class="btn btn-warning" />
+  </td>
+</ng-template>
+
+<div id='loading-modal' *ngIf="showLoading">
+  <img src="../../../assets/images/spinner_icon.gif" />
+</div>

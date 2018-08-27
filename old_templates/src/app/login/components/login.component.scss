@@ -1,0 +1,49 @@
+.login-component {
+    min-height: calc(100vh - 100px);
+}
+
+
+/*.login-component .row,
+.login-component .row>div {
+    height: 100%;
+}*/
+
+.mainbox {
+    padding-top: 160px;
+}
+
+.btns {
+    color: blue;
+}
+
+.panel-heading {
+    color: red;
+}
+
+.gfont {
+    font-family: "open_sansregular", sans-serif;
+}
+
+.login-center {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.tab-pane {
+    padding-top: 40px;
+}
+
+.controls button {
+    margin-bottom: 20px;
+}
+
+ng2-password-strength-bar {
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+
+.point {
+    border-radius: 0px!important;
+    margin-right: 5px!important;
+}

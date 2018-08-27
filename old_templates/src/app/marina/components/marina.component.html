@@ -1,0 +1,68 @@
+<div class="flex-container width-100">
+        <div class="width-25"></div>
+        <div class="width-half flex-container flex-column">
+            <div class="margin-bottom-30">
+                <h2>Edit Marina</h2>
+            </div>
+            <form #editObject="ngForm" (ngSubmit)="save()">
+                <div>
+                    <label for="name" class="label-margin">Name</label>
+                    <input type="text" pInputText [(ngModel)]="item.name" name="name" class="form-control" placeholder="Enter Name" required >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Database Name</label>
+                    <input type="text" pInputText [(ngModel)]="item.databaseName" name="databaseName" class="form-control" placeholder="Enter Database Name" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Company Name</label>
+                    <input type="text" pInputText [(ngModel)]="item.companyName" name="companyName" class="form-control" placeholder="Enter Company Name" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Address</label>
+                    <input type="text" pInputText [(ngModel)]="item.address" name="address" class="form-control" placeholder="Enter Address" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Address 2</label>
+                    <input type="text" pInputText [(ngModel)]="item.address2" name="address2" class="form-control" placeholder="Enter Address 2" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">City</label>
+                    <input type="text" pInputText [(ngModel)]="item.city" name="city" class="form-control" placeholder="Enter City" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">State</label>
+                    <input type="text" pInputText [(ngModel)]="item.state" name="state" class="form-control" placeholder="Enter State" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Zip</label>
+                    <input type="text" pInputText [(ngModel)]="item.zip" name="zip" class="form-control" placeholder="Enter Zip" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">County</label>
+                    <input type="text" pInputText [(ngModel)]="item.county" name="county" class="form-control" placeholder="Enter County" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Phone</label>
+                    <input type="text" pInputText [(ngModel)]="item.phone" name="phone" class="form-control" placeholder="Enter Phone" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Website Domain Name</label>
+                    <input type="text" pInputText [(ngModel)]="item.websiteDomainName" name="websiteDomainName" class="form-control" placeholder="Enter Website Domain" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">Full Name</label>
+                    <input type="text" pInputText [(ngModel)]="item.fullName" name="fullName" class="form-control" placeholder="Enter Full Name" >
+                </div>
+                <div>
+                    <label for="title" class="label-margin">General Manager</label>
+                    <input type="text" pInputText [(ngModel)]="item.generalManager" name="generalManager" class="form-control" placeholder="Enter Full Name" >
+                </div>
+
+                <div>
+                    <button type="submit" class="primary margin-top-10">Save</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="width-25"></div>
+    </div>

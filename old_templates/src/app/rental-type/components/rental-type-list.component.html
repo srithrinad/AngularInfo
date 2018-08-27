@@ -1,0 +1,16 @@
+<div class="flex-container">
+    <div class="width-5"></div>
+    <div class="flex-container flex-column">
+        <div class="padding-below-30">
+            <h2>Rental Types</h2>
+        </div>
+        <p-dataTable [value]="list" resizableColumns="true" selectionMode="single" (onRowSelect)="onRowSelect($event)">
+            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="marina.name" header="Marina" [sortable]="true"></p-column>
+            <p-column field="rentalTypeCategory" header="Type" [sortable]="true"></p-column>
+            <p-column field="isInactive" header="Inactive" [sortable]="true"></p-column>
+        </p-dataTable>
+    </div>
+    <div class="width-5"></div>
+</div>
+

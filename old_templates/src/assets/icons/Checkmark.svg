@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Checkmark</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Checkmark">
+            <g id="checkmark">
+                <g id="Group">
+                    <rect id="Rectangle-5" x="0" y="0" width="80" height="80"></rect>
+                </g>
+                <path d="M62.230303,21 L30.6666667,52 L17.769697,39.3333333 C16.4121212,38 14.3757576,38 13.0181818,39.3333333 C11.6606061,40.6666667 11.6606061,42.6666667 13.0181818,44 L28.2909091,59 C29.6484848,60.3333333 31.6848485,60.3333333 33.0424242,59 C33.2121212,58.8333333 33.2121212,58.8333333 33.3818182,58.6666667 L66.9818182,25.6666667 C68.3393939,24.3333333 68.3393939,22.3333333 66.9818182,21 C65.6242424,19.6666667 63.5878788,19.6666667 62.230303,21 Z" id="Check" fill="#868686" fill-rule="nonzero"></path>
+                <rect id="Rectangle-6" fill="#868686" transform="translate(22.207107, 49.207107) rotate(-45.000000) translate(-22.207107, -49.207107) " x="20.2071068" y="35.3578644" width="4" height="27.6984848"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
