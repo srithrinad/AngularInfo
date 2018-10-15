@@ -1,0 +1,47 @@
+<div class="flex-container width-100">
+    <div class="width-25"></div>
+    <div class="width-half flex-container flex-column">
+        <div class="margin-bottom-30">
+            <h2></h2>
+        </div>
+        <form #editObject="ngForm" (ngSubmit)="search()">
+            <div>
+                <label for="name" class="label-margin">Email</label>
+                <input type="text" pInputText [(ngModel)]="searchItem.email" name="Email" class="form-control" placeholder="Enter Email" >
+            </div>
+            <div>
+                <label for="title" class="label-margin">First Name</label>
+                <input type="text" pInputText [(ngModel)]="searchItem.firstName" name="FirstName" class="form-control" placeholder="Enter First Name" >
+            </div>
+            <div>
+                <label for="title" class="label-margin">Last Name</label>
+                <input type="text" pInputText [(ngModel)]="searchItem.lastName" name="LastName" class="form-control" placeholder="Enter Last Name" >
+            </div>           
+            <div>
+                <button type="submit" class="primary margin-top-10">Search</button>
+                <button type="submit" class="primary margin-top-10" (click)="addUser()">Add</button>
+            </div>
+        </form>
+        
+    </div>
+    <div class="width-25"></div>
+</div>
+
+<div class="flex-container">
+  <div class="width-5"></div>
+  <div class="flex-container flex-column">
+      <div class="padding-below-30">
+          <h2>Users</h2>
+      </div>
+      <p-dataTable [value]="list" resizableColumns="true" selectionMode="single" 
+      (onRowSelect)="onRowSelect($event)" [lazy]="true" [rows]="pageItem.pageSize" [paginator]="true" [rowsPerPageOptions]="[10,20]" [totalRecords]="totalRecords" (onLazyLoad)="pageClicked($event)">
+          <p-column field="email" header="Email" [sortable]="true"></p-column>
+          <p-column field="firstName" header="FirstName" [sortable]="true"></p-column>
+          <p-column field="lastName" header="LastName" [sortable]="true"></p-column>
+          <p-column field="loyaltyCardNumber" header="LoyaltyCardNumber" [sortable]="true"></p-column>
+      </p-dataTable>
+  </div>
+  <div class="width-5"></div>
+</div>
+  
+  

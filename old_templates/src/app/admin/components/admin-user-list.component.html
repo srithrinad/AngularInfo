@@ -1,0 +1,51 @@
+<table width="100%">
+  <tr><td colspan="3"><h1>Admin Users</h1></td></tr>
+  <tr>
+    <td width="35%">
+      <label><b>Marina</b></label>
+      <select [(ngModel)]="marinaId" (change)="btnSearch()">
+        <option value="undefined">--Select--</option>
+        <option *ngFor="let marina of marinaList"
+                value={{marina.id}}>
+          {{marina.name}}
+        </option>
+      </select>
+    </td>
+    <td width="25%">
+      <label><b>Active</b></label>
+      <select [(ngModel)]="active" (change)="btnSearch()" style="width:180px;">
+        <option value="undefined">--Select--</option>
+        <option value="1">True</option>
+        <option value="0">False</option>
+      </select>
+    </td>
+    <td width="40%">
+      <label><b>Search</b></label>
+      <input name="txtSearch" [(ngModel)]="search" type="text" style="width:290px;height:50px;margin-bottom:38px;" />
+      <input name="btnSearch" type="button" (click)="btnSearch()" value="Search" style="height:50px;margin-bottom:38px; width:120px; " />
+    </td>
+  </tr>
+  <tr><td colspan="3"><b>Count : {{adminListCount}}</b></td></tr>
+  <tr>
+    <td colspan="3">
+      <p-dataTable [value]="adminUserList" [editable]="true" resizableColumns="true" selectionMode="single"
+                   (onRowSelect)="onRowSelect($event)" [lazy]="true"
+                   [rows]="pageItem.pageSize" [paginator]="true" [rowsPerPageOptions]="[10,20]" [totalRecords]="totalRecords">
+        <p-column field="name" header="Name" [sortable]="true"></p-column>
+        <p-column field="email" header="Email" [sortable]="true"></p-column>
+        <p-column field="marinaName" header="Marina" [sortable]="true"></p-column>
+        <p-column field="active" header="Active" [sortable]="true"></p-column>
+      </p-dataTable>
+    </td>
+  </tr>
+</table>
+
+<div class='loading-modal-bg' *ngIf="showLoading"></div>
+<div id='loading-modal' *ngIf="showLoading">
+  <img src="../../../assets/images/spinner_icon.gif" />
+</div>
+
+
+<p-dialog header="Edit"  [(visible)]="popupDisplay" modal="modal" [responsive]="true" [closable]="true">
+  <admin-user [setAdminUserItem]="adminUserEdit" [setMarinaList]="marinaList" [setRolesList]="rolesList" (closeMe)="popupDisplay=false"></admin-user>
+</p-dialog>

@@ -1,0 +1,105 @@
+select{
+  height:30px;
+  width:200px;
+  margin:1px;
+
+}
+
+input {
+  height: 30px;
+  margin: 1px;
+}
+
+
+
+.topdiv {
+  margin-top: 9px;
+  border: 1px solid #e4e4e4;
+  width: 100%;
+}
+
+.topdivHeading {
+  padding-left: 8px;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+
+.bottonfooter {
+  height: 40px;
+  text-align: right;
+  padding: 8px;
+}
+
+
+
+.addRoleDiv {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: 100%;
+  height: 21px;
+  text-align:right;
+  padding-right:6px;
+}
+
+
+.tbl {
+  margin-top:9px;
+  width:100%;
+
+}
+
+.tblHeading {
+  width: 20%;
+  color: black;
+  text-align:center;
+  font-weight: bold;
+  border: 1px solid #e4e4e4;
+  height: 42px;
+  background-color:#dedada;
+}
+
+
+.tblLabel {
+  width: 20%;
+  color: black;
+  font-weight: bold;
+  border-bottom: 1px solid #e4e4e4;
+  height: 33px;
+  padding-left: 6px;
+}
+
+.tblData {
+  width: 80%;
+  color: black;
+  height: 33px;
+  border-bottom: 1px solid #e4e4e4;
+  border-left: 1px solid #e4e4e4;
+  padding-left: 6px;
+}
+
+.first-letter {
+  text-transform: capitalize;
+}
+
+
+.itemDataLeft {
+  text-align:left;
+  padding-left:6px;
+}
+
+.itemDataRight {
+  text-align: right;
+  padding-right: 6px;
+}
+
+
+#loading-modal {
+  position: fixed;
+  z-index: 1032;
+  left: 46%;
+  width: 369px;
+  height: 230px;
+  top: 40%;
+}
+
+

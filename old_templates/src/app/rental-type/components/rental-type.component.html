@@ -1,0 +1,61 @@
+<div class="flex-container width-100">
+    <div class="width-25"></div>
+    <div class="width-half flex-container flex-column">
+        <div class="margin-bottom-30">
+            <h2>Edit Rental Type</h2>
+        </div>
+        <form #editObject="ngForm" (ngSubmit)="save()">
+            <div>
+                <label for="name" class="label-margin">Name</label>
+                <input type="text" pInputText [(ngModel)]="rentalType.name" #name="ngModel" name="name" class="form-control" placeholder="Enter Name" required >
+            </div>
+            <div>
+                <label for="title" class="label-margin">Title</label>
+                <input type="text" pInputText [(ngModel)]="rentalType.title" #title="ngModel" name="title" class="form-control" placeholder="Enter Title" >
+            </div>
+            <div>
+                <label class="label-margin">Description</label>
+                <p-editor [(ngModel)]="rentalType.description" name="description"></p-editor>
+            </div>
+            <div class="ui-datatable-tablewrapper margin-top-30">
+                <table class="width-50">
+                    <thead class="ui-datatable-thead">
+                        <th class="ui-state-default">Feature</th>
+                        <th class="ui-state-default">Enabled</th>
+                        <th class="ui-state-default">Value</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let feature of features; let i = index;" class="ui-datatable-data ui-widget-content">
+                            <td><input type="checkbox" name="feature-enabled-{{i}}" [(ngModel)]="feature.enabled" binary="true"/></td>
+                            <td>{{feature.name}}</td>
+                            <td><input type="text" pInputText [(ngModel)]="feature.value" name="feature-value-{{i}}"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="margin-top-30">
+                <p-dataTable [value]="rentalType.images" resizableColumns="true" [editable]="true" [immutable]="false">
+                    <p-column field="sequence" header="Order" [sortable]="true" [editable]="true" [style]="{'width':'80px'}"></p-column>
+                    <p-column field="url" header="Url" [sortable]="true" [editable]="true"></p-column>
+                    <p-column header="Image" [style]="{'width':'140px'}">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <img src="{{item.url}}" style="height:100px; width:135px;"/>
+                        </ng-template>
+                    </p-column>
+                    <p-column styleClass="col-button" header="Delete" [style]="{'width':'90px'}">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <button type="button" pButton (click)="removeImage(item)" label="Delete"></button>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+                <button type="button" pButton (click)="addImage()" label="Add Image Manually"></button><br/>
+                <p-fileUpload name="upload-files" mode="basic" url="{{imageUploadUrl}}" accept="image/*" auto="auto" (onUpload)="onUpload($event)" multiple="multiple" chooseLabel="UPLOAD IMAGE"></p-fileUpload>
+            </div>
+            <div>
+                <button type="submit" class="primary margin-top-10">Save</button>
+            </div>
+        </form>
+        
+    </div>
+    <div class="width-25"></div>
+</div>

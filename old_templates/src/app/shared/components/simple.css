@@ -1,0 +1,40 @@
+.simple.navbar {
+    padding: 30px;
+    background-color: white;
+}
+
+.simple .navbar-right li {
+    display: inline-block;
+}
+
+@media (max-width: 1180px) {
+    .simple #myNavbar {
+        display: block!important;
+    }
+}
+
+@media (max-width: 970px) {
+    .simple.navbar .container-fluid {
+        display: flex;
+        align-items: center;
+    }
+    .simple.navbar .container-fluid>div {
+        flex: 0 0 50%;
+    }
+    .simple #myNavbar {
+        display: inline-block!important;
+    }
+    .simple.navbar-header {
+        display: inline-block;
+    }
+}
+
+@media (max-width: 520px) {
+    .simple #myNavbar {
+        display: none!important;
+    }
+    .simple.navbar .container-fluid {
+        display: flex;
+        justify-content: flex-start;
+    }
+}

@@ -1,0 +1,78 @@
+.input-group ng-select>div {
+    border-color: #AAA;
+    outline: 0;
+    outline: none;
+}
+
+.input-group ng-select>div {
+    box-shadow: inset 0 0 0 1px transparent;
+}
+
+.input-group ng-select>div>div.single>div.toggle {
+    border: 1px solid transparent;
+}
+
+.input-group ng-select,
+.input-group ng-select>div:hover {
+    box-shadow: inset 0 0 0 1px #AAA;
+}
+
+.input-group ng-select>div>div.single>div.toggle:hover {
+    border-color: #AAA;
+    border-left-color: transparent;
+}
+
+.input-group ng-select:focus {
+    box-shadow: inset 0 0 0 2px #AAA;
+    outline: 0;
+}
+
+.input-group ng-select>div>div.single {
+    height: 50px;
+}
+
+.input-group ng-select>div>div.single>div.value,
+.input-group ng-select>div>div.single>div.placeholder {
+    color: #666;
+    line-height: 50px;
+    font-family: 'open_sansregular';
+    font-size: 11px;
+}
+
+.input-group ng-select>div>div.single>div {
+    line-height: 50px;
+}
+
+.input-group ng-select>div>div.single>div.clear,
+.input-group ng-select>div>div.single>div.toggle {
+    line-height: 50px;
+}
+
+.input-group select-dropdown .selected {
+    background: #EFE9E4;
+    color: #B19378;
+}
+
+.input-group ng-select>div>div.single>div.clear,
+.input-group ng-select>div>div.single>div.toggle {
+    color: #0D5389;
+}
+
+.input-group ng-select>div>div.single>div.clear:hover,
+.input-group ng-select>div>div.single>div.toggle:hover {
+    background-color: #FFF;
+}
+
+.input-group select-dropdown>div .filter input {
+    outline: 0;
+    color: #666;
+    font-family: 'open_sansregular';
+}
+
+.input-group select-dropdown>div .options ul li {
+    font-family: 'open_sansregular';
+}
+
+.input-group select-dropdown>div {
+    z-index: 3;
+}

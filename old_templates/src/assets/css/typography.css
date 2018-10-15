@@ -1,0 +1,133 @@
+h1,
+.hd1 {
+    font-family: 'loraregular';
+    font-size: 42px;
+    line-height: 50px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.6px;
+}
+
+h2,
+.hd2 {
+    font-family: 'open_sansbold';
+    font-size: 30px;
+    line-height: 23px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.3px;
+}
+
+h3,
+.hd3 {
+    font-family: 'loraregular';
+    font-size: 24px;
+    line-height: 38px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.6px;
+}
+
+h4,
+.hd4 {
+    font-family: 'open_sansregular';
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.4px;
+}
+
+p,
+label,
+.copy {
+    font-family: 'open_sansregular';
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.4px;
+}
+
+a {
+    font-family: 'open_sansregular';
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.88px;
+}
+
+b,
+.bold {
+    font-family: 'open_sansbold';
+}
+
+.italic {
+    font-family: 'open_sansitalic';
+}
+
+small,
+.small {
+    font-family: 'open_sanslight';
+    font-size: 11px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.light {
+    font-family: 'open_sanslight';
+}
+
+.fancy {
+    font-family: 'loraregular';
+}
+
+.fancy.italic {
+    font-family: 'loraitalic';
+}
+
+.tab-header {
+    font-family: 'open_sansregular';
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.text-align-r {
+    text-align: right!important;
+}
+
+.text-align-c {
+    text-align: center!important;
+}
+
+.text-align-l {
+    text-align: left!important;
+}
+
+.use-word-break {
+    word-wrap: break-word;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+.capital {
+    text-transform: capitalize;
+}
+
+.underline {
+    text-decoration: underline!important;
+}
+
+.multiline span {
+    margin-bottom: 10px;
+}
+
+p.large {
+    font-size: 20px
+}

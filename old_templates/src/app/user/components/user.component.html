@@ -1,0 +1,78 @@
+<div class="flex-container width-100">
+    <div class="width-25"></div>
+    <div class="width-half flex-container flex-column">
+        <div class="margin-bottom-30">
+            <h2 *ngIf="userId == 0" >Add User</h2>   
+            <h2 *ngIf="userId > 0" >Edit User</h2>          
+        </div>
+        <form #userForm="ngForm" (ngSubmit)="save(userForm)">
+            <div>
+                <label for="name" class="label-margin">Email</label>
+                <input type="text" pInputText [(ngModel)]="item.email" name="Email" class="form-control" placeholder="Email" [disabled]="userId > 0" required [pattern]='EMAIL_REGEXP' ngModel #email='ngModel'  [ngClass]="{'error': email.errors && (email.dirty && email.touched || userForm.submitted) && email.errors?.required, 'warning': email.errors && (email.dirty && email.touched || userForm.submitted) && email.errors?.pattern}">
+                <div *ngIf="email.errors && ((email.touched && email.dirty) || userForm.submitted)" class="form-warning" >
+                    <p [ngClass]="{'color-error-red': email.errors?.required, 'color-warning-yellow': email.errors.pattern}">
+                        <i class="icon icon-warning"></i>
+                        <span [hidden]="!email.errors?.required">Email is required</span>
+                        <span [hidden]="!email.errors.pattern">Email Invalid</span>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <label for="title" class="label-margin">First Name</label>
+                <input type="text" pInputText [(ngModel)]="item.firstName" name="FirstName" class="form-control" placeholder="Enter First Name"  required ngModel #firstName='ngModel'  [ngClass]="{'error': firstName.errors && (firstName.dirty && firstName.touched || userForm.submitted) && firstName.errors?.required, 'warning': firstName.errors && (firstName.dirty && firstName.touched || userForm.submitted) && firstName.errors?.pattern}">
+                <div *ngIf="firstName.errors && ((firstName.touched && firstName.dirty) || userForm.submitted)" class="form-warning" >
+                    <p [ngClass]="{'color-error-red': email.errors?.required}">
+                        <i class="icon icon-warning"></i>
+                        <span [hidden]="!firstName.errors?.required">First Name is required</span>                         
+                    </p>
+                </div>
+            </div>
+            <div>
+                <label for="title" class="label-margin">Last Name</label>
+                <input type="text" pInputText [(ngModel)]="item.lastName" name="LastName" class="form-control" placeholder="Enter Last Name" required ngModel #lastName='ngModel'  [ngClass]="{'error': lastName.errors && (lastName.dirty && lastName.touched || userForm.submitted) && lastName.errors?.required, 'warning': lastName.errors && (lastName.dirty && lastName.touched || userForm.submitted) && lastName.errors?.pattern}">
+                <div *ngIf="lastName.errors && ((lastName.touched && lastName.dirty) || userForm.submitted)" class="form-warning" >
+                    <p [ngClass]="{'color-error-red': email.errors?.required}">
+                        <i class="icon icon-warning"></i>
+                        <span [hidden]="!lastName.errors?.required">Last Name is required</span>                         
+                    </p>
+                </div>
+            </div>
+            <div>
+                <label for="title" class="label-margin">Loyalty Card Number</label>
+                <input type="text" pInputText [(ngModel)]="item.loyaltyCardNumber" name="LoyaltyCardNumber" class="form-control" placeholder="Enter Loyalty Card Number" >
+            </div>             
+            <div *ngIf="userId > 0">
+                <label for="title" class="label-margin">Marina Name</label>
+                <input type="text" pInputText [(ngModel)]="item.marinaName" name="MarinaName" class="form-control" placeholder="Marina Name" disabled >                 
+            </div>    
+            <div>
+                <label for="title" class="label-margin">FSM Customer Id</label>
+                <input type="text" pInputText [(ngModel)]="item.fsmId" name="FsmId" class="form-control" placeholder="FSM Customer Id" [disabled]="userId > 0" required ngModel #fsmCustomerId='ngModel'  [ngClass]="{'error': fsmCustomerId.errors && (fsmCustomerId.dirty && fsmCustomerId.touched || userForm.submitted) && fsmCustomerId.errors?.required, 'warning': fsmCustomerId.errors && (fsmCustomerId.dirty && fsmCustomerId.touched || userForm.submitted) && fsmCustomerId.errors?.pattern}">
+                <div *ngIf="fsmCustomerId.errors && ((fsmCustomerId.touched && fsmCustomerId.dirty) || userForm.submitted)" class="form-warning" >
+                    <p [ngClass]="{'color-error-red': fsmCustomerId.errors?.required}">
+                        <i class="icon icon-warning"></i>
+                        <span [hidden]="!fsmCustomerId.errors?.required">Fsm CustomerId is required</span>                         
+                    </p>
+                </div>
+            </div>    
+            <div *ngIf="userId == 0">
+                <label for="title" class="label-margin">Marina Database Name</label>
+                <input type="text" pInputText [(ngModel)]="item.databaseName" name="DatabaseName" class="form-control" placeholder="Marina DatabaseName" required ngModel #databaseName='ngModel'  [ngClass]="{'error': databaseName.errors && (databaseName.dirty && databaseName.touched || userForm.submitted) && databaseName.errors?.required, 'warning': databaseName.errors && (databaseName.dirty && databaseName.touched || userForm.submitted) && databaseName.errors?.pattern}">
+                <div *ngIf="databaseName.errors && ((databaseName.touched && databaseName.dirty) || userForm.submitted)" class="form-warning" >
+                    <p [ngClass]="{'color-error-red': databaseName.errors?.required}">
+                        <i class="icon icon-warning"></i>
+                        <span [hidden]="!databaseName.errors?.required">Marina Database Name is required</span>                         
+                    </p>
+                </div>
+            </div>    
+            <div>
+                <button type="submit" class="primary margin-top-10">Save</button>
+            </div>
+            <div class='notification warning' *ngIf='showError'>
+                {{serverErr}}                 
+            </div>
+        </form>
+        
+    </div>
+    <div class="width-25"></div>
+</div>

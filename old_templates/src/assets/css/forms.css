@@ -1,0 +1,252 @@
+.notification {
+    padding: 20px;
+    margin: 20px 0px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.notification.top {
+    position: fixed;
+    word-wrap: break-word;
+    top: 90px;
+    right: 30px;
+    z-index: 10;
+    min-width: 250px;
+    max-width: 300px;
+}
+
+.notification.bottom {
+    bottom: 0px;
+    left: 0px;
+    top: initial;
+}
+
+.notification.success {
+    background-color: rgba(240, 245, 234, 90);
+    border-color: #008300;
+    color: #008300;
+}
+
+.notification.info {
+    background-color: #E2EFF8;
+    border-color: #0D5389;
+    color: #0D5389;
+}
+
+.notification.warning {
+    background-color: #FFFAF1;
+    border-color: #B55808;
+    color: #B55808;
+}
+
+
+/***** FORMS *****/
+
+.form-horizontal .form-group {
+    margin: 0px;
+    margin-bottom: 30px;
+}
+
+.form-warning {
+    margin-top: 15px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.input-info {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+
+/***** FORM INPUTS *****/
+
+input.form-control {
+    background: #FFF;
+    color: #666;
+    border-radius: 0px;
+    border: 1px solid #AAAAAA;
+    padding: 15px;
+    box-shadow: inset 0 0 0 1px transparent;
+    height: 50px;
+    font-size: 11px;
+}
+
+select,
+.form-group .checkbox,
+.form-group .input-group {
+    margin-bottom: 38px;
+}
+
+input.form-control:hover {
+    box-shadow: inset 0 0 0 1px #AAAAAA;
+    border: 1px solid #AAAAAA;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.form-group label {
+    margin-bottom: 14px;
+}
+
+.form-group .input-group {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.input-group[class*="col-"] {
+    padding: 0px 15px;
+    float: left;
+}
+
+input.form-control.error {
+    border: 1px solid #991111;
+}
+
+input.form-control.warning {
+    border: 1px solid #E28B3C;
+}
+
+input.form-control:focus,
+input.form-control:active {
+    border: 1px solid #0D5389;
+    box-shadow: none;
+}
+
+.no-offset-r {
+    padding-right: 0
+}
+
+.no-offset-l {
+    padding-left: 0
+}
+
+.no-border-r,
+.no-offset-r .no-border-r {
+    border-right: 0
+}
+
+.no-border-l,
+.no-offset-l .no-border-l {
+    border-left: 0
+}
+
+.form-group .radio-container {
+    margin-bottom: 15px;
+    display: block;
+}
+
+select,
+select.form-control {
+    height: 50px;
+    color: #666;
+}
+
+select option,
+select.form-control option {
+    color: #666;
+}
+
+.boat-engine-container .input-group {
+    margin-bottom: 20px;
+}
+
+
+/***** TABS *****/
+
+.nav-tabs {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.nav-tabs>li {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.nav-tabs>li>a {
+    border: none;
+    color: #0D5389;
+    text-transform: uppercase;
+    padding: 20px 50px
+}
+
+.nav-tabs>li>button {
+    border: none;
+    color: #0D5389;
+    text-transform: uppercase;
+    padding: 20px 50px;
+    background: none;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+    border: none;
+    border-bottom: solid 1px #0D5389;
+}
+
+.nav-tabs>li.active>button,
+.nav-tabs>li.active>button:hover,
+.nav-tabs>li.active>button:focus {
+    border: none;
+    border-bottom: solid 1px #0D5389;
+}
+
+.nav-tabs>li>a:hover {
+    border: none;
+    color: #B19378;
+    border-bottom: solid 1px #B19378;
+}
+
+.nav-tabs>li>button:hover {
+    border: none;
+    color: #B19378;
+    border-bottom: solid 1px #B19378;
+}
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.nav>li>button:hover,
+.nav>li>button:focus {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+
+/***** PROGRESS BAR *****/
+
+.progress .table,
+.table>thead>tr>th,
+.table>tbody>tr>th,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>tbody>tr>td,
+.table>tfoot>tr>td {
+    border-top: none;
+    border-bottom: 1px solid #DFDBD8;
+    text-align: center;
+}
+
+.progress .table,
+.table>thead>tr>th,
+.table>tbody>tr>th,
+.table>tfoot>tr>th,
+{
+    border: none;
+}

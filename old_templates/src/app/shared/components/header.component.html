@@ -1,0 +1,20 @@
+<nav id='main-nav' class="navbar navbar-inverse  navbar-fixed-top simple">
+    <div class="container-fluid">
+        <div class="navbar-header">        
+            <a class="navbar-brand color-blue hv-gold" routerLink='/'>
+                <h2 class="header-logo">SAFE HARBOR MARINAS</h2>
+                <!--<img [src]="shmLogo" alt="Safe Harbor Marinas Logo" class="footer-logo">-->
+            </a>
+        </div>
+        <div class="collapse navbar-collapse off" id="myNavbar" [ngClass]="{'open': menuOpen}">         
+            <ul class="nav navbar-nav navbar-right no-collapse">    
+                    <li *ngIf='localSaved()'><a routerLink='/user' class="color-blue hv-gold">User</a></li>            
+                <li *ngIf='localSaved()'><a routerLink='/marina' class="color-blue hv-gold">Marina</a></li>
+                <li *ngIf='localSaved()'><a routerLink='/rentaltype' class="color-blue hv-gold">Rental Types</a></li>
+                <li *ngIf='localSaved()'><a routerLink='/contracttemplate' class="color-blue hv-gold">Contract Templates</a></li>
+                <li *ngIf='!localSaved()'><a routerLink='/login' class="color-blue hv-gold">Login</a></li>
+                <li *ngIf='localSaved()'><a (click)='logOut()' class="color-blue hv-gold" id="logout-link">Logout</a></li>
+            </ul>            
+        </div>
+    </div>
+</nav>
