@@ -28,7 +28,7 @@ Local Admin (Manager for the location)- who will manage a branch/Location.
 
 
 
-Brniks ia Organication which is using this application, so employees are assosication to brinks, all the  transactions happane in the web application will be stored in SIAE database.. and also this application connection Sicop database..and also this application will be connected to SICOP database and that  Sicop database is a location spacific database..
+Brniks is Organication which is using this application, so employees are assosication to brinks, all the  transactions happane in the web application will be stored in SIAE database.. and also this application connection Sicop database and that  Sicop database is a location spacific database..
 
 Local Admin login in web application can manage only customers who are associated to that particular location.
 
