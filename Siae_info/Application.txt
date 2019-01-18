@@ -1,0 +1,21 @@
+Grouping
+Batching
+SwiftManagment,
+Verification,
+Selection,
+Classification
+
+-----------------------------------------------------------------------------------------
+Supervisor receive ticket from
+
+Source of ticket
+---------------
+Sicop (Enter or scan a ticket number)
+Vault (Vault Onhold Ticket (Seal Number), Vault Unprocessed Tickets (Vault Ticket - 3 level hirarchy) ),
+Unprocessed tickets from Previous Shift
+
+when to onnhold means it should dis-associate group/Batch
+
+Create Group for the  Tickets (Can group ticket belongs to one source).
+
+Create Batching ..  can be done for differnt groupsgroups

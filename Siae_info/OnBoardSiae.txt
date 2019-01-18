@@ -1,0 +1,47 @@
+Btink is a cash managment application 
+
+where birnks will recive a cash from various customer (Bank , Retile constomer) than it will store that case in valut and communicate to customers.
+
+
+brniks has one centarlisez data base SIAE, another batabase is Sicop.
+
+Sicop is a source of Truth. so when ever we do cash inflow/Out Flow we doing with a Sicop, Sicop has their own Database.
+
+and this Sicop Database there are Mutiple Sicop Database based on the Locations, so each Sicop location they have there own Database,
+
+So when ever we receive a ticket from the customer first it will go to Sicop Datadatabe and then it will be received to Brinkes
+
+In brinks we have 4 diff types of users
+
+Chasher
+Supervisor
+Treasuror
+Administrator
+
+Admin will manages all the Customer info and all the Employee Access.
+
+Local Admin / Global Admin
+
+1-Global Admin / Mutiple Local Admins
+
+Local Admin (Manager for the location)- who will manage a branch/Location.
+
+
+
+Brniks is Organication which is using this application, so employees are assosication to brinks, all the  transactions happane in the web application will be stored in SIAE database.. and also this application connection Sicop database and that  Sicop database is a location spacific database..
+
+Local Admin login in web application can manage only customers who are associated to that particular location.
+
+Supervisor.. who actualy recevies the tickets and group them and batch them and he only one who authorizes all the chashiers.
+
+Chashier.. who will do all the ground work. key verifing hoe much many and ..
+
+Treasaror.. he owns Vault.  so finally one cash is verified it has to some location.. called Valut secure Location. 
+
+
+
+
+
+
+
+
