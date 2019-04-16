@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<!-- saved from url=(0096)https://jonhilton.net/2016/06/06/simplify-your-controllers-with-the-command-pattern-and-mediatr/ -->
+<html lang="en-uk"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+	<link href="./Simplify your controllers with the Command Pattern and MediatR_files/css" rel="stylesheet">
+
+	<title>Simplify your controllers with the Command Pattern and MediatR</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<meta name="author" content="Jon Hilton">
+
+	
+	<meta name="description" content="Keep your controllers thin using the command pattern and MediatR">
+	<meta name="twitter:description" content="Keep your controllers thin using the command pattern and MediatR">
+	<meta property="og:description" content="Keep your controllers thin using the command pattern and MediatR">
+	
+
+	
+
+	<meta name="generator" content="Hugo 0.25">
+
+	<meta name="twitter:widgets:csp" content="on">
+	<meta name="twitter:site" content="@jonhilt">
+	<meta name="twitter:creator" content="@jonhilt">
+
+	
+	<meta name="twitter:title" content="Simplify your controllers with the Command Pattern and MediatR">
+	<meta name="twitter:card" content="summary_large_image">
+	
+
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Simplify your controllers with the Command Pattern and MediatR">
+	<meta property="og:url" content="https://jonhilton.net/2016/06/06/simplify-your-controllers-with-the-command-pattern-and-mediatr/">
+
+	<!-- JQuery -->
+	<script src="./Simplify your controllers with the Command Pattern and MediatR_files/iubenda.js.download"></script><script type="text/javascript" async="" defer="" src="./Simplify your controllers with the Command Pattern and MediatR_files/matomo.js.download"></script><script async="" src="./Simplify your controllers with the Command Pattern and MediatR_files/70949027.js.download"></script><script src="./Simplify your controllers with the Command Pattern and MediatR_files/core-fcf8c9eac36aece9d290934b54a63296.js.download"></script><script src="./Simplify your controllers with the Command Pattern and MediatR_files/jquery-3.2.1.min.js.download"></script>
+
+	<!-- bPopup -->
+	<script src="./Simplify your controllers with the Command Pattern and MediatR_files/jquery.bpopup.min.js.download"></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="./Simplify your controllers with the Command Pattern and MediatR_files/main.css">
+	<link rel="stylesheet" href="./Simplify your controllers with the Command Pattern and MediatR_files/site.css">
+	<link rel="stylesheet" href="./Simplify your controllers with the Command Pattern and MediatR_files/social.css">
+	<link rel="stylesheet" href="./Simplify your controllers with the Command Pattern and MediatR_files/lists.css">
+	<link rel="stylesheet" href="./Simplify your controllers with the Command Pattern and MediatR_files/forms.css">
+
+	
+
+	
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="https://jonhilton.net/favicon.ico" type="image/x-icon">
+
+	<!-- RSS -->
+	
+
+	<!-- Font Awesome -->
+	<link href="./Simplify your controllers with the Command Pattern and MediatR_files/font-awesome.min.css" rel="stylesheet">
+
+	<style type="text/css">
+		#iubenda-cs-banner {
+			bottom: 0px !important;
+			left: 0px !important;
+			position: fixed !important;
+			width: 100% !important;
+			z-index: 99999998 !important;
+			background-color: black;
+		}
+
+		.iubenda-cs-content {
+			display: block;
+			margin: 0 auto;
+			padding: 20px;
+			width: auto;
+			font-family: Helvetica, Arial, FreeSans, sans-serif;
+			font-size: 14px;
+			background: #000;
+			color: #fff;
+		}
+
+		.iubenda-cs-rationale {
+			max-width: 900px;
+			position: relative;
+			margin: 0 auto;
+		}
+
+		.iubenda-banner-content>p {
+			font-family: Helvetica, Arial, FreeSans, sans-serif;
+			line-height: 1.5;
+		}
+
+		.iubenda-cs-close-btn {
+			margin: 0;
+			color: #fff;
+			text-decoration: none;
+			font-size: 14px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			border: none;
+		}
+
+		.iubenda-cs-cookie-policy-lnk {
+			text-decoration: underline;
+			color: #fff;
+			font-size: 14px;
+			font-weight: 900;
+		}
+	</style>
+	<script type="text/javascript"> var _iub = _iub || []; _iub.csConfiguration = { "banner": { "slideDown": false, "applyStyles": false }, "lang": "en", "siteId": 1101886, "cookiePolicyId": 70949027 }; </script>
+	<script type="text/javascript" src="./Simplify your controllers with the Command Pattern and MediatR_files/iubenda_cs.js.download" charset="UTF-8" async=""></script>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<script src="./Simplify your controllers with the Command Pattern and MediatR_files/axios.min.js.download"></script>
+	<script src="./Simplify your controllers with the Command Pattern and MediatR_files/vue"></script>
+
+	
+	<script type="text/javascript">
+		var _paq = window._paq || [];
+		 
+		_paq.push(["setCookieDomain", "*.jonhilton.net"]);
+		_paq.push(["setDomains", ["*.jonhilton.net"]]);
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function () {
+			var u = "https://jonhilton.matomo.cloud/";
+			_paq.push(['setTrackerUrl', u + 'matomo.php']);
+			_paq.push(['setSiteId', '1']);
+			var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+			g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+		})();
+	</script>
+	
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><link type="text/css" href="./Simplify your controllers with the Command Pattern and MediatR_files/commento.css" rel="stylesheet" onload="window.commento.loadCssOverride()"><style type="text/css"></style></head>
+<body>
+	
+<header class="site-header">
+	<div class="branding">
+		<a href="https://jonhilton.net/">
+			<img class="avatar" src="./Simplify your controllers with the Command Pattern and MediatR_files/dea518e06fef174113840b0aae7a7310.jpeg" alt="">
+		</a>
+		<h1 class="site-title">
+			<a href="https://jonhilton.net/">Jon Hilton</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			<li class="featured">
+				<a href="https://jonhilton.net/practical-aspnet-core-mvc">ASP.NET Core MVC Book</a>
+			</li>
+			<li class="featured tertiary">
+				<a href="https://jonhilton.net/post">All Posts</a>
+			</li>
+			<li class="featured secondary">
+				<a href="https://jonhilton.net/hire-me">Contact</a>
+			</li>
+			<li> 
+				<a href="https://jonhilton.net/series/"> Recent Series </a>
+			</li> 
+
+<li class="icon">
+	<a href="https://jonhilton.net/index.xml" title="Subcribe">
+		<i class="fa fa-fw fa-rss"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+
+	<div class="content">
+	<article>
+	<header>
+		<h1 class="title">Simplify your controllers with the Command Pattern and MediatR</h1>
+		<p class="meta">
+	June 6, 2016 · 3 minute read
+
+	
+</p>
+
+	</header>
+
+	<section class="post-content">
+		
+
+<p>So you want to keep your controllers thin even as your application becomes more and more complicated.</p>
+
+<p>You’re concerned that your controllers are getting bloated and you’ve heard people talk about the <strong>command pattern</strong> as one possible solution.</p>
+
+<p>But you don’t know how the command pattern would fit into your app. How many commands should you have? Do you need separate commands every time you want to change a field in your database?</p>
+
+<h2 id="focus-on-features">Focus on features</h2>
+
+<p>One of the nice things about the command pattern is that you can pause thinking about your implementation, and <strong>focus on your user’s interactions</strong>.</p>
+
+<p>Let’s say you are creating a site where users can register and log in. If you take these actions and turn them into commands you’ll end up with;</p>
+
+<ul>
+<li>RegisterUser</li>
+<li>LogIn</li>
+</ul>
+
+<p>When you focus on creating commands like these, you can stay focused on the feature in question and defer all those niggling questions about service layers, fat controllers, where to put your code etc.</p>
+
+<p>That’s not to say you shouldn’t consider the architecture of your app, but if you focus on the feature first, you can <strong>prove the feature works</strong> before getting bogged down with other (more technical) concerns.</p>
+
+<h2 id="hello-mediatr">Hello MediatR</h2>
+
+<p>The good news is, implementing the command pattern is simple, especially if you use <a href="https://github.com/jbogard/MediatR" target="_blank">Jimmy Bogard’s MediatR</a> to send commands from your ASP.NET MVC/WebAPI controllers.</p>
+
+<p>With MediatR you start by creating a simple C# class to represent your command.</p>
+
+<pre><code class="language-c# hljs cpp"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RegisterUser</span> :</span> IRequest&lt;<span class="hljs-keyword">bool</span>&gt;
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> EmailAddress { get; <span class="hljs-built_in">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> FirstName { get; <span class="hljs-built_in">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> LastName { get; <span class="hljs-built_in">set</span>; }
+}
+</code></pre>
+
+<p>The <code>bool</code> type parameter indicates the response type meaning in this case running this command will return a bool.</p>
+
+<p>Then in your controller action you can “send” this command using MediatR.</p>
+
+<pre><code class="language-c# hljs cpp"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> :</span> Controller
+{
+    <span class="hljs-keyword">private</span> readonly IMediator _mediator;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UserController</span><span class="hljs-params">(IMediator mediator)</span>
+    </span>{
+        _mediator = mediator;
+    }
+
+    [HttpPost]
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">Register</span><span class="hljs-params">(RegisterUser registerUser)</span>
+    </span>{
+        <span class="hljs-keyword">bool</span> registered = _mediator.Send(registerUser);
+        <span class="hljs-keyword">return</span> View();
+    }
+}
+</code></pre>
+
+<h3 id="points-to-note">Points to note</h3>
+
+<p>There’s a clean separation of concerns. You don’t need to pull repositories, services etc into your controller because all you need is the Mediator itself</p>
+
+<p>Model Binding has automatically populated the command object (<code>RegisterUser</code>) based on the values passed in the HTTP request</p>
+
+<p>This ensures your controllers stay bloat-free; focused entirely on handling requests and forwarding them on to your business logic.</p>
+
+<p>So how do you actually handle this command? Simple, create a handler of course!</p>
+
+<pre><code class="language-c# hljs cpp"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RegisterUserHandler</span> :</span> IRequestHandler&lt;RegisterUser, <span class="hljs-keyword">bool</span>&gt;
+    {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">Handle</span><span class="hljs-params">(RegisterUser message)</span>
+        </span>{
+            <span class="hljs-comment">// save to database</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+</code></pre>
+
+<p>And that’s it. You now have a simple controller action which sends the command and a handler to handle it.</p>
+
+<p>Finally if you need multiple handlers to react to the same message you should <a href="https://jonhilton.net/2016/08/31/how-to-easily-extend-your-app-using-mediatr-notifications/">take a look at MediatR notifications</a>.</p>
+
+
+		
+<section class="series-links">
+        
+	<p><a href="https://jonhilton.net/2016/06/06/simplify-your-controllers-with-the-command-pattern-and-mediatr/" id="series"></a>All posts in the  
+	<b>Getting started with MediatR</b> series.<br>
+
+    
+    
+    
+    </p><ul class="series">
+    
+    	<li><a href="https://jonhilton.net/2016/06/06/simplify-your-controllers-with-the-command-pattern-and-mediatr/" class="active">Simplify your controllers with the Command Pattern and MediatR</a></li>
+    
+    	<li><a href="https://jonhilton.net/2016/08/31/how-to-easily-extend-your-app-using-mediatr-notifications/">How to easily extend your app using MediatR notifications</a></li>
+    
+    </ul>
+</section>
+ 
+
+		
+
+
+<div>
+  <div id="globalCTA"><span style="display: none;"><div class="form mvc-free-chapter"><div class="panel"><fieldset><h3>Stuck every time you jump out of the tutorials?</h3> <div>Make 2019 the year you finally conquer all those controllers, views, models and all that other "stuff"
+                that comes with MVC.</div> <br> <div class="anonymous" style="display: block;"><form><div class="cta-form"><input type="hidden" name="formId" value="826553"> <input type="text" name="firstName" placeholder="First Name"> <input type="text" name="email" placeholder="Email"> <input type="submit" value="Send me the Practical ASP.NET Core MVC quick start (PDF)" class="button"></div> <!----></form></div> <div class="subscribed"><a data-tagid="745916" href="https://f001.backblazeb2.com/file/jonhilton-freebies/Practical+ASP.NET+Core+MVC+Intro.pdf" class="goodie">
+                    View the Practical ASP.NET Core MVC quick start (PDF)</a></div></fieldset></div></div></span> <span style="display: none;"><div class="form mvc-free-chapter"><div class="panel"><fieldset><h3>Stuck every time you jump out of the tutorials?</h3> <div>Stop wasting time <strong>trying</strong> to learn ASP.NET Core MVC and fast forward to the fun bit
+                (building your features)</div> <br> <div><a data-tagid="740805" href="https://products.jonhilton.net/practical-asp-net-core-mvc/" class="goodie">
+                    Check out "Practical ASP.NET Core MVC"</a></div></fieldset></div></div></span> <span style="display: none;"><div class="form"><div class="panel"><fieldset><h3>Can't make sense of front-end development?</h3> <div>Check out Front-end in four hours for a head-start</div> <br> <a data-tagid="740806" href="https://products.jonhilton.net/front-end-in-four-hours/" class="goodie">
+                Take a look</a></fieldset></div></div></span> <span style=""><div class="form mvc-free-chapter"><div class="panel"><fieldset><h3>Stuck every time you jump out of the tutorials?</h3> <div>Make 2019 the year you finally conquer all those controllers, views, models and all that other "stuff"
+                that comes with MVC.</div> <br> <div class="anonymous" style="display: block;"><form><div class="cta-form"><input type="hidden" name="formId" value="826553"> <input type="text" name="firstName" placeholder="First Name"> <input type="text" name="email" placeholder="Email"> <input type="submit" value="Send me the Practical ASP.NET Core MVC quick start (PDF)" class="button"></div> <!----></form></div> <div class="subscribed"><a data-tagid="745916" href="https://f001.backblazeb2.com/file/jonhilton-freebies/Practical+ASP.NET+Core+MVC+Intro.pdf" class="goodie">
+                    View the Practical ASP.NET Core MVC quick start (PDF)</a></div></fieldset></div></div></span></div>
+
+<script>
+    var app = new Vue({
+        delimiters: ['${', '}'],
+        el: '#globalCTA',
+        data() {
+            return { info: { "cta": [] } }
+        },
+        mounted() {
+            let c = getCookie('_jonhiltonnet');
+            if (c) {
+                var subscriberId = JSON.parse(c).ck_id;
+                axios
+                    .get('/.netlify/functions/ck_info?subscriberId=' + subscriberId)
+                    .then(response => (this.info = response.data));
+            } else {
+                this.info = { "cta": [0] }
+            }
+        }
+    });
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    Vue.component('cta', {
+        data: function () {
+            return { firstName: '', email: '', formId: 826553, submitted: false, submitting: false }
+        },
+        template: `
+            <form v-on:submit="subscribe">
+                <div class="cta-form" v-if="!submitted">
+                    <input type="hidden" name="formId" v-model="formId" />
+                    <input type="text" name="firstName" placeholder="First Name" v-model="firstName" />
+                    <input type="text" name="email" placeholder="Email" v-model="email" />
+                    <input type="submit" class="button" v-bind:disabled="submitting"
+                        value="Send me the Practical ASP.NET Core MVC quick start (PDF)" />
+                </div>
+                <div v-if="submitted">
+                    Sorted, now check your inbox :-)
+                </div>
+            </form>
+        `,
+        methods: {
+            subscribe: async function (event) {
+                event.preventDefault();
+                var payload = {
+                    "firstName": this.firstName,
+                    "formId": this.formId,
+                    "email": this.email
+                };
+                this.submitting = true;
+                var result = await axios.post(
+                    '/.netlify/functions/ck_submit/', payload,
+                    {
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    });
+
+                this.submitting = false;
+                if (result.status === 200) {
+                    this.submitted = true;
+                }
+            }
+        }
+    });
+</script>
+</div>
+
+
+
+		
+
+<style>
+
+    h3 {
+        color: #666666;
+    }
+
+    .relatedPosts {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .postDetails {
+        flex: 1 0 0;
+        padding-right: 1em;
+    }
+
+    .postDetails a {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1em;
+    }
+
+    .postDetails .description {
+        font-size: 0.8em;
+    }
+
+</style>
+
+		
+
+		<div id="commento" class="commento-root" style=""><div id="commento-login-box-container"></div><div id="commento-error" class="commento-error-box" style="display: none;"></div><div id="commento-mod-tools" class="commento-mod-tools" style="display: none"><button id="commento-mod-tools-lock-button">Lock Thread</button></div><div id="commento-main-area" class="commento-main-area" style=""><div id="commento-login" class="commento-login"><div class="commento-login-text">Login</div></div><div id="commento-textarea-super-container-root" class="commento-button-margin"><div id="commento-textarea-container-root" class="commento-textarea-container"><textarea id="commento-textarea-root" placeholder="Add a comment"></textarea></div><button id="commento-submit-button-root" class="commento-button commento-submit-button">Add Comment</button></div><div id="commento-comments-area" class="commento-comments"><div><div id="commento-comment-card-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" class="commento-card" style="border-left: 2px solid rgb(146, 36, 40);"><div class="commento-header"><div id="commento-comment-options-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(146, 36, 40);">S</div><div id="commento-comment-name-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" class="commento-name" style="max-width: 109.578125px;">Scott Juranek</div><div id="commento-comment-subtitle-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" class="commento-subtitle"><div id="commento-comment-score-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" class="commento-score">0 points</div><div id="commento-comment-timeago-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" title="Wed Jun 08 2016 02:23:59 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f"><div id="commento-comment-body-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" class="commento-body"><div id="commento-comment-text-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f"><p>One downside of this pattern we found is that when you are in a controller it is more time consuming to jump to the implementation. You can't right click on the command class and find references. Or maybe there is a better way? We still use the mediator pattern but we include the handler class as a generic parameter. So it looks like this: bool registered = _mediator.Send&lt;registeruserhandler&gt;(registerUser); Since 99% of our commands have only one handler then this allowed us to keep things skinny and not waste time finding implementation. Maybe others know of a better way to quickly jump to the handler? We have a large projects with hundreds and hundreds of commands and queries and even when using a nicely organized folder structure it was somewhat frustrating to be in a controller and not able to quickly find the implementation, which is off in another project loaded in the solution.</p>
+</div></div><div id="commento-comment-children-21abfade2ee7e161498818f60f223a29343c3345ec8b0c76bf86598222ffea2f" class="commento-body"><div id="commento-comment-card-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">J</div><div id="commento-comment-name-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" class="commento-name" style="max-width: 88.234375px;">Jon Hilton</div><div id="commento-comment-subtitle-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" class="commento-subtitle"><div id="commento-comment-score-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" class="commento-score">0 points</div><div id="commento-comment-timeago-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" title="Wed Jun 15 2016 03:23:58 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f"><div id="commento-comment-body-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f" class="commento-body"><div id="commento-comment-text-409a366664979e729ba7006673dc33cabe8ce4a3c9e203052108a13d414a730f"><p>Hi Scott</p>
+
+<p>Yeah it does seem that a more decoupled architecture is (by it's very nature) often less discoverable.</p>
+
+<p>I guess it's a reasonable trade-off if you find the code is easier to maintain and less prone to bugs.</p>
+</div></div></div></div><div id="commento-comment-card-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">P</div><div id="commento-comment-name-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" class="commento-name" style="max-width: 48.234375px;">Paul</div><div id="commento-comment-subtitle-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" class="commento-subtitle"><div id="commento-comment-score-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" class="commento-score">0 points</div><div id="commento-comment-timeago-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" title="Wed Jun 15 2016 04:37:36 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c"><div id="commento-comment-body-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" class="commento-body"><div id="commento-comment-text-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c"><p>We actually put the handler as a nested class inside the request since for us they are required to always work as a pair. (sorry for the messed up formatting, I couldn't figure out how to fix it in Disqus, I put a link with a Github example)<br>
+<a href="https://github.com/Command-R/CommanderDemo/blob/a6e72ea9870478dc0db9e3e94ac6d11c83e771e2/CommanderDemo.Domain/Commands/Ping.cs" rel="nofollow">https://github.com/Command-...</a></p>
+
+<p>public class Ping : IRequest&lt;pong&gt; {<br>
+    public string Name { get; set; }</p>
+
+<pre><code>public class Pong {  
+    public string Message { get; set; }  
+ }
+
+internal class Handler : IRequestHander&amp;lt;ping, pong=""&amp;gt;     {  
+     public Pong Handle(Ping ping) {  
+         return new Pong { Message = $"Hello {ping.Name}" };  
+     }  
+}  
+</code></pre>
+
+<p>}</p>
+</div></div><div id="commento-comment-children-ecf35961af25922fb3a61a973d13122caf3bee31b5b924176b18fd8400bb2f6c" class="commento-body"><div id="commento-comment-card-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" class="commento-card" style="border-left: 2px solid rgb(83, 81, 84);"><div class="commento-header"><div id="commento-comment-options-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(83, 81, 84);">N</div><div id="commento-comment-name-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" class="commento-name" style="max-width: 61.5625px;">niaher</div><div id="commento-comment-subtitle-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" class="commento-subtitle"><div id="commento-comment-score-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" class="commento-score">0 points</div><div id="commento-comment-timeago-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" title="Fri Jun 17 2016 12:35:13 GMT+0530 (India Standard Time)" class="commento-timeago">34 months ago</div></div></div><div id="commento-comment-contents-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4"><div id="commento-comment-body-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" class="commento-body"><div id="commento-comment-text-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4"><p>I do the opposite - the request and response classes are nested inside the handler class. I try not to reuse request and response classes in different handlers, because request/response and handler are usually very tightly coupled. In my opinion it's better to duplicate the same request/response classes rather than reuse them.</p>
+</div></div><div id="commento-comment-children-bdaab153f717121b717c50c35bc1c306f735d03dab300cc77a948bfe328606f4" class="commento-body"><div id="commento-comment-card-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">P</div><div id="commento-comment-name-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" class="commento-name" style="max-width: 48.234375px;">Paul</div><div id="commento-comment-subtitle-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" class="commento-subtitle"><div id="commento-comment-score-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" class="commento-score">0 points</div><div id="commento-comment-timeago-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" title="Fri Jun 17 2016 19:24:25 GMT+0530 (India Standard Time)" class="commento-timeago">34 months ago</div></div></div><div id="commento-comment-contents-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02"><div id="commento-comment-body-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" class="commento-body"><div id="commento-comment-text-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02"><p>Interesting approach. The reason we went with the Request/Response (which we call Commands) on the outside is that they are public classes in our assembly, while the nested Handler class is marked as internal. We actually have the ability for other teams to reference the public Request/Response Commands in our assembly as strongly-typed classes in their assemblies. We provide a JsonRpcClient that serializes the the Commands and sends to our server which executes them via JSON-RPC then returns the Response as json which is then deserialized to the strong type.<br>
+<a href="https://github.com/Command-R/Command-R/blob/master/CommandR/JsonRpcClient.cs" rel="nofollow">https://github.com/Command-...</a></p>
+
+<p>We also never reuse the Request/Response view models they each stand completely alone. All of our Entity Framework models are completely internal also and the necessary pieces are mapped to the Request/Response view models. Any necessary services are also internal, the only things publicly exposed in the business/domain assemblies are the Commands.</p>
+</div></div><div id="commento-comment-children-d9b36666788fbe4bbbcaf6abcd083f1dd5463b12f8ffe63d3eac184c93800c02" class="commento-body"><div id="commento-comment-card-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" class="commento-card" style="border-left: 2px solid rgb(83, 81, 84);"><div class="commento-header"><div id="commento-comment-options-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(83, 81, 84);">N</div><div id="commento-comment-name-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" class="commento-name" style="max-width: 61.5625px;">niaher</div><div id="commento-comment-subtitle-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" class="commento-subtitle"><div id="commento-comment-score-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" class="commento-score">0 points</div><div id="commento-comment-timeago-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" title="Fri Jun 17 2016 22:08:02 GMT+0530 (India Standard Time)" class="commento-timeago">34 months ago</div></div></div><div id="commento-comment-contents-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7"><div id="commento-comment-body-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" class="commento-body"><div id="commento-comment-text-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7"><p>I guess the 2 approaches are more or less the same. It's only a matter of preference. The only real difference is that our handlers are public and can be invoked directly without IMediatr (useful for unit-testing).</p>
+</div></div><div id="commento-comment-children-645a7ff8d458bf375a024ca300f8ed5276d780ab3f85709ef876308c891be4f7" class="commento-body"><div id="commento-comment-card-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">P</div><div id="commento-comment-name-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" class="commento-name" style="max-width: 48.234375px;">Paul</div><div id="commento-comment-subtitle-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" class="commento-subtitle"><div id="commento-comment-score-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" class="commento-score">0 points</div><div id="commento-comment-timeago-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" title="Fri Jun 17 2016 22:15:58 GMT+0530 (India Standard Time)" class="commento-timeago">34 months ago</div></div></div><div id="commento-comment-contents-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166"><div id="commento-comment-body-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166" class="commento-body"><div id="commento-comment-text-9f72a8a3a05218d3b089c62c74910245c64097492e27d144cbcc9844e60e8166"><p>Yeah, basically the same idea of structuring the commands/handlers as a cohesive unit.<br>
+Good point about unit testing, we use the InternalsVisibleTo assembly attribute to allow unit testing of internal Handlers in the Domain project to be visible to the Domain.Tests project:</p>
+
+<p>//in Domain.dll/AssemblyInfo.cs<br>
+[assembly: InternalsVisibleTo("Domain.Tests")]</p>
+</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><div id="commento-comment-card-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" class="commento-card" style="border-left: 2px solid rgb(83, 81, 84);"><div class="commento-header"><div id="commento-comment-options-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(83, 81, 84);">S</div><div id="commento-comment-name-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" class="commento-name" style="max-width: 75.40625px;">Scooletz</div><div id="commento-comment-subtitle-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" class="commento-subtitle"><div id="commento-comment-score-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" class="commento-score">0 points</div><div id="commento-comment-timeago-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" title="Wed Jun 08 2016 10:34:47 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4"><div id="commento-comment-body-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" class="commento-body"><div id="commento-comment-text-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4"><p>The best thing about the pattern is that controllers are becoming mostly uneeded. For a project I was working on I used Fody weaver to examine all the commands and emit simple controllers like the one you wrote. It allowed me to operate on a better, command based level instead of spending time on writing and maintaining controllers.<br>
+The second thing is that it's really easy to write a mediator! It's not a complex algorithm (effectively it's just a dictionary of handlers) so it is easy to propagate in a team, not to mention that you can just embed your own implementation in a solution.</p>
+</div></div><div id="commento-comment-children-0bcad16cba27942593b29d3f284f817d4ae181903e8310cc56a312e57dea38c4" class="commento-body"><div id="commento-comment-card-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">J</div><div id="commento-comment-name-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" class="commento-name" style="max-width: 88.234375px;">Jon Hilton</div><div id="commento-comment-subtitle-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" class="commento-subtitle"><div id="commento-comment-score-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" class="commento-score">0 points</div><div id="commento-comment-timeago-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" title="Wed Jun 15 2016 03:25:46 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f"><div id="commento-comment-body-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f" class="commento-body"><div id="commento-comment-text-1c1539048378df30e5a788f39407b2e63466c995e2fc26a788f0acb3f3116d6f"><p>Anything which lets you focus on handling your actual business logic and not boilerplate code has to be good, right? :-)</p>
+</div></div></div></div></div></div></div><div id="commento-comment-card-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">P</div><div id="commento-comment-name-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" class="commento-name" style="max-width: 48.234375px;">Paul</div><div id="commento-comment-subtitle-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" class="commento-subtitle"><div id="commento-comment-score-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" class="commento-score">0 points</div><div id="commento-comment-timeago-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" title="Tue Jun 07 2016 18:10:34 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154"><div id="commento-comment-body-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" class="commento-body"><div id="commento-comment-text-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154"><p>Nice article, I <em>love</em> the command pattern using MediatR! Where I worked we built a huge application using a command per API endpoint and everyone on the team loved the architecture. Since we had an angular front-end (not MVC) we ended up using a single Web API endpoint based on JSON-RPC that dispatched the command from the web layer to the domain business layer where all the commands lived (in multiple projects). We could also execute the commands in a background queue, 100% of our business logic in the app lived in commands. I can't say enough good things about it.</p>
+
+<p><a href="http://www.jsonrpc.org/specification" rel="nofollow">http://www.jsonrpc.org/spec...</a></p>
+
+<p><a href="https://github.com/Command-R/Command-R/blob/master/CommandR.WebApi/JsonRpcController.cs" rel="nofollow">https://github.com/Command-...</a></p>
+</div></div><div id="commento-comment-children-1ea6cd3a7d94c90f17287bfffd4241f64063de95a14a52ca1cc0d67c5551c154" class="commento-body"><div id="commento-comment-card-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">J</div><div id="commento-comment-name-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" class="commento-name" style="max-width: 88.234375px;">Jon Hilton</div><div id="commento-comment-subtitle-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" class="commento-subtitle"><div id="commento-comment-score-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" class="commento-score">0 points</div><div id="commento-comment-timeago-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" title="Wed Jun 15 2016 03:26:41 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b"><div id="commento-comment-body-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b" class="commento-body"><div id="commento-comment-text-f75087013a671894f0523a9967f8c1a81ae5bfca5b6808004182fe5c12cb073b"><p>Really like this approach, not tried JSON-RPC yet but will definitely give it a go.</p>
+</div></div></div></div></div></div></div><div id="commento-comment-card-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">A</div><div id="commento-comment-name-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" class="commento-name" style="max-width: 134.546875px;">Anthony Halliday</div><div id="commento-comment-subtitle-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" class="commento-subtitle"><div id="commento-comment-score-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" class="commento-score">0 points</div><div id="commento-comment-timeago-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" title="Wed Jun 08 2016 03:37:28 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf"><div id="commento-comment-body-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" class="commento-body"><div id="commento-comment-text-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf"><p>It looks an interesting concept and I know this is just an intro but I would be interested in how the patter is used to populate view data, handle  conditional redirects, validation and so on (in the same action). Do you create a response object for each command that has possible view data, redirect URL, response steams ect.?</p>
+
+<p>I guess this would come down to the implementation technique but is it easy to make independent to the HttpContext, e.g. you have a command invoked by 2 controllers but the result is different based on the URL (not query string) or cookies do you need to populate the request data in the controller, is the HttpContext still required and how about setting cookies.</p>
+</div></div><div id="commento-comment-children-2ccd600d666fdb4d16a73f9b14a0d379d894af69139d652c3ce5f6cc58ad72cf" class="commento-body"><div id="commento-comment-card-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">J</div><div id="commento-comment-name-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" class="commento-name" style="max-width: 88.234375px;">Jon Hilton</div><div id="commento-comment-subtitle-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" class="commento-subtitle"><div id="commento-comment-score-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" class="commento-score">0 points</div><div id="commento-comment-timeago-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" title="Wed Jun 15 2016 03:20:35 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807"><div id="commento-comment-body-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" class="commento-body"><div id="commento-comment-text-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807"><p>Hey Anthony, thanks for your comment.</p>
+
+<p>Personally I would see the command handlers as pure business logic, so no references to HttpContext or anything which could be considered environment specific. For me it's a good sign if your commands/handlers are easily portable to a different framework, for example you could switch from ASP.NET MVC to NancyFX and your commands/handlers could be used with no changes necessary.</p>
+
+<p>Any tweaking of the results, or setting of cookies etc. could still reside in your controller, or a service which exists at that layer in your application (but outside of the commands/handlers).</p>
+
+<p>Hope that makes sense :-)</p>
+</div></div><div id="commento-comment-children-ee2cc3583d36291a80aa81c5766ff5be675f0d7a3ec5530f5985f0696845c807" class="commento-body"><div id="commento-comment-card-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">A</div><div id="commento-comment-name-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" class="commento-name" style="max-width: 134.546875px;">Anthony Halliday</div><div id="commento-comment-subtitle-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" class="commento-subtitle"><div id="commento-comment-score-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" class="commento-score">0 points</div><div id="commento-comment-timeago-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" title="Wed Jun 15 2016 03:29:21 GMT+0530 (India Standard Time)" class="commento-timeago">35 months ago</div></div></div><div id="commento-comment-contents-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494"><div id="commento-comment-body-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494" class="commento-body"><div id="commento-comment-text-baa207b51a82aa3f64b1e83c785f0a1b9c2cff7d4627f3d036dae8a180308494"><p>Hi Jon, thanks for your response. It does make sense and has got me intrigued to give it a try for my next hobby project.</p>
+</div></div></div></div></div></div></div></div></div></div><div id="commento-comment-card-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" class="commento-card" style="border-left: 2px solid rgb(62, 150, 81);"><div class="commento-header"><div id="commento-comment-options-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(62, 150, 81);">Y</div><div id="commento-comment-name-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" class="commento-name" style="max-width: 152.125px;">Yaroslav Veremenko</div><div id="commento-comment-subtitle-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" class="commento-subtitle"><div id="commento-comment-score-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" class="commento-score">0 points</div><div id="commento-comment-timeago-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" title="Fri Jun 24 2016 22:51:20 GMT+0530 (India Standard Time)" class="commento-timeago">34 months ago</div></div></div><div id="commento-comment-contents-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9"><div id="commento-comment-body-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" class="commento-body"><div id="commento-comment-text-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9"><p>Hi Jon. I have a quite difficult project I am working on. All logic is in controllers and I have about 20 of them structured by the area of use. If I try to use this approach I will end up with hundreds of class files. How would you suggest to structure something like that?</p>
+</div></div><div id="commento-comment-children-8eedc2c21d12bf7466259849c483a95fd0191f33c19cb4405319d06dc02c9fb9" class="commento-body"><div id="commento-comment-card-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" class="commento-card" style="border-left: 2px solid rgb(57, 106, 177);"><div class="commento-header"><div id="commento-comment-options-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(57, 106, 177);">L</div><div id="commento-comment-name-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" class="commento-name" style="max-width: 113.625px;">Luca Briguglia</div><div id="commento-comment-subtitle-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" class="commento-subtitle"><div id="commento-comment-score-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" class="commento-score">0 points</div><div id="commento-comment-timeago-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" title="Fri Nov 18 2016 01:59:18 GMT+0530 (India Standard Time)" class="commento-timeago">29 months ago</div></div></div><div id="commento-comment-contents-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05"><div id="commento-comment-body-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05" class="commento-body"><div id="commento-comment-text-65a5cfddd711e621c14c6b28bb88627addf3ab4efa621b717248ac5646e91f05"><p>Hi Yaroslav,</p>
+
+<p>please have a look at my open source cms project <a href="https://github.com/weapsy/weapsy" rel="nofollow">https://github.com/weapsy/w...</a>.</p>
+
+<p>I'm using a identical pattern identical to the one described in this article but without using an external library.</p>
+
+<p>It's a large application already and you can see how easy is to add new features without modifications to the existing classes.</p>
+
+<p>Hope that helps!</p>
+</div></div></div></div><div id="commento-comment-card-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">J</div><div id="commento-comment-name-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" class="commento-name" style="max-width: 88.234375px;">Jon Hilton</div><div id="commento-comment-subtitle-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" class="commento-subtitle"><div id="commento-comment-score-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" class="commento-score">0 points</div><div id="commento-comment-timeago-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" title="Tue Jun 28 2016 18:00:10 GMT+0530 (India Standard Time)" class="commento-timeago">34 months ago</div></div></div><div id="commento-comment-contents-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54"><div id="commento-comment-body-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54" class="commento-body"><div id="commento-comment-text-e61eff3207eb8bc6bb4c6f54970dbfad7840b75cbebaf93b96012339f2b2dc54"><p>Completely agree with @niaher:disqus about small files vs large files.</p>
+
+<p>In many ways I'd consider the number of files to be mostly irrelevant.</p>
+
+<p>If you focus on creating handlers which directly map to the operations that your users can perform, then it is less a question about "how many class files have I got?" and more "what actions can my users perform?" and "how easily can I maintain/add features to my application?".</p>
+
+<p>As you create more handlers (with names which accurately represent what they do), you can easily scan the list you've ended up with to decide what folders (or indeed projects) you need to start grouping related features/functionality.</p>
+
+<p>At the simplest level, those 20 controllers may just become 20 folders (or projects) containing multiple handlers.</p>
+
+<p>A nice benefit is that less code in each file means you have to read/understand less code to learn what any individual feature does and how it works.</p>
+
+<p>Hope that helps ;-)</p>
+</div></div></div></div><div id="commento-comment-card-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" class="commento-card" style="border-left: 2px solid rgb(83, 81, 84);"><div class="commento-header"><div id="commento-comment-options-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(83, 81, 84);">N</div><div id="commento-comment-name-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" class="commento-name" style="max-width: 61.5625px;">niaher</div><div id="commento-comment-subtitle-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" class="commento-subtitle"><div id="commento-comment-score-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" class="commento-score">0 points</div><div id="commento-comment-timeago-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" title="Sun Jun 26 2016 13:34:51 GMT+0530 (India Standard Time)" class="commento-timeago">34 months ago</div></div></div><div id="commento-comment-contents-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8"><div id="commento-comment-body-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8" class="commento-body"><div id="commento-comment-text-3392714fc63dccc06a9ea65e76f583eb89cea4b6190a55df0e807afc790c2dd8"><p>It's better to have 100s of small files, than 10s of huge files. To answer your question - you can separate those files by "area of use" as you suggest. I prefer to have separate projects for each domain/subdomain, e.g.</p>
+
+<ul>
+<li>MyProject.Accounting<br></li>
+<li>MyProject.UserManagement<br></li>
+<li>MyProject.Inventory<br></li>
+<li>MyProject.Orders</li>
+</ul>
+
+<p>etc</p>
+</div></div></div></div></div></div></div><div id="commento-comment-card-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" class="commento-card" style="border-left: 2px solid rgb(83, 81, 84);"><div class="commento-header"><div id="commento-comment-options-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(83, 81, 84);">K</div><div id="commento-comment-name-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" class="commento-name" style="max-width: 79.671875px;">k3nn c.p.</div><div id="commento-comment-subtitle-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" class="commento-subtitle"><div id="commento-comment-score-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" class="commento-score">0 points</div><div id="commento-comment-timeago-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" title="Fri Aug 05 2016 08:18:36 GMT+0530 (India Standard Time)" class="commento-timeago">33 months ago</div></div></div><div id="commento-comment-contents-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b"><div id="commento-comment-body-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" class="commento-body"><div id="commento-comment-text-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b"><p>beginner in unity + mediatr here :D --&gt;   need to know exactly how to set up MediatR with Unity. can you show the wiring how to define  container.Register() for the handlers in your example. I've tried it on my own using unity (the same with the example of "PONG" request/response from bogard's wiki) but have run into runtime error:</p>
+
+<p>Resolution of the dependency failed, type = "MediatR.IRequestHandler<code>2[ReqMediatR,System.Boolean]", name = "(none)".  
+Exception occurred while: while resolving.  
+Exception is: InvalidOperationException - The current type, MediatR.IRequestHandler</code>2[ReqMediatR,System.Boolean], is an interface and cannot be constructed. Are you missing a type mapping?</p>
+
+<p>where: ReqMediatR is equivalent to RegisterUser class as they are both derived from IRequest. The point where it failed is in the code _mediator.send(reqMediatR) as I seem to think it cannot find the handler I defined in Unity. my unity registerTypes look like this:</p>
+
+<pre><code>        #region Mediatr  
+        container.RegisterType&amp;lt;imediator, mediator=""&amp;gt;();  
+        container.RegisterTypes(AllClasses.FromLoadedAssemblies());  
+        container.RegisterTypes(AllClasses.FromAssemblies(typeof(ReqMediatR).Assembly), WithMappings.FromAllInterfaces, GetRequestName, GetLifetimeManager);  
+        container.RegisterInstance&amp;lt;singleinstancefactory&amp;gt;(t =&amp;gt; container.Resolve(t));  
+        container.RegisterInstance&amp;lt;multiinstancefactory&amp;gt;(t =&amp;gt; container.ResolveAll(t));  
+        #endregion  
+</code></pre>
+
+<p>....<br>
+        #region Mediatr<br>
+        static bool IsNotificationHandler(Type type)<br>
+        {<br>
+            return type.GetInterfaces().Any(x =&gt; x.IsGenericType &amp;&amp; (x.GetGenericTypeDefinition() == typeof(INotificationHandler&lt;&gt;) || x.GetGenericTypeDefinition() == typeof(IAsyncNotificationHandler&lt;&gt;)));<br>
+        }</p>
+
+<pre><code>    static bool IsRequestHandler(Type type)  
+    {  
+        return type.GetInterfaces().Any(x =&amp;gt; x.IsGenericType &amp;amp;&amp;amp; (x.GetGenericTypeDefinition() == typeof(IRequestHandler&amp;lt;,&amp;gt;) || x.GetGenericTypeDefinition() == typeof(IAsyncRequestHandler&amp;lt;,&amp;gt;)));  
+    }
+
+    static LifetimeManager GetLifetimeManager(Type type)  
+    {  
+        return IsNotificationHandler(type) ? new ContainerControlledLifetimeManager() : null;  
+    }
+
+    static string GetNotificationName(Type type)  
+    {  
+        return IsNotificationHandler(type) ? string.Format("HandlerFor" + type.Name) : string.Empty;  
+    }  
+    static string GetRequestName(Type type)  
+    {  
+        return IsRequestHandler(type) ? string.Format("HandlerFor" + type.Name) : string.Empty;  
+    }  
+    #endregion
+</code></pre>
+
+<p>it is a bit long, but one more clue was that the debug line pointed to where the error was:</p>
+
+<pre><code>                     container.RegisterInstance&amp;lt;singleinstancefactory&amp;gt;(t =&amp;gt; container.Resolve(t));
+</code></pre>
+
+<p>can you help how I can properly register my request handlers in unity? thanks for any info you may have.</p>
+</div></div><div id="commento-comment-children-626c3c743dc07e491216bd687ab021fb3ec7f8dbcb683bb641a04a6d758f962b" class="commento-body"><div id="commento-comment-card-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">J</div><div id="commento-comment-name-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" class="commento-name" style="max-width: 88.234375px;">Jon Hilton</div><div id="commento-comment-subtitle-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" class="commento-subtitle"><div id="commento-comment-score-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" class="commento-score">0 points</div><div id="commento-comment-timeago-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" title="Sat Aug 06 2016 01:41:47 GMT+0530 (India Standard Time)" class="commento-timeago">33 months ago</div></div></div><div id="commento-comment-contents-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca"><div id="commento-comment-body-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" class="commento-body"><div id="commento-comment-text-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca"><p>Hey. It's a little difficult to interpret this code in isolation, but I think the error is possibly indicating that your Unity container hasn't been intiialised.</p>
+
+<p>My hunch is that your method to set up the IMediatR dependencies (everything inside #region Mediatr#) isn't actually being triggered anywhere.</p>
+
+<p>See this example...</p>
+
+<p><a href="https://gist.github.com/anonymous/179bddd951887c5b5e63a8ca5b523a2f" rel="nofollow">https://gist.github.com/ano...</a></p>
+
+<p>Note that the BuildMediator() method is called from Applicaiton_Start, this seems to work.</p>
+
+<p>Thanks<br>
+Jon</p>
+</div></div><div id="commento-comment-children-8842b1d0f55d9847374ae3d1d5c880f10bc9bcc22e943e6ef318da3a1d1fadca" class="commento-body"><div id="commento-comment-card-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" class="commento-card" style="border-left: 2px solid rgb(83, 81, 84);"><div class="commento-header"><div id="commento-comment-options-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(83, 81, 84);">K</div><div id="commento-comment-name-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" class="commento-name" style="max-width: 79.671875px;">k3nn c.p.</div><div id="commento-comment-subtitle-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" class="commento-subtitle"><div id="commento-comment-score-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" class="commento-score">0 points</div><div id="commento-comment-timeago-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" title="Mon Aug 08 2016 12:23:42 GMT+0530 (India Standard Time)" class="commento-timeago">33 months ago</div></div></div><div id="commento-comment-contents-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc"><div id="commento-comment-body-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc" class="commento-body"><div id="commento-comment-text-b654f1473fe6044bc5100bf4992e033394a44f1a3f8cf528e2cf7a94d6a310fc"><p>Hi Jon, thanks very much! your article paved the way for me to realize the potential of MediatR in my projects (much thanks also to JBogard for MediatR!). I have found the culprit (thanks to your example and for pointing it out). The MediatR wiki had this example registerType for INotificationHandler (Async, in this case)</p>
+
+<p>container.RegisterType(typeof(IAsyncNotificationHandler&lt;&gt;), typeof(GenericAsyncHandler), GetName(typeof(GenericAsyncHandler)));</p>
+
+<p>and I removed it early on because I did not use INotificationHandler and instead used IRegisterHandler. So later when I try to connect everything, with my naivety (or stupidity, hehe), the removed lines also removed the basic template for which I had to follow to use IRegisterHandler properly. I researched other projects that used MediatR and found this line</p>
+
+<p>container.Register&lt;irequesthandler&lt;getinventoryitem, inventoryitem=""&gt;, GetInventoryItemHandler&gt;();</p>
+
+<p>which i did not have in my codes :) and that was what I needed. Literally I had a light bulb flash in my head :D and when I implemented my own IRequestHandler like that...everything got connected and is working fine with this code:</p>
+
+<pre><code>        container.RegisterType&amp;lt;irequesthandler&amp;lt;reqmediatr, bool=""&amp;gt;, RegisterUserHandler&amp;gt;();
+</code></pre>
+
+<p>before the line to register singleinstancefactory. I cannot stress how your example codes got my brain working while from the previous 2 days I was annoyed I couldn't get the same examples to work. So thank you very much Jon. Cheers!</p>
+</div></div></div></div></div></div></div></div></div></div><div id="commento-comment-card-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">D</div><div id="commento-comment-name-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" class="commento-name" style="max-width: 131.8125px;">Dimitris Mylonas</div><div id="commento-comment-subtitle-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" class="commento-subtitle"><div id="commento-comment-score-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" class="commento-score">0 points</div><div id="commento-comment-timeago-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" title="Sat Nov 19 2016 15:36:38 GMT+0530 (India Standard Time)" class="commento-timeago">29 months ago</div></div></div><div id="commento-comment-contents-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74"><div id="commento-comment-body-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" class="commento-body"><div id="commento-comment-text-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74"><p>Hi<br>
+in the constructor of the UserController you're passing an IMediator parameter<br>
+public UserController(IMediator mediator)<br>
+Where this parameter is being initialized? I'm using ASP.NET Core and I guess that in the StartUp class "something" need to be added to the services.<br>
+Can you please explain?<br>
+Thanks<br>
+Dimitris</p>
+</div></div><div id="commento-comment-children-fc332e142e0718e6fa47c8d6352431a203be7d6977dac5bf669b68c09e58ca74" class="commento-body"><div id="commento-comment-card-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" class="commento-card" style="border-left: 2px solid rgb(204, 37, 41);"><div class="commento-header"><div id="commento-comment-options-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(204, 37, 41);">J</div><div id="commento-comment-name-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" class="commento-name" style="max-width: 88.234375px;">Jon Hilton</div><div id="commento-comment-subtitle-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" class="commento-subtitle"><div id="commento-comment-score-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" class="commento-score">0 points</div><div id="commento-comment-timeago-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" title="Mon Nov 21 2016 02:54:31 GMT+0530 (India Standard Time)" class="commento-timeago">29 months ago</div></div></div><div id="commento-comment-contents-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4"><div id="commento-comment-body-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4" class="commento-body"><div id="commento-comment-text-52287009d760554ad0e666aabe3a23be887ba8ad2f936261b1ae700698b6a0a4"><p>Hey Dimitris.</p>
+
+<p>For MediatR to work you need to tell your dependency injection framework what to do (how to locate the instance of IMediator and all your request handlers etc.).</p>
+
+<p>If you're using ASP.NET Core with no third party Dependency Injection Framework then you can configure the built-in Core DI framework using a nifty extension package Jimmy Bogard released.</p>
+
+<p>Install this package...<br>
+<a href="https://www.nuget.org/packages/MediatR.Extensions.Microsoft.DependencyInjection" rel="nofollow">https://www.nuget.org/packa...</a></p>
+
+<p>And then simply call it from your startup.cs.</p>
+
+<p><code>services.AddMediatR(typeof(Startup));</code></p>
+
+<p>And you're good to go.</p>
+
+<p>Jimmy went into a bit more detail here.<br>
+<a href="https://lostechies.com/jimmybogard/2016/07/19/mediatr-extensions-for-microsoft-dependency-injection-released/" rel="nofollow">https://lostechies.com/jimm...</a></p>
+
+<p>If you should switch to a different DI Framework, check out the MediatR GitHub project for examples of configuring other DI frameworks to work with MediatR.</p>
+
+<p><a href="https://github.com/jbogard/MediatR" rel="nofollow">https://github.com/jbogard/...</a></p>
+
+<p>Thanks<br>
+Jon</p>
+</div></div></div></div></div></div></div><div id="commento-comment-card-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" class="commento-card" style="border-left: 2px solid rgb(83, 81, 84);"><div class="commento-header"><div id="commento-comment-options-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" class="commento-options" style="width: 160px;"><button id="commento-comment-collapse-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" title="Collapse children" class="commento-option-button commento-option-collapse" style="right: 0px;"></button><button id="commento-comment-downvote-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" title="Downvote" class="commento-option-button commento-option-downvote" style="right: 32px;"></button><button id="commento-comment-upvote-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" title="Upvote" class="commento-option-button commento-option-upvote" style="right: 64px;"></button><button id="commento-comment-reply-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" title="Reply" class="commento-option-button commento-option-reply" style="right: 96px;"></button></div><div class="commento-avatar" style="background: rgb(83, 81, 84);">B</div><div id="commento-comment-name-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" class="commento-name" style="max-width: 58.6875px;">beton</div><div id="commento-comment-subtitle-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" class="commento-subtitle"><div id="commento-comment-score-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" class="commento-score">0 points</div><div id="commento-comment-timeago-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" title="Fri Dec 02 2016 16:37:47 GMT+0530 (India Standard Time)" class="commento-timeago">29 months ago</div></div></div><div id="commento-comment-contents-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9"><div id="commento-comment-body-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9" class="commento-body"><div id="commento-comment-text-648c867e2ffbcff799f7f53b586fbe97d34326a3acb250b6cdb1bb4b56a7cbe9"><p>Love MediatR! Betting on it for big re platforming of our web apps (ecommerce domain).<br>
+The only small downside of that approach is debugging IMO.<br>
+You do not know @ run time with requests are linked to with handler/notification handler so you have to check up you installers up front and it is not immediate at the beginning (especially for new developers that start working with such abstract code bases xD)</p>
+
+<p>Anyway great series!</p>
+</div></div></div></div></div></div></div><div id="commento-footer" class="commento-footer"><div class="commento-logo-container"><a class="commento-logo" href="https://commento.io/" target="_blank"><span class="commento-logo-text">Commento</span></a></div></div></div>
+		<script src="./Simplify your controllers with the Command Pattern and MediatR_files/commento.js.download"></script>
+	</section>
+
+</article>
+	</div>
+
+	
+
+<footer class="site-footer">
+	<div class="centered">
+		<p class="text">© 2019 - Jon Hilton</p>
+
+		<iframe class="iubenda-ibadge" scrolling="no" frameborder="0" allowtransparency="true" style="width:97px; height:22px;" src="./Simplify your controllers with the Command Pattern and MediatR_files/saved_resource.html"></iframe>
+		<script type="text/javascript">(function (w, d) { var loader = function () { var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s, tag); }; if (w.addEventListener) { w.addEventListener("load", loader, false); } else if (w.attachEvent) { w.attachEvent("onload", loader); } else { w.onload = loader; } })(window, document);</script>
+		
+</div></footer>
+
+
+<script src="./Simplify your controllers with the Command Pattern and MediatR_files/multi-image.js.download" type="text/javascript"></script>
+
+<link rel="stylesheet" href="./Simplify your controllers with the Command Pattern and MediatR_files/googlecode.css">
+<script src="./Simplify your controllers with the Command Pattern and MediatR_files/highlight.pack.js.download"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+
+<script src="./Simplify your controllers with the Command Pattern and MediatR_files/ck.js.download"></script>
+
+
+
+
+<iframe style="width:0px; height:0px; display:none; visibility:hidden" src="./Simplify your controllers with the Command Pattern and MediatR_files/iframe_bridge.html"></iframe></body></html>

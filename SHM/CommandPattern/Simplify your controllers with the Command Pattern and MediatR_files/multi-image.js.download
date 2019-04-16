@@ -1,0 +1,25 @@
+$(document).ready(function(){
+    $('.multi').hide();
+
+    if($('.multi').length > 0){
+        $('.multi-control').show();
+        $('.multi.1-0-1').show();
+        $('.multi-control button.1-0-1').addClass('active');
+    }
+
+    $('button.1-0-0').on('click', function(){
+        toggle('1-0-0');
+    });
+
+    $('button.1-0-1').on('click', function(){
+        toggle('1-0-1');
+    });
+
+    function toggle(tag){
+        $('.multi').hide();
+        $('.multi.' + tag).show();
+        $('.multi-control button').removeClass('active');
+        $('.multi-control button.' + tag).addClass('active');
+    }
+    
+});

@@ -1,0 +1,85 @@
+function createCookie(name, value, days) {
+    let expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+
+    document.cookie = `${name}=${value}${expires}; path=/`;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function getQueryString(field, url) {
+    var href = url ? url : window.location.href;
+    var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+    var string = reg.exec(href);
+    return string ? string[1] : null;
+};
+
+function getSubscriberId() {
+    let c = getCookie('_jonhiltonnet');
+    var subscriberId = JSON.parse(c).ck_id;
+    return subscriberId;
+}
+
+async function handleDownloadClick(e) {
+    e.preventDefault();
+    _paq.push(['trackGoal', 3]);
+    var subscriberId = getSubscriberId();
+    window.open(e.target.getAttribute('href'));
+    await fetch(`/.netlify/functions/ck_tag?subscriberId=${subscriberId}&tagId=${e.target.getAttribute('data-tagId')}`);
+    return false;
+}
+
+function toggleCTAs() {
+    let ctas = document.getElementsByClassName("anonymous");
+    let subscribed = document.getElementsByClassName("subscribed");
+    let c = getCookie('_jonhiltonnet');
+    if (c) {
+        // remove anonymous        
+        for (let i = 0; i < ctas.length; i++) {
+            ctas[i].style.display = "none";
+        }
+        // show subscribed
+        for (let i = 0; i < subscribed.length; i++) {
+            subscribed[i].style.display = "block";
+        }
+
+        // fix links in subscribed content        
+        let downloadButtons = document.getElementsByClassName("goodie");
+        for (let i = 0; i < downloadButtons.length; i++) {
+            var button = downloadButtons[i];
+            button.addEventListener('click', handleDownloadClick);
+        }
+
+    } else {
+        for (let i = 0; i < ctas.length; i++) {
+            ctas[i].style.display = "block";
+        }
+    }
+}
+
+window.onload = async function () {
+    toggleCTAs();
+    let subscriberId = getQueryString("ck_subscriber_id");
+    if (subscriberId) {
+        createCookie('_jonhiltonnet', `{"ck_id":${subscriberId}}`, 365);
+    }
+    toggleCTAs();
+}
