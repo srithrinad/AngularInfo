@@ -1,0 +1,186 @@
+/*
+Name: Visualstudiodark
+Description: JetBrains PhpStorm Obsidian
+Version: 1
+Author: Vladimir Pecanac
+URL: http://rakcheev.ru/
+*/
+.crayon-theme-visualstudiodark {
+	text-shadow: none !important;
+	color: #fff;
+	background: #283033 !important;
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: #1e1e1e !important;
+}
+.crayon-theme-visualstudiodark .crayon-code {
+	background: #2d2d2d !important;
+}
+.crayon-theme-visualstudiodark-inline {
+	background: #1e1e1e !important;
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: #1e1e1e !important;
+}
+.crayon-theme-visualstudiodark span {
+	color: #999 !important;
+}
+.crayon-theme-visualstudiodark .crayon-table .crayon-nums {
+	color: #81969a !important;
+	background: #3f4b4e !important;
+	border-right-style: dotted !important;
+	border-right-width: 1px !important;
+	border-right-color: #808080 !important;
+}
+.crayon-theme-visualstudiodark .crayon-striped-line {
+	background: #283033 !important;
+	border-width: 1px !important;
+	border-color: #171717 !important;
+}
+.crayon-theme-visualstudiodark .crayon-striped-num {
+	background: #3f4b4e !important;
+	color: #81969a !important;
+	border-width: 1px !important;
+	border-color: #CCC !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-line {
+	background: #1f5b7d !important;
+	border-width: 1px !important;
+	border-color: #2f393c !important;
+	border-style: hidden !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-num {
+	color: #81969a !important;
+	background: #3f4b4e !important;
+	border-width: 1px !important;
+	border-color: #2f393c !important;
+	border-style: ridge !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-line.crayon-striped-line {
+	background: #2f393c !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-num.crayon-striped-num {
+	background: #2f393c !important;
+	color: #81969a !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-line.crayon-top {
+	border-top-style: solid !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-num.crayon-top {
+	border-top-style: solid !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-line.crayon-bottom {
+	border-bottom-style: solid !important;
+}
+.crayon-theme-visualstudiodark .crayon-marked-num.crayon-bottom {
+	border-bottom-style: solid !important;
+}
+.crayon-theme-visualstudiodark .crayon-info {
+	background: #faf9d7 !important;
+	color: #7e7d34 !important;
+	border-bottom-style: solid !important;
+	border-bottom-width: 1px !important;
+	border-bottom-color: #b1af5e !important;
+}
+.crayon-theme-visualstudiodark .crayon-toolbar {
+	background: #3c3f41 !important;
+	border-bottom-style: solid !important;
+	border-bottom-width: 1px !important;
+	border-bottom-color: #595959 !important;
+}
+.crayon-theme-visualstudiodark .crayon-toolbar > div {
+	float: left !important;
+}
+.crayon-theme-visualstudiodark .crayon-toolbar .crayon-tools {
+	float: right !important;
+}
+.crayon-theme-visualstudiodark .crayon-title {
+	color: #bbbbbb !important;
+}
+.crayon-theme-visualstudiodark .crayon-language {
+	color: #bbbbbb !important;
+}
+.crayon-theme-visualstudiodark .crayon-toolbar .crayon-mixed-highlight {
+	background-position: -24px center;
+}
+.crayon-theme-visualstudiodark .crayon-button {
+	background-color: transparent !important;
+}
+.crayon-theme-visualstudiodark .crayon-button:hover {
+	background-color: #3c3f41 !important;
+	color: #666;
+}
+.crayon-theme-visualstudiodark .crayon-button.crayon-pressed:hover {
+	background-color: #505050 !important;
+	color: #666;
+}
+.crayon-theme-visualstudiodark .crayon-button.crayon-pressed {
+	background-color: #505050 !important;
+	color: #ccc;
+}
+.crayon-theme-visualstudiodark .crayon-button.crayon-pressed:active {
+	background-color: #505050 !important;
+	color: #ccc;
+}
+.crayon-theme-visualstudiodark .crayon-button:active {
+	background-color: #505050 !important;
+	color: #ccc;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-c {
+	color: #4ea63c !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-p {
+	color: #a19ba2 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-s {
+	color: #d69d85 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-k {
+	color: #3987d6 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-st {
+	color: #3987d6 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-r {
+	color: #3987d6 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-t {
+	color: #3987d6 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-m {
+	color: #3987d6 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-ta {
+	color: #aaaaaa !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-i {
+	color: #d955c1 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-v {
+	color: #ffffff !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-e {
+	color: #35afb0 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-cn {
+	color: #ffcd22 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-o {
+	color: #ffffff !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-h {
+	color: #ac99ab !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-sy {
+	color: #ffffff !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-n {
+	color: #726e73 !important;
+	font-style: italic !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre .crayon-f {
+	color: #d8bfd8 !important;
+}
+.crayon-theme-visualstudiodark .crayon-pre {
+	color: #ffffff !important;
+}

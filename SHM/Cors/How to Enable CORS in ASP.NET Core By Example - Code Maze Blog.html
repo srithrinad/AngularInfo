@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://code-maze.com/enabling-cors-in-asp-net-core/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="js"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="msvalidate.01" content="CDBD822530E3DCD26727F223A37D8118">
+	
+			
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="pingback" href="https://code-maze.com/xmlrpc.php">
+
+		<!--[if lt IE 9]>
+	<script src="https://code-maze.com/wp-content/themes/Extra/scripts/ext/html5.js" type="text/javascript"></script>
+	<![endif]-->
+<!-- Google Tag Manager -->
+<script src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/osd.js.download"></script><script async="" type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/gpt.js.download"></script><script type="text/javascript" async="" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/analytics.js.download"></script><script async="" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/gtm.js.download"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NZSG84F');</script>
+<!-- End Google Tag Manager -->
+	
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-73197516-1');
+</script>
+	
+	<script>var et_site_url='https://code-maze.com';var et_post_id='3565';function et_core_page_resource_fallback(a,b){"undefined"===typeof b&&(b=a.sheet.cssRules&&0===a.sheet.cssRules.length);b&&(a.onerror=null,a.onload=null,a.href?a.href=et_site_url+"/?et_core_page_resource="+a.id+et_post_id:a.src&&(a.src=et_site_url+"/?et_core_page_resource="+a.id+et_post_id))}
+</script><title>How to Enable CORS in ASP.NET Core By Example - Code Maze Blog</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v11.0 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Find out how to Enable CORS in ASP.NET Core, what is the Same Origin Policy and how CORS works. We use the project deployed on Azure to explain this topic.">
+<link rel="canonical" href="https://code-maze.com/enabling-cors-in-asp-net-core/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Enable CORS in ASP.NET Core By Example - Code Maze Blog">
+<meta property="og:description" content="Find out how to Enable CORS in ASP.NET Core, what is the Same Origin Policy and how CORS works. We use the project deployed on Azure to explain this topic.">
+<meta property="og:url" content="https://code-maze.com/enabling-cors-in-asp-net-core/">
+<meta property="og:site_name" content="Code Maze">
+<meta property="article:tag" content="asp.net core">
+<meta property="article:tag" content="Azure">
+<meta property="article:tag" content="CORS">
+<meta property="article:tag" content="Same-Origin policy">
+<meta property="article:section" content="C#">
+<meta property="article:published_time" content="2018-10-08T07:00:40+00:00">
+<meta property="article:modified_time" content="2019-04-07T16:26:15+00:00">
+<meta property="og:updated_time" content="2019-04-07T16:26:15+00:00">
+<meta property="og:image" content="https://code-maze.com/wp-content/uploads/2018/06/cors-aspnetcore-examples-cover.png">
+<meta property="og:image:secure_url" content="https://code-maze.com/wp-content/uploads/2018/06/cors-aspnetcore-examples-cover.png">
+<meta property="og:image:width" content="1100">
+<meta property="og:image:height" content="620">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Find out how to Enable CORS in ASP.NET Core, what is the Same Origin Policy and how CORS works. We use the project deployed on Azure to explain this topic.">
+<meta name="twitter:title" content="How to Enable CORS in ASP.NET Core By Example - Code Maze Blog">
+<meta name="twitter:site" content="@VladaPecanac">
+<meta name="twitter:image" content="https://code-maze.com/wp-content/uploads/2018/06/cors-aspnetcore-examples-cover.png">
+<meta name="twitter:creator" content="@VladaPecanac">
+<script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://code-maze.com/#website","url":"https://code-maze.com/","name":"Code Maze","publisher":{"@id":"https://code-maze.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://code-maze.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://code-maze.com/enabling-cors-in-asp-net-core/#webpage","url":"https://code-maze.com/enabling-cors-in-asp-net-core/","inLanguage":"en-US","name":"How to Enable CORS in ASP.NET Core By Example - Code Maze Blog","isPartOf":{"@id":"https://code-maze.com/#website"},"image":{"@type":"ImageObject","@id":"https://code-maze.com/enabling-cors-in-asp-net-core/#primaryimage","url":"https://code-maze.com/wp-content/uploads/2018/06/cors-aspnetcore-examples-cover.png","caption":""},"primaryImageOfPage":{"@id":"https://code-maze.com/enabling-cors-in-asp-net-core/#primaryimage"},"datePublished":"2018-10-08T07:00:40+00:00","dateModified":"2019-04-07T16:26:15+00:00","description":"Find out how to Enable CORS in ASP.NET Core, what is the Same Origin Policy and how CORS works. We use the project deployed on Azure to explain this topic."},{"@type":"Article","@id":"https://code-maze.com/enabling-cors-in-asp-net-core/#article","isPartOf":{"@id":"https://code-maze.com/enabling-cors-in-asp-net-core/#webpage"},"author":{"@id":"https://code-maze.com/author/codemazecontributor/#author","name":"Code Maze"},"publisher":{"@id":"https://code-maze.com/#organization"},"headline":"Enabling CORS in ASP.NET Core","datePublished":"2018-10-08T07:00:40+00:00","dateModified":"2019-04-07T16:26:15+00:00","commentCount":"10","mainEntityOfPage":"https://code-maze.com/enabling-cors-in-asp-net-core/#webpage","image":{"@id":"https://code-maze.com/enabling-cors-in-asp-net-core/#primaryimage"},"keywords":"asp.net core,Azure,CORS,Same-Origin policy","articleSection":"C#,Web Development"},{"@type":"Person","@id":"https://code-maze.com/author/codemazecontributor/#author","name":"Code Maze","image":{"@type":"ImageObject","@id":"https://code-maze.com/#personlogo","url":"https://code-maze.com/wp-content/uploads/2018/04/LogoWithoutLetters2.png","caption":"Code Maze"},"sameAs":[]}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="amphtml" href="https://code-maze.com/enabling-cors-in-asp-net-core/amp/"><meta name="generator" content="AMP for WP 0.9.97.49"><link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Code Maze » Feed" href="https://code-maze.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Code Maze » Comments Feed" href="https://code-maze.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Code Maze » Enabling CORS in ASP.NET Core Comments Feed" href="https://code-maze.com/enabling-cors-in-asp-net-core/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/code-maze.com\/wp-includes\/js\/wp-emoji-release.min.js"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<!-- managing ads with Advanced Ads – https://wpadvancedads.com/ --><script>
+					advanced_ads_ready=function(){var fns=[],listener,doc=typeof document==="object"&&document,hack=doc&&doc.documentElement.doScroll,domContentLoaded="DOMContentLoaded",loaded=doc&&(hack?/^loaded|^c/:/^loaded|^i|^c/).test(doc.readyState);if(!loaded&&doc){listener=function(){doc.removeEventListener(domContentLoaded,listener);window.removeEventListener("load",listener);loaded=1;while(listener=fns.shift())listener()};doc.addEventListener(domContentLoaded,listener);window.addEventListener("load",listener)}return function(fn){loaded?setTimeout(fn,0):fns.push(fn)}}();
+			</script><meta content="Extra v.2.0.88" name="generator"><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="crayon-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-visualstudiodark-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/visualstudiodark.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-consolas-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/consolas.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="tve_style_family_tve_flt-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/thrive_flat.css" type="text/css" media="all">
+<link rel="stylesheet" id="tve_leads_forms-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/frontend.css" type="text/css" media="all">
+<link rel="stylesheet" id="dlm-frontend-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/frontend(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="extra-fonts-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="extra-style-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="tablepress-default-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/default.min.css" type="text/css" media="all">
+<style id="tablepress-default-inline-css" type="text/css">
+.tablepress{border-left:1px solid lightgray!important;border-bottom:1px solid lightgray!important;border-right:1px solid lightgray!important}.tablepress td{border-left:1px solid lightgray!important}.tablepress td:first-child{border-left:none}.tablepress tr td{padding:5px!important}
+</style>
+<link rel="stylesheet" id="jquery-lazyloadxt-spinner-css-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/jquery.lazyloadxt.spinner.css" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/dashicons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-featherlight-css" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/wp-featherlight.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/jquery.js.download"></script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/jquery-migrate.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/code-maze.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/crayon.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var dfp_ad_object = [{"google_ad_script_name":"google_ad_js","script_name":null,"account_id":"\/\/","asynch":true,"dir_uri":null,"positions":[],"page_targeting":{"Page":["enabling-cors-in-asp-net-core"],"Category":["C#","Web Development"],"Tag":["asp.net core","Azure","CORS","Same-Origin policy"]}}];
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/google-ads.min.js.download"></script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/dfp-ads.min.js.download"></script>
+<link rel="https://api.w.org/" href="https://code-maze.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://code-maze.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://code-maze.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.1.1">
+<link rel="shortlink" href="https://code-maze.com/?p=3565">
+<link rel="alternate" type="application/json+oembed" href="https://code-maze.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcode-maze.com%2Fenabling-cors-in-asp-net-core%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://code-maze.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcode-maze.com%2Fenabling-cors-in-asp-net-core%2F&amp;format=xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1"><style type="text/css" id="tve_global_variables">:root{}</style><link rel="shortcut icon" href="https://code-maze.com/wp-content/uploads/2018/01/favicon.ico"><style id="et-extra-customizer-global-cached-inline-styles">.widget_et_recent_tweets .widget_list a,.widget_et_recent_tweets .et-extra-icon,.widget_et_recent_tweets .widget-footer .et-extra-social-icon,.widget_et_recent_tweets .widget-footer .et-extra-social-icon::before,.project-details .project-details-title,.et_filterable_portfolio .filterable_portfolio_filter a.current,.et_extra_layout .et_pb_column .module-head h1,.et_pb_extra_column .module-head h1,#portfolio_filter a.current,.woocommerce div.product div.summary .product_meta a,.woocommerce-page div.product div.summary .product_meta a,.et_pb_widget.woocommerce .product_list_widget li .amount,.et_pb_widget li a:hover,.et_pb_widget.woocommerce .product_list_widget li a:hover,.et_pb_widget.widget_et_recent_videos .widget_list .title:hover,.et_pb_widget.widget_et_recent_videos .widget_list .title.active,.woocommerce .woocommerce-info:before{color:#3e5062}.single .score-bar,.widget_et_recent_reviews .review-breakdowns .score-bar,.et_pb_extra_module .posts-list article .post-thumbnail,.et_extra_other_module .posts-list article .post-thumbnail,.et_pb_widget .widget_list_portrait,.et_pb_widget .widget_list_thumbnail,.quote-format,.link-format,.audio-format .audio-wrapper,.paginated .pagination li.active,.score-bar,.review-summary-score-box,.post-footer .rating-stars #rating-stars img.star-on,.post-footer .rating-stars #rated-stars img.star-on,.author-box-module .author-box-avatar,.timeline-menu li.active a:before,.woocommerce div.product form.cart .button,.woocommerce-page div.product form.cart .button,.woocommerce div.product form.cart .read-more-button,.woocommerce-page div.product form.cart .read-more-button,.woocommerce div.product form.cart .post-nav .nav-links .button,.woocommerce-page div.product form.cart .post-nav .nav-links .button,.woocommerce .woocommerce-message,.woocommerce-page .woocommerce-message{background-color:#3e5062}#et-menu>li>ul,#et-menu li>ul,#et-menu>li>ul>li>ul,.et-top-search-primary-menu-item .et-top-search,.et_pb_module,.module,.page article,.authors-page .page,#timeline-sticky-header,.et_extra_other_module,.woocommerce .woocommerce-info{border-color:#3e5062}body{font-size:15px}a,a:visited,.post-content a,.et_pb_pagebuilder_layout .et_pb_blurb_container p a,.et_pb_pagebuilder_layout .et_pb_code a,.et_pb_pagebuilder_layout .et_pb_promo_description a,.et_pb_pagebuilder_layout .et_pb_newsletter_description a,.et_pb_pagebuilder_layout .et_pb_team_member_description>a,.et_pb_pagebuilder_layout .et_pb_pricing li a,.et_pb_pagebuilder_layout .et_pb_slide_content a,.et_pb_pagebuilder_layout .et_pb_tab a,.et_pb_pagebuilder_layout .et_pb_text a,.et_pb_pagebuilder_layout .et_pb_toggle_content a,.et_pb_pagebuilder_layout .et_pb_fullwidth_code a{color:rgba(0,3,219,0.97)}body{color:#000000}h1,h2,h3,h4,h5,h6,h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{color:rgba(0,0,0,0.89)}.archive h1,.search h1{color:rgba(0,0,0,0.89)}#et-info .et-cart,#et-info .et-cart:before,#et-info .et-top-search .et-search-field,#et-info .et-top-search .et-search-submit:before{font-size:11.000000px}#et-info .et-extra-social-icons .et-extra-icon{font-size:14.000000px;line-height:27.500000px;width:27.500000px;height:27.500000px}#et-info .et-cart{padding:8.000000px 9.166667px}#et-info .et-top-search .et-search-field{padding:6.000000px 9.166667px}#et-info .et-top-search .et-search-field{width:110.000000px}#et-info .et-top-search .et-search-submit:before{margin-top:-5.500000px}.et_pb_slider_fullwidth_off .et_pb_slide_description{padding-top:39%;padding-bottom:39%}.et_pb_contact_form_container .et_pb_contact p input,.et_pb_contact_form_container .et_pb_contact p textarea{font-size:12px}@media only screen and (min-width:768px){#main-header .logo{height:51.92px;margin:18.04px 0}.header.left-right #et-navigation>ul>li>a{padding-bottom:36px}}@media only screen and (min-width:768px){.et-fixed-header #main-header .logo{height:30.16px;margin:36.92px 0}.et-fixed-header .header.left-right #et-navigation>ul>li>a{padding-bottom:44px}}.home-page-content article{border-radius:0px!important;box-shadow:none!important}.et_pb_code_inner .wrapper{min-height:50px}.et_pb_code_inner .wrapper-title span.bold{font-weight:bold}.et_pb_code_inner .wrapper-title h2{font-size:17px!important}.et_pb_row{max-width:1480px}.et_pb_image img{box-shadow:#e0e0e0 2px 2px 0px 1px}.home-page-content .post-content p{display:none}.home-page-content .entry-title{width:64%;font-size:17px;padding-left:5px}.home-page-content .post-content a{position:absolute;top:5px;right:0px;padding:5px 20px;background:#405061;color:white}@media(max-width:800px){.home-page-content .post-content a{top:-10px!important}}.home-page-content article{border-top-width:0px;background:transparent;border-bottom:1px solid;min-height:50px}.home-page-content a{font-weight:300;color:#3E5062}.wrapper{display:flex;border-bottom:1px solid}.wrapper-title{flex:2;padding-right:10px}.wrapper-title h2{font-size:20px}@media (max-width:1200px) and (min-width:982px){.wrapper-title{flex:1}}.wrapper-title a{font-weight:300;color:#3E5062!important}.read-more-wrapper{flex:1}.read-more-wrapper a{position:absolute;top:5px;right:0px;padding:5px 19px;background:#405061;color:white!important;text-transform:uppercase;font-size:13px;width:116px;text-align:center;box-shadow:#e0e0e0 2px 2px 0px 1px;min-height:35px}.read-more-wrapper a.series{background:#D4A753}.tablet-row .et_pb_column{width:45%!important;float:left;margin-right:50px}.advads-widget{height:250px}.advads-widget h4{display:none}.et_extra_layout .et_pb_column_sidebar,.et_pb_extra_column_sidebar{width:310px!important;max-width:310px!important;min-width:310px!important;display:table}@media (min-width:1025px){.et_pb_extra_column_sidebar{display:table!important;position:relative}}.fixed-sidebar{position:fixed}.relative-sidebar{position:relative}.et_pb_widget{width:300px!important;max-width:300px!important;min-width:300px!important}p+ul{margin-top:-25px}p:last-of-type+ul{margin-top:0px}#mc4wp_form_widget-2{border-top:6px solid #3e5062;border-radius:3px}#mc4wp_form_widget-2 h4{display:none}#mc4wp-form-1{width:300px}h1,h2,h3,h4,h5,h6{text-transform:initial}code{background:rgba(0,0,0,.05);padding:3px 4px;font-family:Menlo,Monaco,"Courier New",Courier,monospace}.crayon-theme-visualstudiodark{margin-bottom:15px}.read-more-button{color:rgba(0,0,0,.8)!important}ol li,ul li{margin-bottom:0.6em;margin-left:40px}ul ul{margin-bottom:-10px;margin-left:-30px}article h2{font-size:25px}sup{vertical-align:super;font-size:smaller}sub{vertical-align:sub;font-size:smaller}.top_ad_placement{text-align:center;margin-bottom:15px}p:last-of-type{margin-bottom:24px}.fixed-max-width{max-width:360px}.cat-item{color:burlywood}.et_pb_main_blurb_image img{max-width:180px!important}@media (max-width:980px){#profile-blurb{width:100%!important;margin-bottom:100px}}@media(max-width:768px){.mobile_friendly_ad{display:none}}.wrap-collabsible{margin-bottom:15px}input[type='checkbox']{display:none}.lbl-toggle{display:block;font-weight:bold;font-family:monospace;font-size:1.2rem;text-transform:uppercase;padding:12px;padding-left:16px;color:#3e5062;background:#e8e8e8;cursor:pointer;border-radius:5px;transition:all 0.25s ease-out;border-top:5px solid #3e5062}.lbl-toggle:hover{color:#417ab3}.lbl-toggle::before{content:' ';display:inline-block;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:5px solid currentColor;vertical-align:middle;margin-right:.7rem;transform:translateY(-2px);transition:transform .2s ease-out}.toggle:checked+.lbl-toggle::before{transform:rotate(90deg) translateX(-3px)}.collapsible-content{max-height:0px;overflow:hidden;transition:max-height .25s ease-in-out}.toggle:checked+.lbl-toggle+.collapsible-content{max-height:450px}.toggle:checked+.lbl-toggle{border-bottom-right-radius:0;border-bottom-left-radius:0}.collapsible-content .content-inner{background:#fbfbfb;border-bottom-left-radius:7px;border-bottom-right-radius:7px;padding:.5rem 1rem}.innerContent{margin-bottom:10px;margin-top:10px}.innerContent li a{color:#417ab3;font-weight:600}.innerContent li a:visited{color:#417ab3;font-weight:600}.innerContent li{font-weight:600;color:darkgoldenrod}</style>	
+<style>[data-columns]::before{visibility:hidden;position:absolute;font-size:1px;}</style><script type="text/javascript" async="" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/5f3f40ed-62d9-4241-9d93-46d1e6991972.js.download"></script><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><link rel="preload" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/f.txt" as="script"><script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/f.txt"></script><link rel="preload" href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/f(1).txt" as="script"><script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/f(1).txt"></script><script src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/pubads_impl_2019041801.js.download" async=""></script></head>
+<body class="post-template-default single single-post postid-3565 single-format-standard wp-featherlight-captions et_extra et_non_fixed_nav et_pb_gutters2 et_primary_nav_dropdown_animation_flipInX et_secondary_nav_dropdown_animation_Default with_sidebar with_sidebar_right et_includes_sidebar chrome et_minified_js et_minified_css">
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZSG84F"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+	<div id="page-container" class="page-container">
+				<!-- Header -->
+		<header class="header left-right">
+			
+			
+
+			<!-- Main Header -->
+			<div id="main-header-wrapper">
+				<div id="main-header" data-fixed-height="104">
+					<div class="container">
+					<!-- ET Ad -->
+						
+						
+						<!-- Logo -->
+						<a class="logo" href="https://code-maze.com/start-here" data-fixed-height="29">
+							<img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/LogoMini.png" alt="Code Maze" id="logo">
+						</a>
+
+						
+						<!-- ET Navigation -->
+						<div id="et-navigation" class="">
+							<ul id="et-menu" class="nav"><li id="menu-item-622" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-622"><a href="https://code-maze.com/start-here">Start Here</a></li>
+<li id="menu-item-47870" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-47870"><a href="https://code-maze.com/">Latest Articles</a></li>
+<li id="menu-item-2439" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2439"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">Series</a>
+<ul class="sub-menu">
+	<li id="menu-item-1026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1026"><a href="https://code-maze.com/net-core-series/">ASP.NET Core Series</a></li>
+	<li id="menu-item-47318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-47318"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">Best Practices</a>
+	<ul class="sub-menu">
+		<li id="menu-item-47319" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47319"><a href="https://code-maze.com/solid-principles/">SOLID Principles</a></li>
+		<li id="menu-item-47321" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-47321"><a href="https://code-maze.com/aspnetcore-webapi-best-practices/">ASP.NET Core Web API Best Practices</a></li>
+		<li id="menu-item-47322" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-47322"><a href="https://code-maze.com/top-rest-api-best-practices/">Top REST API Best Practices</a></li>
+		<li id="menu-item-47320" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-47320"><a href="https://code-maze.com/angular-best-practices/">Angular Development Best Practices</a></li>
+	</ul>
+</li>
+	<li id="menu-item-47674" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47674"><a href="https://code-maze.com/design-patterns-csharp/">Design Patterns in C#</a></li>
+	<li id="menu-item-5358" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-5358"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">C# Series</a>
+	<ul class="sub-menu">
+		<li id="menu-item-5357" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5357"><a href="https://code-maze.com/csharp-back-to-basics/">C# Back to Basics</a></li>
+		<li id="menu-item-5356" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5356"><a href="https://code-maze.com/csharp-intermediate-tutorial-oop/">C# Intermediate</a></li>
+	</ul>
+</li>
+	<li id="menu-item-2859" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2859"><a href="https://code-maze.com/docker-series/">Docker Series</a></li>
+	<li id="menu-item-5359" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-5359"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">Angular</a>
+	<ul class="sub-menu">
+		<li id="menu-item-2754" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2754"><a href="https://code-maze.com/angular-series/">Angular Series</a></li>
+		<li id="menu-item-5355" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5355"><a href="https://code-maze.com/angular-material-series/">Angular Material Series</a></li>
+	</ul>
+</li>
+	<li id="menu-item-2970" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2970"><a href="https://code-maze.com/react-series/">React Series</a></li>
+	<li id="menu-item-4376" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4376"><a href="https://code-maze.com/vue-js-series/">Vue.js Series</a></li>
+	<li id="menu-item-621" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-621"><a href="https://code-maze.com/http-series/">HTTP Series</a></li>
+</ul>
+</li>
+<li id="menu-item-47547" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47547"><a href="https://code-maze.com/sponsor/">Sponsor</a></li>
+<li id="menu-item-1760" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1760"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-1758" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1758"><a href="https://code-maze.com/about/">About Us</a></li>
+	<li id="menu-item-1757" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1757"><a href="https://code-maze.com/write-for-codemaze/">Write for Code Maze</a></li>
+	<li id="menu-item-1759" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1759"><a href="https://code-maze.com/contact/">Contact</a></li>
+</ul>
+</li>
+<li class="menu-item et-top-search-primary-menu-item" style=""><span id="et-search-icon" class="search-icon"></span><div class="et-top-search"><form role="search" class="et-search-form" method="get" action="https://code-maze.com/">
+			<input type="search" class="et-search-field" placeholder="Search" value="" name="s" title="Search for:">
+			<button class="et-search-submit"></button>
+		</form></div></li></ul>							<div id="et-mobile-navigation">
+			<span class="show-menu">
+				<div class="show-menu-button">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<p>Select Page</p>
+			</span>
+			<nav>
+			<div id="et-info">
+
+						
+						<!-- .et-top-search -->
+												<div class="et-top-search" style="display:none;">
+							<form role="search" class="et-search-form" method="get" action="https://code-maze.com/">
+			<input type="search" class="et-search-field" placeholder="Search" value="" name="s" title="Search for:">
+			<button class="et-search-submit"></button>
+		</form>						</div>
+						
+						<!-- cart -->
+											</div><ul id="et-extra-mobile-menu" class="et_extra_mobile_menu"><li id="menu-item-622" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-622 et_first_mobile_item"><a href="https://code-maze.com/start-here">Start Here</a></li>
+<li id="menu-item-47870" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-47870"><a href="https://code-maze.com/">Latest Articles</a></li>
+<li id="menu-item-2439" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2439"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">Series</a>
+<ul class="sub-menu">
+	<li id="menu-item-1026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1026"><a href="https://code-maze.com/net-core-series/">ASP.NET Core Series</a></li>
+	<li id="menu-item-47318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-47318"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">Best Practices</a>
+	<ul class="sub-menu">
+		<li id="menu-item-47319" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47319"><a href="https://code-maze.com/solid-principles/">SOLID Principles</a></li>
+		<li id="menu-item-47321" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-47321"><a href="https://code-maze.com/aspnetcore-webapi-best-practices/">ASP.NET Core Web API Best Practices</a></li>
+		<li id="menu-item-47322" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-47322"><a href="https://code-maze.com/top-rest-api-best-practices/">Top REST API Best Practices</a></li>
+		<li id="menu-item-47320" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-47320"><a href="https://code-maze.com/angular-best-practices/">Angular Development Best Practices</a></li>
+	</ul>
+</li>
+	<li id="menu-item-47674" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47674"><a href="https://code-maze.com/design-patterns-csharp/">Design Patterns in C#</a></li>
+	<li id="menu-item-5358" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-5358"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">C# Series</a>
+	<ul class="sub-menu">
+		<li id="menu-item-5357" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5357"><a href="https://code-maze.com/csharp-back-to-basics/">C# Back to Basics</a></li>
+		<li id="menu-item-5356" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5356"><a href="https://code-maze.com/csharp-intermediate-tutorial-oop/">C# Intermediate</a></li>
+	</ul>
+</li>
+	<li id="menu-item-2859" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2859"><a href="https://code-maze.com/docker-series/">Docker Series</a></li>
+	<li id="menu-item-5359" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-5359"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">Angular</a>
+	<ul class="sub-menu">
+		<li id="menu-item-2754" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2754"><a href="https://code-maze.com/angular-series/">Angular Series</a></li>
+		<li id="menu-item-5355" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5355"><a href="https://code-maze.com/angular-material-series/">Angular Material Series</a></li>
+	</ul>
+</li>
+	<li id="menu-item-2970" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2970"><a href="https://code-maze.com/react-series/">React Series</a></li>
+	<li id="menu-item-4376" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4376"><a href="https://code-maze.com/vue-js-series/">Vue.js Series</a></li>
+	<li id="menu-item-621" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-621"><a href="https://code-maze.com/http-series/">HTTP Series</a></li>
+</ul>
+</li>
+<li id="menu-item-47547" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47547"><a href="https://code-maze.com/sponsor/">Sponsor</a></li>
+<li id="menu-item-1760" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1760"><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#">About</a>
+<ul class="sub-menu">
+	<li id="menu-item-1758" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1758"><a href="https://code-maze.com/about/">About Us</a></li>
+	<li id="menu-item-1757" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1757"><a href="https://code-maze.com/write-for-codemaze/">Write for Code Maze</a></li>
+	<li id="menu-item-1759" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1759"><a href="https://code-maze.com/contact/">Contact</a></li>
+</ul>
+</li>
+<li class="menu-item et-top-search-primary-menu-item" style=""><span id="et-search-icon" class="search-icon"></span><div class="et-top-search"><form role="search" class="et-search-form" method="get" action="https://code-maze.com/">
+			<input type="search" class="et-search-field" placeholder="Search" value="" name="s" title="Search for:">
+			<button class="et-search-submit"></button>
+		</form></div></li></ul></nav>
+		</div> <!-- /#et-mobile-navigation -->						</div><!-- /#et-navigation -->
+					</div><!-- /.container -->
+				</div><!-- /#main-header -->
+			</div><!-- /#main-header-wrapper -->
+<!-- #top-header -->
+			<div id="top-header" style="display: none;">
+				<div class="container">
+
+					<!-- Secondary Nav -->
+											<div id="et-secondary-nav" class="">
+												</div>
+					
+					<!-- #et-info -->
+					<div id="et-info">
+
+						
+						<!-- .et-top-search -->
+												<div class="et-top-search" style="display:none;">
+							<form role="search" class="et-search-form" method="get" action="https://code-maze.com/">
+			<input type="search" class="et-search-field" placeholder="Search" value="" name="s" title="Search for:">
+			<button class="et-search-submit"></button>
+		</form>						</div>
+						
+						<!-- cart -->
+											</div>
+				</div><!-- /.container -->
+			</div><!-- /#top-header -->
+		</header>
+
+				<script>
+	 function writeContent(){
+		 var elements = document.getElementById("series_parts");
+		 elements.style.display = "none";
+	 }
+</script>
+<div id="main-content">
+		<div class="container">
+		<div id="content-area" class="clearfix">
+			<div class="et_pb_extra_column_main">
+				<div class="mobile_friendly_ad">
+					<div style="text-align: center; margin-bottom: 15px; " id="advads-477157864"><ins class="dcmads" style="display: inline-block; width: 728px; height: 90px; text-decoration: none;" data-dcm-placement="N366601.3184092CODE-MAZE.COM/B9754935.214477675" data-dcm-rendering-mode="iframe" data-dcm-https-only="" data-dcm-resettable-device-id="" data-dcm-app-id="" data-dcm-processed="y">
+  <script src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/dcmads.js.download"></script><script src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/impl_v48.js.download"></script><iframe marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/B9754935.html" style="width: 100%; height: 100%; border: 0px; margin: 0px; padding: 0px;"></iframe>
+</ins>
+</div>				</div>
+																<article id="post-3565" class="module single-post-module post-3565 post type-post status-publish format-standard has-post-thumbnail hentry category-csharp category-webdevelopment tag-asp-net-core tag-azure tag-cors tag-same-origin-policy et-has-post-format-content et_post_format-et-post-format-standard">
+														<div class="post-header">
+								<h1 class="entry-title">Enabling CORS in ASP.NET Core</h1>
+								<div class="post-meta vcard">
+									<p>Posted by <a href="https://code-maze.com/author/codemazecontributor/" class="url fn" title="Posts by Code Maze" rel="author">Code Maze</a> | <span class="updated">Oct 8, 2018</span> | <a class="comments-link" href="https://code-maze.com/enabling-cors-in-asp-net-core/#comments">4 <span title="comment count" class="comment-bubble post-meta-icon"></span></a></p>
+								</div>
+							</div>
+							
+														<div class="post-thumbnail header">
+								<img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/cors-aspnetcore-examples-cover.png" alt="Enabling CORS in ASP.NET Core">							</div>
+							
+														
+							<div class="post-wrap">
+															<div class="post-content entry-content">
+									<p>In this post, we are going to talk about enabling CORS in ASP.NET Core Web Applications.</p>
+<ul id="series_parts" style="display: none;">
+<li><a href="https://code-maze.com/net-core-series/" target="_blank" rel="noopener noreferrer">.NET Core Tutorial</a></li>
+<li><a href="https://code-maze.com/global-error-handling-aspnetcore/" target="_blank" rel="noopener noreferrer">Global Error Handling in .NET Core Web API</a></li>
+<li><a href="https://code-maze.com/create-pdf-dotnetcore/" target="_blank" rel="noopener noreferrer">Create PDF in .NET Core Web API</a></li>
+<li><a href="https://code-maze.com/action-filters-aspnetcore/" target="_blank" rel="noopener noreferrer">Implementing Action Filters in .NET Core Web API</a></li>
+<li><a href="https://code-maze.com/design-patterns-csharp/" target="_blank" rel="noopener noreferrer">Design Patterns in C#</a></li>
+</ul>
+<div class="wrap-collabsible">
+    <input id="collapsible" class="toggle" type="checkbox">
+    <label for="collapsible" class="lbl-toggle" onclick="writeContent()">Recommended Articles</label>
+    <div class="collapsible-content">
+      <div class="content-inner">
+        <p class="innerContent" id="innerContent"></p>
+        <script>
+           function writeContent(){
+               var links= document.getElementById("series_parts").innerHTML;
+               document.getElementById("innerContent").innerHTML = links;
+           }
+       </script>
+      </div>
+    </div>
+</div>
+
+<p><span style="font-weight: 400;">You can find the <a href="https://github.com/CodeMazeBlog/cors-aspnetcore-example" target="_blank" rel="nofollow noopener noreferrer">source code</a> for this blog post on GitHub.</span></p>
+<p>This post is divided into the following sections:</p>
+<ul>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#whatissameorigin">About Same-Origin and What it Means</a></li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#whatissameoriginpolicy">What Is the Same-Origin policy?</a></li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#whatiscors">What Is CORS?</a></li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#whatcorsworks">How Does CORS Work?</a>
+<ul>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#innerworkings">Inner Workings</a></li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#preflightrequests">Preflight Requests</a></li>
+</ul>
+</li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#demo">Demo</a>
+<ul>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#sameoriginpolicyinaction">Same-Origin Policy in Action</a></li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#enablecors">Enabling CORS</a></li>
+</ul>
+</li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#configcorsrequests">Configuring CORS Requests</a></li>
+<li><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#configcorspolicyoptions">Configure CORS Policy Options</a></li>
+</ul>
+<p>Before we understand how to enable CORS in ASP.NET Core applications, we need to understand an important concept in the web application security model called the Same-Origin policy.</p>
+<h2 id="whatissameorigin"><span style="color: #000000;">About Same-Origin and What it Means</span></h2>
+<p>Two URLs are considered to have the same origin if they have&nbsp;the same URL scheme (HTTP or HTTPS), same hostname (domain name) and same port number (the endpoint at which applications talk to each other).</p>
+<h2 id="whatissameoriginpolicy">What Is the Same-Origin policy?</h2>
+<p>The Same-origin policy states that a Web browser will only allow <span style="color: #000000;">c</span>ommunication between two URLs if they belong to the same origin. That is, the client app (<code>https://example.com</code>) cannot communicate with the server app (<code>https://example.net</code>) as they belong to a different origin. This policy exists to isolate potentially malicious scripts from harming other documents on the web.</p>
+<p>Let’s come to the core of the article.</p>
+<h2 id="whatiscors">What Is CORS?</h2>
+<p>But there are some cases where Cross-Domain scripting is desired and the idea of the open web makes it compelling.</p>
+<p>Cross-Origin Resource Sharing is a mechanism to bypass the Same-Origin policy of a Web browser. Specifically, a server app uses additional HTTP headers to tell a browser that it is fine to load documents (from its origin) in a few selected client apps (of different origin).</p>
+<p>Let’s go deep.</p>
+<h2 id="whatcorsworks">How Does CORS Work?</h2>
+<p>In this section, let’s learn how CORS works at the level of HTTP messages.</p>
+<h3 id="innerworkings">Inner Workings</h3>
+<p>Let’s have a look at the picture below. There is a client app (<code>https://example.com</code>) sending a GET request to a server app (<code>https://example.net</code>) for some resource:</p>
+<p><img class="aligncenter wp-image-3590 size-full lazy-loaded" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/Enabling-CORS-in-ASP.NET-Core-1.png" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1.png" alt="Enabling CORS in ASP.NET Core" width="824" height="151" srcset="https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1.png 824w, https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1-600x110.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1-300x55.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1-768x141.png 768w" data-srcset="" sizes="(max-width: 824px) 100vw, 824px"><noscript><img class="aligncenter wp-image-3590 size-full" src="https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1.png" alt="Enabling CORS in ASP.NET Core" width="824" height="151" srcset="https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1.png 824w, https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1-600x110.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1-300x55.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Enabling-CORS-in-ASP.NET-Core-1-768x141.png 768w" sizes="(max-width: 824px) 100vw, 824px" /></noscript></p>
+<p>All modern browsers set the <code>Origin</code> header automatically, which indicates the domain of the site is making the request.</p>
+<p>If the server allows Cross-origin requests from the Origin (<code>https://example.com</code>), it sets the <code>Access-Control-Allow-Origin</code> header with its value matching the origin header’s value from the request.</p>
+<p>In other way, if the server doesn’t include this header, the request fails. The browser shall receive the response data, but this data shall not be accessible to the client.</p>
+<p>That’s how a simple CORS request works.</p>
+<h3 id="preflightrequests">Preflight Requests</h3>
+<p>Sometimes, instead of a simple GET request, a client may need to send requests like PUT, DELETE etc. For such requests, the browser sends an additional request (an OPTIONS request) called a <span style="color: #000000;">Preflight request. This is done just before the actual request to make sure&nbsp;that the original request succeeds. If it does, the browser&nbsp;sends&nbsp;the actual request.</span></p>
+<p><span style="color: #000000;">This</span> diagram illustrates such a scenario:</p>
+<p style="text-align: right;"><i><span style="font-weight: 400;"><span style="font-size: 8pt;"><img class="aligncenter wp-image-3591 size-full lazy-loaded" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/Preflight-Request-1.png" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1.png" alt="Preflight Request" width="875" height="183" srcset="https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1.png 875w, https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1-600x125.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1-300x63.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1-768x161.png 768w" data-srcset="" sizes="(max-width: 875px) 100vw, 875px"><noscript><img class="aligncenter wp-image-3591 size-full" src="https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1.png" alt="Preflight Request" width="875" height="183" srcset="https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1.png 875w, https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1-600x125.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1-300x63.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Preflight-Request-1-768x161.png 768w" sizes="(max-width: 875px) 100vw, 875px" /></noscript><strong><span style="font-size: 10pt;">A preflight request</span></strong></span></span></i></p>
+<p style="text-align: right;"><em style="font-size: 8pt;"><img class="aligncenter wp-image-3592 size-full lazy-loaded" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/Actual-Reques-1t.png" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t.png" alt="Actual Request" width="865" height="172" srcset="https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t.png 865w, https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t-600x119.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t-300x60.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t-768x153.png 768w" data-srcset="" sizes="(max-width: 865px) 100vw, 865px"><noscript><img class="aligncenter wp-image-3592 size-full" src="https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t.png" alt="Actual Request" width="865" height="172" srcset="https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t.png 865w, https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t-600x119.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t-300x60.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Actual-Reques-1t-768x153.png 768w" sizes="(max-width: 865px) 100vw, 865px" /></noscript><strong><span style="font-size: 10pt;">Actual request</span></strong></em></p>
+<h2 id="demo">Demo</h2>
+<p><span style="color: #000000;">Enough of the theory. Let’s get to the action.</span></p>
+<h3 id="sameoriginpolicyinaction">Same-Origin Policy in Action</h3>
+<p>In the demo, let’s <span style="color: #000000;">create&nbsp;two projects. One is a server ap</span>p which we are going to deploy to Azure. And the other the client app, which we are going to run locally.</p>
+<p><strong><em>Additional read:&nbsp;</em></strong><em>You can see the CORS in action with .NET Core and Angular projects by reading the <a href="https://code-maze.com/net-core-series/" target="_blank" rel="noopener noreferrer">.NET Core tutorial.</a></em></p>
+<p>In Visual Studio, let’s create an MVC project. This will be our server app:</p>
+<p><a href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/New-Project-1.png" data-featherlight="image"><img class="alignnone size-full wp-image-3623 lazy-loaded" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/New-Project-1.png" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/New-Project-1.png" alt="New MVC Project" width="786" height="553" srcset="https://code-maze.com/wp-content/uploads/2018/06/New-Project-1.png 786w, https://code-maze.com/wp-content/uploads/2018/06/New-Project-1-600x422.png 600w, https://code-maze.com/wp-content/uploads/2018/06/New-Project-1-300x211.png 300w, https://code-maze.com/wp-content/uploads/2018/06/New-Project-1-768x540.png 768w" data-srcset="" sizes="(max-width: 786px) 100vw, 786px"><noscript><img class="alignnone size-full wp-image-3623" src="https://code-maze.com/wp-content/uploads/2018/06/New-Project-1.png" alt="New MVC Project" width="786" height="553" srcset="https://code-maze.com/wp-content/uploads/2018/06/New-Project-1.png 786w, https://code-maze.com/wp-content/uploads/2018/06/New-Project-1-600x422.png 600w, https://code-maze.com/wp-content/uploads/2018/06/New-Project-1-300x211.png 300w, https://code-maze.com/wp-content/uploads/2018/06/New-Project-1-768x540.png 768w" sizes="(max-width: 786px) 100vw, 786px" /></noscript></a></p>
+<p>If you are new to Azure deployment, then check out this <a href="https://docs.microsoft.com/en-us/azure/app-service/app-service-web-get-started-dotnet">article</a>. You can also get a free Azure account <a href="https://azure.microsoft.com/en-in/free/">here.</a></p>
+<p>Once the project is created, let’s deploy it to Azure Web App:</p>
+<p><a href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/Azure-Web-App-settings.png" data-featherlight="image"><img class="alignnone wp-image-3624 size-full lazy-loaded" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/Azure-Web-App-settings.png" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings.png" alt="Azure web app deploy" width="796" height="487" srcset="https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings.png 796w, https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings-600x367.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings-300x184.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings-768x470.png 768w" data-srcset="" sizes="(max-width: 796px) 100vw, 796px"><noscript><img class="alignnone wp-image-3624 size-full" src="https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings.png" alt="Azure web app deploy" width="796" height="487" srcset="https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings.png 796w, https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings-600x367.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings-300x184.png 300w, https://code-maze.com/wp-content/uploads/2018/06/Azure-Web-App-settings-768x470.png 768w" sizes="(max-width: 796px) 100vw, 796px" /></noscript></a></p>
+<p><span style="font-weight: 400;">After deployment, the server app is hosted at </span><code><span style="font-weight: 400;">testapp1158.azurewebsites.net</span></code>:</p>
+<p><a href="https://code-maze.com/wp-content/uploads/2018/06/Live-app.png" data-featherlight="image"><img class="lazy-hidden alignnone size-full wp-image-3625" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/lazy_placeholder.gif" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/Live-app.png" alt="Live page" width="737" height="408" srcset="" data-srcset="https://code-maze.com/wp-content/uploads/2018/06/Live-app.png 737w, https://code-maze.com/wp-content/uploads/2018/06/Live-app-600x332.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Live-app-300x166.png 300w" sizes="(max-width: 737px) 100vw, 737px"><noscript><img class="alignnone size-full wp-image-3625" src="https://code-maze.com/wp-content/uploads/2018/06/Live-app.png" alt="Live page" width="737" height="408" srcset="https://code-maze.com/wp-content/uploads/2018/06/Live-app.png 737w, https://code-maze.com/wp-content/uploads/2018/06/Live-app-600x332.png 600w, https://code-maze.com/wp-content/uploads/2018/06/Live-app-300x166.png 300w" sizes="(max-width: 737px) 100vw, 737px" /></noscript></a></p>
+<p>Next, let’s create a Client app. Again, we are going to create another ASP.NET Core MVC project, which runs locally. We have both client and the server app running and they belong to different origins.</p>
+<p>To make cross-origin requests, let’s go to Solution Explorer, navigate to <code>Views</code> -&gt; <code>Home</code> -&gt; <code>Index.html</code>. Let’s go to the bottom of the document and add the following piece of code:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb88863887686" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb88863887686-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abb88863887686-2">2</div><div class="crayon-num" data-line="crayon-5cc83159abb88863887686-3">3</div><div class="crayon-num" data-line="crayon-5cc83159abb88863887686-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb88863887686-1"><span class="crayon-o">&lt;</span><span class="crayon-v">div</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abb88863887686-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-e">input </span><span class="crayon-e ">type</span><span class="crayon-o">=</span><span class="crayon-s">"button"</span><span class="crayon-h"> </span><span class="crayon-e ">value</span><span class="crayon-o">=</span><span class="crayon-s">"Try"</span><span class="crayon-h"> </span><span class="crayon-e ">onclick</span><span class="crayon-o">=</span><span class="crayon-s">"CORSRequest()"</span><span class="crayon-h"> </span><span class="crayon-c ">/&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abb88863887686-3"><span class="crayon-c ">&nbsp;&nbsp;&nbsp;&nbsp;&lt;span id='data'&gt;(Result)&lt;/s</span><span class="crayon-v">pan</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abb88863887686-4"><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-v">div</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p>This markup creates a button and, when the user clicks the button, it calls a function.</p>
+<p>Just below the markup, let’s create a <code>script</code> tag with the code that makes an ajax request to the server app when the user clicks the button:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb91134631987" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">Ajax calls to the server</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-mixed-highlight" title="Contains Mixed Languages"></span><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-2">2</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-3">3</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-4">4</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-5">5</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-6">6</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-7">7</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-8">8</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-9">9</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-10">10</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-11">11</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-12">12</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-13">13</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-14">14</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-15">15</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-16">16</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-17">17</div><div class="crayon-num" data-line="crayon-5cc83159abb91134631987-18">18</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb91134631987-1"><span class="crayon-ta">&lt;script&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-e ">serviceUrl</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'http://testapp1158.azurewebsites.net'</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-4">&nbsp;</div><div class="crayon-line" id="crayon-5cc83159abb91134631987-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-e">CORSRequest</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">method</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">'#method'</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">val</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-7">&nbsp;</div><div class="crayon-line" id="crayon-5cc83159abb91134631987-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">$</span><span class="crayon-sy">.</span><span class="crayon-e">ajax</span><span class="crayon-sy">(</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">type</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">method</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">url</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">serviceUrl</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">done</span><span class="crayon-sy">(</span><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">'#data'</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">text</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">error</span><span class="crayon-sy">(</span><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">jqXHR</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">textStatus</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">errorThrown</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">'#data'</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">text</span><span class="crayon-sy">(</span><span class="crayon-v">jqXHR</span><span class="crayon-sy">.</span><span class="crayon-v">responseText</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-h"> </span><span class="crayon-v">textStatus</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5cc83159abb91134631987-17">&nbsp;</div><div class="crayon-line" id="crayon-5cc83159abb91134631987-18"><span class="crayon-ta">&lt;/script&gt;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Since we haven’t enabled CORS on the server app, the server app doesn’t set any headers and the browser rejects the response.</p>
+<p>So, if we navigate to the client app running locally and click the <code>Try</code> button, we should see an error<span style="color: #000000;">:</span></p>
+<p><a href="https://code-maze.com/wp-content/uploads/2018/06/Error.png" data-featherlight="image"><img class="lazy-hidden alignnone size-full wp-image-3626" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/lazy_placeholder.gif" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/Error.png" alt="error" width="135" height="51"><noscript><img class="alignnone size-full wp-image-3626" src="https://code-maze.com/wp-content/uploads/2018/06/Error.png" alt="error" width="135" height="51" /></noscript></a></p>
+<p>Okay! Let’s get to the best part.</p>
+<h3 id="enablecors">Enabling CORS</h3>
+<p>Now that we have seen the Same-Origin policy in action, let’s enable CORS.</p>
+<p>There are 3 steps to enable CORS in a server app:</p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">First of all, we need the&nbsp;<code>Microsoft.AspNetCore.Cors</code>package in our project. It should be already installed in our project via the <code>Microsoft.AspNetCore.App</code> package, which is created as soon as our project was created. But if for some reason, you can’t see that package in the Solution Explorer, g</span>o to <code>Tools</code> -&gt; <code>NuGet Package Manager</code> -&gt; <code>Manage NuGet Packages for Solution</code>. Search for <code>Microsoft.AspNetCore.Cors</code> and install the package</li>
+<li><span style="font-weight: 400;">Next, we need to inject CORS into the container so that it can be used by the application. In <code>Startup.cs</code> class, let’s go to the <code>ConfigureServices</code> method and register CORS:</span><span style="font-weight: 400;"><br>
+</span><br>
+<!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb95950561813" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">Registering CORS</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb95950561813-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abb95950561813-2">2</div><div class="crayon-num" data-line="crayon-5cc83159abb95950561813-3">3</div><div class="crayon-num" data-line="crayon-5cc83159abb95950561813-4">4</div><div class="crayon-num" data-line="crayon-5cc83159abb95950561813-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb95950561813-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">ConfigureServices</span><span class="crayon-sy">(</span><span class="crayon-e">IServiceCollection </span><span class="crayon-v">services</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5cc83159abb95950561813-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb95950561813-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">services</span><span class="crayon-sy">.</span><span class="crayon-e">AddCors</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb95950561813-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">services</span><span class="crayon-sy">.</span><span class="crayon-e">AddMvc</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb95950561813-5"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+
+</li>
+<li><span style="font-weight: 400;">To enable CORS for our application, let’s add the CORS middleware to the HTTP request pipeline in the <code>Configure</code> method, just below the <code>if-else</code> statement. Let’s specify an URL from where the CORS requests are allowed when building the CORS policy. Here, we have given the Client URL:</span><br>
+<!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb97166614778" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">Allowing requests from the client</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb97166614778-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abb97166614778-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb97166614778-1"><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">UseCors</span><span class="crayon-sy">(</span><span class="crayon-v">builder</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abb97166614778-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">builder</span><span class="crayon-sy">.</span><span class="crayon-e">WithOrigins</span><span class="crayon-sy">(</span><span class="crayon-s">"http://localhost:55294"</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+
+</li>
+</ul>
+<p><span style="font-weight: 400;">Let’s save our Server app and re-publish it to the App Service. Now let’s open the client app and click the <code>Try</code> button. We should see an HTML document retrieved from the server app:</span></p>
+<p><a href="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png" data-featherlight="image"><img class="lazy-hidden alignnone size-full wp-image-3627" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/lazy_placeholder.gif" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png" alt="data from server app" width="1078" height="107" srcset="" data-srcset="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png 1078w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-600x60.png 600w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-300x30.png 300w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-768x76.png 768w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-1024x102.png 1024w" sizes="(max-width: 1078px) 100vw, 1078px"><noscript><img class="alignnone size-full wp-image-3627" src="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png" alt="data from server app" width="1078" height="107" srcset="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png 1078w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-600x60.png 600w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-300x30.png 300w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-768x76.png 768w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-1024x102.png 1024w" sizes="(max-width: 1078px) 100vw, 1078px" /></noscript></a></p>
+<p>Congratulations! We have successfully enabled CORS.</p>
+<p><span style="color: #000000;">Okay, but that’s not all. Let us show you a few more tricks.</span></p>
+<h2 id="configcorsrequests">Configuring CORS Requests</h2>
+<p>If we only want to<span style="color: #000000;"> allow CORS requests to a selected few methods</span>, instead of enabling CORS at the entire application level, we can also enable CORS at the controller level or at the action level.</p>
+<p>So to e<span style="color: #000000;">nable CORS at the Action l</span>evel, let’s replace the code we added previously in the <code>ConfigureServices</code> method with:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb99324108758" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">Defining a CORS policy</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-2">2</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-3">3</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-4">4</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-5">5</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-6">6</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-7">7</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-8">8</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-9">9</div><div class="crayon-num" data-line="crayon-5cc83159abb99324108758-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb99324108758-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">ConfigureServices</span><span class="crayon-sy">(</span><span class="crayon-e">IServiceCollection </span><span class="crayon-v">services</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">services</span><span class="crayon-sy">.</span><span class="crayon-e">AddCors</span><span class="crayon-sy">(</span><span class="crayon-v">options</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">options</span><span class="crayon-sy">.</span><span class="crayon-e">AddPolicy</span><span class="crayon-sy">(</span><span class="crayon-s">"AllowOrigin"</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">builder</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">builder</span><span class="crayon-sy">.</span><span class="crayon-e">WithOrigins</span><span class="crayon-sy">(</span><span class="crayon-s">"http://localhost:55294"</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-8">&nbsp;</div><div class="crayon-line" id="crayon-5cc83159abb99324108758-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">services</span><span class="crayon-sy">.</span><span class="crayon-e">AddMvc</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb99324108758-10"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p>This method defines a named CORS policy called,<code><span style="font-weight: 400;">AllowOrigin</span></code><i></i>&nbsp;that allows cross-origin requests from our client app. And now, instead of specifying CORS middleware in the HTTP request pipeline in the<code><span style="font-weight: 400;">Configure</span></code>method&nbsp;<span style="font-weight: 400;">, we are going to select this policy at runtime at the Action level.</span></p>
+<p><span style="font-weight: 400;">So, in our server app, let’s go to <code>Controllers</code> -&gt; <code>HomeController.cs</code> and add the </span><code><span style="font-weight: 400;">EnableCors</span></code><span style="font-weight: 400;"> decorator to the Index method:</span></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb9c843597438" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">Enabling CORS for an action</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb9c843597438-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abb9c843597438-2">2</div><div class="crayon-num" data-line="crayon-5cc83159abb9c843597438-3">3</div><div class="crayon-num" data-line="crayon-5cc83159abb9c843597438-4">4</div><div class="crayon-num" data-line="crayon-5cc83159abb9c843597438-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb9c843597438-1"><span class="crayon-sy">[</span><span class="crayon-e">EnableCors</span><span class="crayon-sy">(</span><span class="crayon-s">"AllowOrigin"</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5cc83159abb9c843597438-2"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-e">IActionResult </span><span class="crayon-e">Index</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5cc83159abb9c843597438-3"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abb9c843597438-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">View</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abb9c843597438-5"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p><span style="font-weight: 400;">Let’s save the project and deploy the server app to Azure <span style="color: #000000;">again</span>.</span></p>
+<p><span style="font-weight: 400;">In the client app, in the <code>Index.cshtml</code> file, let’s update the <code>serviceURL</code> in the script section:</span></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb9e760185165" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">Updating the server URL to send request to home page</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb9e760185165-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb9e760185165-1"><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-e ">serviceUrl</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'http://testapp1158.azurewebsites.net/Home/Index'</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p><span style="font-weight: 400;">Now, if we run the project without debugging, we should still see the output:</span></p>
+<p><a href="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png" data-featherlight="image"><img class="lazy-hidden alignnone size-full wp-image-3627" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/lazy_placeholder.gif" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png" alt="data from server app" width="1078" height="107" srcset="" data-srcset="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png 1078w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-600x60.png 600w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-300x30.png 300w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-768x76.png 768w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-1024x102.png 1024w" sizes="(max-width: 1078px) 100vw, 1078px"><noscript><img class="alignnone size-full wp-image-3627" src="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png" alt="data from server app" width="1078" height="107" srcset="https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app.png 1078w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-600x60.png 600w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-300x30.png 300w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-768x76.png 768w, https://code-maze.com/wp-content/uploads/2018/06/data-from-server-app-1024x102.png 1024w" sizes="(max-width: 1078px) 100vw, 1078px" /></noscript></a></p>
+<p><span style="font-weight: 400;">But, if we update the <code>serviceUrl</code> in client app to access any other method in <code>Home Controller</code> in the server app, we should see an error output. The updated <code>serviceURL</code>:</span></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abb9f365495834" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">Updating server URL to send request to About page</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abb9f365495834-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abb9f365495834-1"><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-e ">serviceUrl</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'http://testapp1158.azurewebsites.net/Home/About'</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p><span style="font-weight: 400;">shall give the expected output as:</span></p>
+<p><a href="https://code-maze.com/wp-content/uploads/2018/06/Error.png" data-featherlight="image"><img class="lazy-hidden alignnone size-full wp-image-3626" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/lazy_placeholder.gif" data-lazy-type="image" data-src="https://code-maze.com/wp-content/uploads/2018/06/Error.png" alt="error" width="135" height="51"><noscript><img class="alignnone size-full wp-image-3626" src="https://code-maze.com/wp-content/uploads/2018/06/Error.png" alt="error" width="135" height="51" /></noscript></a></p>
+<p>Similarly, we can do this per controller as well.</p>
+<p>It’s not over. More power to you.</p>
+<h2 id="configcorspolicyoptions">Configure CORS Policy Options</h2>
+<p>In ASP.NET Core, we can use various options to customize our CORS policy.</p>
+<p><span style="font-weight: 400;">For example, to only allow <code>GET</code> methods on our resource, let’s use the </span><code><span style="font-weight: 400;">WithMethods</span></code><span style="font-weight: 400;">&nbsp;method when we define the CORS policy:</span></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abba1563236446" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">CORS policy to only allow GET Methods</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abba1563236446-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abba1563236446-2">2</div><div class="crayon-num" data-line="crayon-5cc83159abba1563236446-3">3</div><div class="crayon-num" data-line="crayon-5cc83159abba1563236446-4">4</div><div class="crayon-num" data-line="crayon-5cc83159abba1563236446-5">5</div><div class="crayon-num" data-line="crayon-5cc83159abba1563236446-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abba1563236446-1"><span class="crayon-v">services</span><span class="crayon-sy">.</span><span class="crayon-e">AddCors</span><span class="crayon-sy">(</span><span class="crayon-v">options</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abba1563236446-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abba1563236446-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">options</span><span class="crayon-sy">.</span><span class="crayon-e">AddPolicy</span><span class="crayon-sy">(</span><span class="crayon-s">"AllowOrigin"</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cc83159abba1563236446-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">builder</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">builder</span><span class="crayon-sy">.</span><span class="crayon-e">WithOrigins</span><span class="crayon-sy">(</span><span class="crayon-s">"http://localhost:55294"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5cc83159abba1563236446-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">.</span><span class="crayon-e">WithMethods</span><span class="crayon-sy">(</span><span class="crayon-s">"GET"</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abba1563236446-6"><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p><span style="font-weight: 400;">If we need to allow any origin to access the resource, let’s use </span><code><span style="font-weight: 400;">AllowAnyOrigin</span></code><span style="font-weight: 400;">&nbsp;instead of </span><code><span style="font-weight: 400;">WithOrigins</span></code><span style="font-weight: 400;">:</span></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5cc83159abba3519107654" class="crayon-syntax crayon-theme-visualstudiodark crayon-font-consolas crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="font-size: 15px !important; line-height: 20px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><span class="crayon-title">CORS policy to allow all origins</span>
+			<div class="crayon-tools" style="font-size: 15px !important;height: 22.5px !important; line-height: 22.5px !important;"><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">C#</span></div></div>
+			<div class="crayon-info" style="min-height: 21px !important; line-height: 21px !important;"></div>
+			<div class="crayon-plain-wrap"></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 15px !important; line-height: 20px !important;"><div class="crayon-num" data-line="crayon-5cc83159abba3519107654-1">1</div><div class="crayon-num" data-line="crayon-5cc83159abba3519107654-2">2</div><div class="crayon-num" data-line="crayon-5cc83159abba3519107654-3">3</div><div class="crayon-num" data-line="crayon-5cc83159abba3519107654-4">4</div><div class="crayon-num" data-line="crayon-5cc83159abba3519107654-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 15px !important; line-height: 20px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5cc83159abba3519107654-1"><span class="crayon-v">services</span><span class="crayon-sy">.</span><span class="crayon-e">AddCors</span><span class="crayon-sy">(</span><span class="crayon-v">options</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5cc83159abba3519107654-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5cc83159abba3519107654-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">options</span><span class="crayon-sy">.</span><span class="crayon-e">AddPolicy</span><span class="crayon-sy">(</span><span class="crayon-s">"AllowOrigin"</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5cc83159abba3519107654-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">builder</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">builder</span><span class="crayon-sy">.</span><span class="crayon-e">AllowAnyOrigin</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5cc83159abba3519107654-5"><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p><span style="font-weight: 400;">And ASP.NET <span style="color: #000000;">C</span>ore provides several tools to customize what kind of requests we would like to allow.</span></p>
+<p>In Addition, you can see how CORS is important while working with SignalR in .NET Core by reading <a href="https://code-maze.com/netcore-signalr-angular/" target="_blank" rel="noopener noreferrer">.NET Core with SignalR Real-Time Charts.</a></p>
+<h2>Conclusion</h2>
+<p>In conclusion, think of CORS as a relaxation attempt to the more restrictive Same-Origin policy. On the one side, there is a growing need for security on the web. And on the other, there is a need to integrate web services. CORS provides rich tools for our need for an&nbsp;open and secure web and ASP.NET Core allows us to take advantage of CORS in our cross-platform web applications.</p>
+<p style="background: lightgoldenrodyellow;border: 1px solid lightgray; padding: 10px;">
+		If you have enjoyed reading this article and if you would like to receive the notifications about the freshly published Web Development content we encourage you to 
+  <span class="tve-leads-two-step-trigger tl-2step-trigger-2792">
+  	<a style="font-weight:bold;" href="https://code-maze.com/enabling-cors-in-asp-net-core/#"><b>subscribe to our blog.</b></a>
+  </span>
+</p>
+<span id="tve_leads_end_content" style="display: block; visibility: hidden; border: 1px solid transparent;"></span>																	</div>
+														</div>
+														<div class="post-footer">
+								<div class="social-icons ed-social-share-icons">
+									<p class="share-title">Share:</p>
+									
+		
+		
+		
+		
+		<a href="http://www.facebook.com/sharer.php?u=https://code-maze.com/enabling-cors-in-asp-net-core/&amp;t=Enabling%20CORS%20in%20ASP.NET%20Core" class="social-share-link" title="Share &quot;Enabling CORS in ASP.NET Core&quot; via Facebook" data-network-name="facebook" data-share-title="Enabling CORS in ASP.NET Core" data-share-url="https://code-maze.com/enabling-cors-in-asp-net-core/">
+				<span class="et-extra-icon et-extra-icon-facebook et-extra-icon-background-hover"></span>
+			</a><a href="http://twitter.com/home?status=Enabling%20CORS%20in%20ASP.NET%20Core%20https://code-maze.com/enabling-cors-in-asp-net-core/" class="social-share-link" title="Share &quot;Enabling CORS in ASP.NET Core&quot; via Twitter" data-network-name="twitter" data-share-title="Enabling CORS in ASP.NET Core" data-share-url="https://code-maze.com/enabling-cors-in-asp-net-core/">
+				<span class="et-extra-icon et-extra-icon-twitter et-extra-icon-background-hover"></span>
+			</a><a href="https://plus.google.com/share?url=https://code-maze.com/enabling-cors-in-asp-net-core/&amp;t=Enabling%20CORS%20in%20ASP.NET%20Core" class="social-share-link" title="Share &quot;Enabling CORS in ASP.NET Core&quot; via Google +" data-network-name="googleplus" data-share-title="Enabling CORS in ASP.NET Core" data-share-url="https://code-maze.com/enabling-cors-in-asp-net-core/">
+				<span class="et-extra-icon et-extra-icon-googleplus et-extra-icon-background-hover"></span>
+			</a><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://code-maze.com/enabling-cors-in-asp-net-core/&amp;title=Enabling%20CORS%20in%20ASP.NET%20Core" class="social-share-link" title="Share &quot;Enabling CORS in ASP.NET Core&quot; via LinkedIn" data-network-name="linkedin" data-share-title="Enabling CORS in ASP.NET Core" data-share-url="https://code-maze.com/enabling-cors-in-asp-net-core/">
+				<span class="et-extra-icon et-extra-icon-linkedin et-extra-icon-background-hover"></span>
+			</a><a href="https://code-maze.com/enabling-cors-in-asp-net-core/#" class="social-share-link" title="Share &quot;Enabling CORS in ASP.NET Core&quot; via Email" data-network-name="basic_email" data-share-title="Enabling CORS in ASP.NET Core" data-share-url="https://code-maze.com/enabling-cors-in-asp-net-core/">
+				<span class="et-extra-icon et-extra-icon-basic_email et-extra-icon-background-hover"></span>
+			</a>								</div>
+																<style type="text/css" id="rating-stars" style="cursor: pointer;">
+									.post-footer .rating-stars #rated-stars img.star-on,
+									.post-footer .rating-stars #rating-stars img.star-on {
+										background-color: #3e5062;
+									}
+								<img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/star-full.svg" alt="1" title="bad" class="rating-star rating-star-1 star-off"><img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/star-full.svg" alt="2" title="poor" class="rating-star rating-star-2 star-off"><img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/star-full.svg" alt="3" title="regular" class="rating-star rating-star-3 star-off"><img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/star-full.svg" alt="4" title="good" class="rating-star rating-star-4 star-off"><img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/star-full.svg" alt="5" title="gorgeous" class="rating-star rating-star-5 star-off"><input type="hidden" name="score"></style>
+							</div>
+
+																				</article>
+
+						<nav class="post-nav">
+							<div class="nav-links clearfix">
+								<div class="nav-link nav-link-prev">
+									<a href="https://code-maze.com/csharp-enumerations/" rel="prev"><span class="button">Previous</span><span class="title">C# Intermediate – Enumerations in C#</span></a>								</div>
+								<div class="nav-link nav-link-next">
+									<a href="https://code-maze.com/csharp-inheritance/" rel="next"><span class="button">Next</span><span class="title">C# Intermediate – Inheritance in C#</span></a>								</div>
+								
+							</div>
+						</nav>
+						
+												<div class="et_extra_other_module related-posts">
+							<div class="related-posts-header">
+								<h3>Related Posts</h3>
+							</div>
+							<div class="related-posts-content clearfix">
+																<div class="related-post">
+									<div class="featured-image"><a href="https://code-maze.com/net-core-web-development-part8/" title="Angular – Navigation and the Angular Routing" class="post-thumbnail">
+				<img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/Logo-1100x620-440x264.png" alt="Angular – Navigation and the Angular Routing"><span class="et_pb_extra_overlay"></span>
+			</a></div>
+									<h4 class="title"><a href="https://code-maze.com/net-core-web-development-part8/">Angular – Navigation and the Angular Routing</a></h4>
+									<p class="date"><span class="updated">March 5, 2018</span></p>
+								</div>
+																<div class="related-post">
+									<div class="featured-image"><a href="https://code-maze.com/faceted-builder/" title="C# Design Patterns – Faceted Builder" class="post-thumbnail">
+				<img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/faceted-builder-440x264.png" alt="C# Design Patterns – Faceted Builder"><span class="et_pb_extra_overlay"></span>
+			</a></div>
+									<h4 class="title"><a href="https://code-maze.com/faceted-builder/">C# Design Patterns – Faceted Builder</a></h4>
+									<p class="date"><span class="updated">February 13, 2019</span></p>
+								</div>
+																<div class="related-post">
+									<div class="featured-image"><a href="https://code-maze.com/net-core-web-development-part6/" title="ASP.NET Core Web API – Post, Put, Delete" class="post-thumbnail">
+				<img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/Logo-za-.NET-Core-series--440x264.jpg" alt="ASP.NET Core Web API – Post, Put, Delete"><span class="et_pb_extra_overlay"></span>
+			</a></div>
+									<h4 class="title"><a href="https://code-maze.com/net-core-web-development-part6/">ASP.NET Core Web API – Post, Put, Delete</a></h4>
+									<p class="date"><span class="updated">February 19, 2018</span></p>
+								</div>
+																<div class="related-post">
+									<div class="featured-image"><a href="https://code-maze.com/react-dot-net-core-navigation-routing/" title="React – Navigation and React Routing" class="post-thumbnail">
+				<img src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/React-series-logo-1024x577-440x264.png" alt="React – Navigation and React Routing"><span class="et_pb_extra_overlay"></span>
+			</a></div>
+									<h4 class="title"><a href="https://code-maze.com/react-dot-net-core-navigation-routing/">React – Navigation and React Routing</a></h4>
+									<p class="date"><span class="updated">May 16, 2018</span></p>
+								</div>
+																							</div>
+						</div>
+										
+				<div id="disqus_thread">
+		</div>
+			</div><!-- /.et_pb_extra_column.et_pb_extra_column_main -->
+
+			<div>
+<div class="et_pb_extra_column_sidebar fixed-sidebar" style="top: 10px;">
+	<div class="et_pb_widget advads-widget"><h4 class="widgettitle"> </h4><div class="" id="advads-943623203"><ins class="dcmads" style="display: inline-block; width: 300px; height: 250px; text-decoration: none;" data-dcm-placement="N366601.3184092CODE-MAZE.COM/B9754935.213937389" data-dcm-rendering-mode="iframe" data-dcm-https-only="" data-dcm-resettable-device-id="" data-dcm-app-id="" data-dcm-processed="y">
+  <script src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/dcmads.js.download"></script><script src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/impl_v48.js.download"></script><iframe marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/B9754935(1).html" style="width: 100%; height: 100%; border: 0px; margin: 0px; padding: 0px;"></iframe>
+</ins>
+
+</div></div> <!-- end .et_pb_widget --><div id="widget_thrive_leads-4" class="et_pb_widget widget_thrive_leads"><div class="tve-leads-widget tve-leads-track-widget-19 tve-tl-anim tl-anim-instant tve-leads-triggered"><div class="tl-style" id="tve_tcb2_set-002" data-state="19" data-form-state=""><style type="text/css" class="tve_custom_style">@import url("//fonts.googleapis.com/css?family=Open+Sans:400,600,300&subset=latin");@media (min-width: 300px){#tve_editor [data-css="tve-u-75b3946225d43d"]:hover button { box-shadow: rgba(255, 255, 255, 0.3) 5px 4px 21px 0px inset, rgba(0, 0, 0, 0.4) 0px 0px 3px 0px; }#tve_editor [data-css="tve-u-65b3946225d3fd"]:hover input { border-radius: 3px; overflow: hidden; background-color: rgb(243, 241, 241) !important; }#tve_editor [data-css="tve-u-55b3946225d3bd"]:hover input { border-radius: 3px; overflow: hidden; background-color: rgb(243, 241, 241) !important; }[data-css="tve-u-25b3946225d2fa"] { margin-bottom: 30px !important; }#tve_editor [data-css="tve-u-35b3946225d33e"] { font-family: "Open Sans"; font-weight: 400; color: rgb(102, 102, 102) !important; }[data-css="tve-u-15b3946225d2b5"] + div { clear: none; }[data-css="tve-u-15b3946225d2b5"] { width: 170px; margin-left: auto !important; margin-right: auto !important; }[data-css="tve-u-05b3946225d271"] { border-right: none; border-bottom: none; border-left: none; overflow: hidden; background-color: rgb(255, 255, 255) !important; border-top: 5px solid rgb(62, 80, 98) !important; border-image: initial !important; padding-top: 0px !important; border-radius: 5px !important; }#tve_editor [data-css="tve-u-65b3946225d3fd"] input { border: 2px solid rgb(221, 221, 221); font-size: 19px; color: rgb(102, 102, 102); line-height: 24px; font-family: "Open Sans"; font-weight: 400; background-image: none !important; background-color: rgb(252, 252, 252) !important; padding-top: 18px !important; padding-bottom: 18px !important; margin-bottom: 15px !important; margin-top: -5px !important; }#tve_editor [data-css="tve-u-55b3946225d3bd"] input { border: 2px solid rgb(221, 221, 221); font-size: 19px; color: rgb(102, 102, 102); line-height: 24px; font-family: "Open Sans"; font-weight: 400; background-image: none !important; background-color: rgb(252, 252, 252) !important; padding-top: 18px !important; padding-bottom: 18px !important; margin-bottom: 15px !important; margin-top: -5px !important; }#tve_editor [data-css="tve-u-75b3946225d43d"] button { color: rgb(255, 255, 255); font-size: 28px; font-family: Lato; font-weight: 400; border: 1px solid rgb(57, 73, 90); border-radius: 9px; overflow: hidden; box-shadow: rgba(196, 196, 196, 0.3) -1px 0px 1px 0px inset, rgba(0, 0, 0, 0.4) 0px 0px 3px 0px; background-color: rgb(62, 80, 98) !important; padding-top: 16px !important; padding-bottom: 16px !important; background-image: none !important; margin-top: -7px !important; }[data-css="tve-u-45b3946225d37e"] { max-width: 550px; margin: -23px auto -16px !important; padding-bottom: 0px !important; padding-top: 0px !important; }}</style><style type="text/css" class="tve_user_custom_style">.tve-leads-conversion-object .thrv_heading h1,.tve-leads-conversion-object .thrv_heading h2,.tve-leads-conversion-object .thrv_heading h3{margin:0;padding:0}.tve-leads-conversion-object .thrv_text_element p,.tve-leads-conversion-object .thrv_text_element h1,.tve-leads-conversion-object .thrv_text_element h2,.tve-leads-conversion-object .thrv_text_element h3{margin:0}</style><style type="text/css" class="tve_global_style"></style><div class="tve-leads-conversion-object" data-tl-type="widget"><div class="tve_flt"><div id="tve_editor" class="tve_shortcode_editor"><div class="thrv-leads-widget thrv_wrapper tve_no_drag tve_editor_main_content tve_empty_dropzone" style="" data-css="tve-u-05b3946225d271"><div class="thrv_wrapper tve_image_caption" data-css="tve-u-15b3946225d2b5" style=""><span class="tve_image_frame" style="width: 100%;"><a href="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/NetCoreBestPracticesMini.png" rel="" data-featherlight="image"><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_form_type&p=3753&tve=true&tcbf=68d627148c&_key=19','YddRYU7ik1',true,false,'y38ime8yfVM');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_form_type&p=3753&tve=true&tcbf=68d627148c&_key=19','YddRYU7ik1',true,false,'QwvkC48_81g');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_form_type&p=3753&tve=true&tcbf=68d627148c&_key=19','YddRYU7ik1',true,false,'_SpzJMcJ-f4');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_form_type&p=3753&tve=true&tcbf=68d627148c&_key=19','YddRYU7ik1',true,false,'0J9PcHkuEOU');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_form_type&p=3753&tve=true&tcbf=68d627148c&_key=19','YddRYU7ik1',true,false,'7DfRLbePHZE');
+//]]></script><img class="tve_image wp-image-3762 lazy-loaded" alt="NetCoreBestPracticesMini" width="170" height="241" title="NetCoreBestPracticesMini" data-id="3762" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/NetCoreBestPracticesMini.png" data-lazy-type="image" data-src="//code-maze.com/wp-content/uploads/2018/07/NetCoreBestPracticesMini.png" pagespeed_url_hash="2124114893" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" style="width: 100%;"><noscript><img class="tve_image wp-image-3762" alt="NetCoreBestPracticesMini" width="170" height="241" title="NetCoreBestPracticesMini" data-id="3762" src="//code-maze.com/wp-content/uploads/2018/07/NetCoreBestPracticesMini.png" pagespeed_url_hash="2124114893" onload="pagespeed.CriticalImages.checkImageForCriticality(this);" style="width: 100%;"></noscript></a></span></div><div class="thrv_wrapper thrv_text_element tve_empty_dropzone on_hover" style="" data-css="tve-u-25b3946225d2fa"><p data-css="tve-u-35b3946225d33e" data-default="Enter your text here..." style="text-align: center;">Want to make the best API possible? Subscribe and get most out of your API with our latest guide.</p></div><div class="thrv_wrapper thrv_lead_generation" data-connection="api" data-css="tve-u-45b3946225d37e"><input type="hidden" class="tve-lg-err-msg" value="{&quot;email&quot;:&quot;Email address invalid&quot;,&quot;phone&quot;:&quot;Phone number invalid&quot;,&quot;password&quot;:&quot;Password invalid&quot;,&quot;passwordmismatch&quot;:&quot;Password mismatch error&quot;,&quot;required&quot;:&quot;Required field missing&quot;}">
+<div class="thrv_lead_generation_container tve_clearfix">
+<form action="https://code-maze.com/enabling-cors-in-asp-net-core/#" method="post" novalidate="novalidate">
+<div class="tve_lead_generated_inputs_container tve_clearfix tve_empty_dropzone">
+<div class="tve_lg_input_container tve_lg_input" data-css="tve-u-55b3946225d3bd">
+<input type="email" data-field="email" data-required="1" data-validation="email" name="email" placeholder="Your Email" data-placeholder="Your Email" style="" class="">
+</div>
+<div class="tve_lg_input_container tve_lg_input" data-css="tve-u-65b3946225d3fd">
+<input type="text" data-field="name" name="name" placeholder="Your Name" data-placeholder="Your Name" data-required="1" data-validation="" class="" style="">
+</div>
+<div class="tve_lg_input_container tve_clearfix tve_lg_checkbox tcb-lg-consent" style="display: none;"><div class="tve_lg_checkbox_wrapper"><input type="checkbox" name="user_consent" value="1" id="tcb-consent-tve-u-1645667443b"><label for="tcb-consent-tve-u-1645667443b"><span class="thrv-inline-text">Insert details about how the information is going to be processed</span></label></div><input type="hidden" name="consent_config" class="consent-config" value="YTozOntzOjc6ImVuYWJsZWQiO2I6MDtzOjg6InJlcXVpcmVkIjtiOjA7czoxMToiYWx3YXlzX3NlbmQiO2E6MDp7fX0="></div><div class="tve_lg_input_container tve_submit_container tve_lg_submit" data-css="tve-u-75b3946225d43d" data-tcb_hover_state_parent="">
+<button type="submit" style="" class="tve-froala">Subscribe Now!</button>
+</div>
+</div>
+<input id="_submit_option" type="hidden" name="_submit_option" value="message"><input id="__tcb_lg_msg" type="hidden" name="__tcb_lg_msg" value="YToyOntzOjU6ImVycm9yIjtzOjY6IkVycm9yISI7czo3OiJzdWNjZXNzIjtzOjI0OiJTdWNjZXNzZnVsbHkgc3Vic2NyaWJlZCEiO30="><input type="hidden" name="__tcb_lg_fc" id="__tcb_lg_fc" value="YToxOntzOjk6Im1haWxjaGltcCI7czoxMDoiOGJmZWI4ZWQ1NiI7fQ=="><input type="hidden" id="mailchimp_groupin" class="tve-api-extra" name="mailchimp_groupin" value="bfa5d3e4fb"><input type="hidden" id="mailchimp_group" class="tve-api-extra" name="mailchimp_group" value="bb955660c3"><input type="hidden" id="mailchimp_optin" class="tve-api-extra" name="mailchimp_optin" value="s"></form>
+</div>
+</div></div></div></div></div></div></div></div> <!-- end .et_pb_widget --></div>	
+</div>
+
+		</div> <!-- #content-area -->
+	</div> <!-- .container -->
+	</div> <!-- #main-content -->
+
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+	  	setInterval(() => {
+			$.each($('iframe'), (arr,x) => {
+				let src = $(x).attr('src');
+				if (src && src.match(/(ads-iframe)|(disqusads)/gi)) {
+					$(x).remove();
+				}
+			});
+		}, 700);
+		
+	});
+})(jQuery);
+</script>
+	
+	<footer id="footer" class="footer_columns_3">
+		<div class="container">
+	<div class="et_pb_extra_row container-width-change-notify">
+						<div class="et_pb_extra_column odd column-1">
+					<div id="custom_html-2" class="widget_text et_pb_widget widget_custom_html"><h4 class="widgettitle">Legal</h4><div class="textwidget custom-html-widget"><ul>
+	<li class="page_item"><a href="https://www.code-maze.com/terms-of-service/">Terms of Service</a></li>
+	<li class="page_item"><a href="https://www.code-maze.com/privacy-policy/">Privacy Policy</a></li>
+<li class="page_item"><a href="https://www.code-maze.com/disclosure-policy/">Disclosure Policy</a></li>
+	<li class="page_item"><a href="https://www.code-maze.com/disclaimer/">Disclaimer</a></li>
+</ul></div></div> <!-- end .et_pb_widget -->				</div>
+								<div class="et_pb_extra_column even column-2">
+					<div id="custom_html-4" class="widget_text et_pb_widget widget_custom_html"><h4 class="widgettitle">Curated Series</h4><div class="textwidget custom-html-widget"><ul>
+	<li class="page_item"><a href="https://code-maze.com/net-core-series/">ASP.NET Core Series</a></li>
+	<li class="page_item"><a href="https://code-maze.com/aspnetcore-webapi-best-practices/">ASP.NET Core Web API Best Practices</a></li>
+<li class="page_item"><a href="https://code-maze.com/angular-best-practices/">Angular Development Best Practices</a></li>
+</ul></div></div> <!-- end .et_pb_widget -->				</div>
+								<div class="et_pb_extra_column even column-4">
+					<div id="custom_html-3" class="widget_text et_pb_widget widget_custom_html"><h4 class="widgettitle">Get in Touch with Us</h4><div class="textwidget custom-html-widget"><ul>
+<li class="page_item"><a href="https://www.code-maze.com/sponsor/" style="color: #ffc007;">Become a Sponsor <span class="et-pb-icon" style="font-size: inherit;"></span>
+</a></li>
+	<li class="page_item"><a href="https://www.code-maze.com/write-for-codemaze/">Write for Code Maze</a></li>
+	<li class="page_item"><a href="https://www.code-maze.com/about/">About Us</a></li>
+<li class="page_item"><a href="https://www.code-maze.com/contact/">Contact Us and Say Hello</a></li>
+</ul></div></div> <!-- end .et_pb_widget -->				</div>
+					</div>
+</div>
+		<div id="footer-bottom">
+			<div class="container">
+
+				<!-- Footer Info -->
+				<p id="footer-info">© Copyright code-maze.com 2016 - 2019</p>
+				<!-- Footer Navigation -->
+								<div id="footer-nav">
+											<ul class="et-extra-social-icons" style="">
+																																								<li class="et-extra-social-icon facebook">
+								<a href="https://www.facebook.com/CodeMazeBlog/" class="et-extra-icon et-extra-icon-background-none et-extra-icon-facebook"></a>
+							</li>
+																																									<li class="et-extra-social-icon twitter">
+								<a href="https://twitter.com/CodeMazeBlog" class="et-extra-icon et-extra-icon-background-none et-extra-icon-twitter"></a>
+							</li>
+																																																																																																																																																																																																																																																																																												<li class="et-extra-social-icon rss">
+								<a href="https://code-maze.com/feed/" class="et-extra-icon et-extra-icon-background-none et-extra-icon-rss"></a>
+							</li>
+																																																																																																																																																																																																																																																																						</ul>
+									</div> <!-- /#et-footer-nav -->
+				
+			</div>
+		</div>
+		
+	</footer>
+	</div> <!-- #page-container -->
+
+			<span title="Back To Top" id="back_to_top" class="visible"></span>
+		
+		<script type="text/javascript">
+		var et_animation_data = [];
+	</script>
+	<script type="text/javascript">var TVE_Event_Manager_Registered_Callbacks = TVE_Event_Manager_Registered_Callbacks || {};TVE_Event_Manager_Registered_Callbacks.thrive_leads_form_close = function(t, a, c){TL_Front.close_form(this, t, a, c); return false;};</script><script type="text/javascript">
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"codemazeblog"};
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"3565 https:\/\/code-maze.com\/?p=3565","disqusShortname":"codemazeblog","disqusTitle":"Enabling CORS in ASP.NET Core","disqusUrl":"https:\/\/code-maze.com\/enabling-cors-in-asp-net-core\/","postId":"3565"};
+var dclCustomVars = {"dcl_progress_text":"Loading..."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/embed-scroll.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tve_frontend_options = {"is_editor_page":"","page_events":[],"is_single":"1","ajaxurl":"https:\/\/code-maze.com\/wp-admin\/admin-ajax.php","social_fb_app_id":"","dash_url":"https:\/\/code-maze.com\/wp-content\/plugins\/thrive-leads\/thrive-dashboard","translations":{"Copy":"Copy"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/frontend.min.js.download"></script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/frontend.min.js(1).download"></script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/masonry.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var EXTRA = {"images_uri":"https:\/\/code-maze.com\/wp-content\/themes\/Extra\/images\/","ajaxurl":"https:\/\/code-maze.com\/wp-admin\/admin-ajax.php","your_rating":"Your Rating:","item_in_cart_count":"%d Item in Cart","items_in_cart_count":"%d Items in Cart","item_count":"%d Item","items_count":"%d Items","rating_nonce":"f8411743c0","timeline_nonce":"d42fd06088","blog_feed_nonce":"4210fe7d7b","error":"There was a problem, please try again.","contact_error_name_required":"Name field cannot be empty.","contact_error_email_required":"Email field cannot be empty.","contact_error_email_invalid":"Please enter a valid email address.","is_ab_testing_active":"","is_cache_plugin_active":"no"};
+var et_shortcodes_strings = {"previous":"Previous","next":"Next"};
+var et_pb_custom = {"ajaxurl":"https:\/\/code-maze.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/code-maze.com\/wp-content\/themes\/Extra\/images","builder_images_uri":"https:\/\/code-maze.com\/wp-content\/themes\/Extra\/includes\/builder\/images","et_frontend_nonce":"a6788436bb","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"6aadec2bf2","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","is_builder_plugin_used":"","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","is_ab_testing_active":"","page_id":"3565","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":""};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/scripts.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"https:\/\/code-maze.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/frontend.min.js(2).download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var a3_lazyload_params = {"apply_images":"1","apply_videos":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/jquery.lazyloadxt.extra.min.js.download"></script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/jquery.lazyloadxt.srcset.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var a3_lazyload_extend_params = {"edgeY":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/jquery.lazyloadxt.extend.js.download"></script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/wpFeatherlight.pkgd.min.js.download"></script>
+<script type="text/javascript" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/wp-embed.min.js.download"></script>
+<script type="text/javascript">/*<![CDATA[*/if ( !window.TL_Const ) {var TL_Const={"security":"63cb35f339","ajax_url":"https:\/\/code-maze.com\/wp-admin\/admin-ajax.php","forms":{"widget":{"_key":"19","trigger":"page_load","trigger_config":{},"form_type_id":3753,"main_group_id":3752,"active_test_id":""},"two_step_2792":{"_key":"2","trigger":"click","trigger_config":{"c":"tl-2step-trigger-2792"},"form_type_id":"2792","main_group_id":"2792","active_test_id":null}},"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":0,"main_group_id":3752,"display_options":{"allowed_post_types":[],"flag_url_match":false},"two_step_ids":["2792"],"custom_post_data":{"http_referrer":"https:\/\/www.google.com\/"},"current_screen":{"screen_type":4,"screen_id":3565},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin"]};} else {ThriveGlobal.$j.extend(true, TL_Const, {"security":"63cb35f339","ajax_url":"https:\/\/code-maze.com\/wp-admin\/admin-ajax.php","forms":{"widget":{"_key":"19","trigger":"page_load","trigger_config":{},"form_type_id":3753,"main_group_id":3752,"active_test_id":""},"two_step_2792":{"_key":"2","trigger":"click","trigger_config":{"c":"tl-2step-trigger-2792"},"form_type_id":"2792","main_group_id":"2792","active_test_id":null}},"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":0,"main_group_id":3752,"display_options":{"allowed_post_types":[],"flag_url_match":false},"two_step_ids":["2792"],"custom_post_data":{"http_referrer":"https:\/\/www.google.com\/"},"current_screen":{"screen_type":4,"screen_id":3565},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin"]})} /*]]> */</script><script type="text/javascript">var TL_Front = TL_Front || {}; TL_Front.impressions_data = TL_Front.impressions_data || {};TL_Front.impressions_data.widget = {"group_id":3752,"form_type_id":3753,"variation_key":"19","active_test_id":0,"output_js":true};TL_Front.impressions_data.two_step_2792 = {"group_id":2792,"form_type_id":2792,"variation_key":"2","active_test_id":null,"output_js":true};</script><script type="text/javascript">
+	(function ($) {
+	$(function () {
+		var event_data = {"form_id":"tve-leads-track-widget-19","form_type":"widget"};
+		event_data.source = 'page_load';
+		setTimeout(function () {
+			ThriveGlobal.$j(TL_Front).trigger('showform.thriveleads', event_data);
+			}, 200);
+		});
+	})
+(ThriveGlobal.$j);
+</script><script type="text/javascript">
+	(function ($) {
+	$( function () {
+		var event_data = {"form_id":"tve-leads-track-2step-2","form_type":"lightbox"},
+			_selector = ".tl-2step-trigger-2792";
+		event_data.source = 'click';
+		event_data.first = true;
+		$( 'body' ).on( 'click', _selector, function ( event ) {
+			event_data.TargetEvent = event;
+			$( TL_Front ).trigger( 'showform.thriveleads', event_data );
+		} );
+	} );
+})
+	(ThriveGlobal.$j);
+</script><div class="tl-states-root tl-anim-instant"><div class="tl-style" id="tve_tcb2_set-006-v1" data-state="2">
+        <div class="tve_tcb2_set-006-v1 tve_post_lightbox tve-leads-lightbox">
+        <div style="visibility: hidden; position: fixed; left: -9000px" class="tl-lb-target tve-leads-track-2step-2" data-s-state=""><div class="tve_p_lb_overlay" style=""></div><div data-anim="instant" class="tve_p_lb_content tve-tl-anim tl-anim-instant bSe cnt" style="" data-css="tve-u-vvwcdyy8u5qrx"><div class="tve_p_lb_inner" id="tve-p-scroller" style=""><article><style type="text/css" class="tve_custom_style">@import url("//fonts.googleapis.com/css?family=Lato:400,700,900,300&subset=latin");@import url("//fonts.googleapis.com/css?family=PT+Serif:400,700&subset=latin");@media (min-width: 300px){[data-css="tve-u-05b41c86a967c2"] img { filter: grayscale(0%) blur(0px); opacity: 0; }#tve_editor [data-css="tve-u-315b41c86a96fbc"] { border-style: none; border-radius: 0px; border-width: 0px; border-color: rgb(0, 0, 0); margin: 0px; padding: 0px; width: 25px; height: 25px; font-size: 25px; }[data-css="tve-u-335b41c86a9703c"] { font-size: 60px; margin-left: auto; margin-right: auto; }#tve_editor [data-css="tve-u-325b41c86a96ffc"] .thrv_icon { right: 0px; left: auto; transform: translate(-50%, -50%); }#tve_editor [data-css="tve-u-305b41c86a96f7c"] .thrv_icon { right: 0px; left: auto; transform: translate(-50%, -50%); }[data-css="tve-u-55b41c86a9691c"] img { filter: grayscale(0%) blur(0px); opacity: 1; }[data-css="tve-u-45b41c86a968da"] { max-width: 50.7%; }[data-css="tve-u-85b41c86a969ee"] > .tve-cb { justify-content: center; display: flex; flex-direction: column; }#tve_editor [data-css="tve-u-325b41c86a96ffc"]:hover input { border: 1px solid rgb(222, 78, 64); }#tve_editor [data-css="tve-u-345b41c86a9707b"]:hover button { background-color: rgb(219, 96, 83) !important; }[data-css="tve-u-345b41c86a9707b"] strong { font-weight: 700; }#tve_editor [data-css="tve-u-345b41c86a9707b"] button { color: rgb(255, 255, 255); font-family: Lato; font-weight: 400; font-size: 24px; line-height: 22px; background-color: rgb(62, 80, 98) !important; padding-top: 20px !important; padding-bottom: 20px !important; background-image: none !important; }#tve_editor [data-css="tve-u-325b41c86a96ffc"] input { box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 1px inset; font-family: Lato; font-weight: 400; font-size: 15px; line-height: 22px; border: 1px solid rgb(255, 255, 255); color: rgb(41, 41, 41); padding-left: 10px; padding-right: 55px; padding-top: 20px !important; padding-bottom: 20px !important; background-color: rgb(255, 252, 211) !important; background-image: none !important; }[data-css="tve-u-295b41c86a96f3b"] { border-radius: 0px; overflow: hidden; max-width: 498px; margin-left: auto !important; margin-right: auto !important; }#tve_editor [data-css="tve-u-265b41c86a96e7b"] { font-family: Lato; font-weight: 400; color: rgb(80, 80, 80) !important; }[data-css="tve-u-265b41c86a96e7b"] { line-height: 20px !important; }[data-css="tve-u-245b41c86a96dfe"] strong { font-weight: 900; }[data-css="tve-u-245b41c86a96dfe"] { line-height: 50px !important; }#tve_editor [data-css="tve-u-245b41c86a96dfe"] { font-family: Lato; font-weight: 400; font-size: 48px !important; color: rgb(62, 80, 98) !important; }[data-css="tve-u-225b41c86a96d7f"] { line-height: 32px !important; }[data-css="tve-u-225b41c86a96d7f"] strong { font-weight: 700; }#tve_editor [data-css="tve-u-225b41c86a96d7f"] { font-family: Lato; font-weight: 400; color: rgb(80, 80, 80) !important; font-size: 30px !important; }#tve_editor [data-css="tve-u-185b41c86a96c80"] { font-family: "PT Serif"; font-weight: 400; color: rgb(80, 80, 80) !important; }[data-css="tve-u-185b41c86a96c80"] { line-height: 18px !important; }[data-css="tve-u-15b41c86a9680e"] { font-size: 20px; width: 20px; height: 20px; color: rgb(123, 123, 123); border-radius: 90px; overflow: hidden; border: 1px solid rgb(123, 123, 123); position: absolute; z-index: 20; top: 10px; right: 10px; margin: 6px 18px 0px auto !important; padding: 5px !important; }[data-css="tve-u-105b41c86a96a75"] { padding-top: 0px !important; padding-bottom: 0px !important; }[data-css="tve-u-95b41c86a96a33"] { margin-top: -20px !important; margin-bottom: 0px !important; }[data-css="tve-u-195b41c86a96cc0"] { max-width: 20%; }[data-css="tve-u-155b41c86a96bc0"] { max-width: 60.2%; }[data-css="tve-u-115b41c86a96ab8"] { max-width: 20%; }[data-css="tve-u-205b41c86a96d01"].thrv-divider .tve_sep { border-width: 1px; border-color: rgb(194, 194, 194); }[data-css="tve-u-205b41c86a96d01"] { max-width: 50px; float: left; width: 100%; margin-bottom: 0px !important; margin-top: 10px !important; }[data-css="tve-u-75b41c86a969aa"] { border-radius: 0px; overflow: hidden; margin-right: 40px !important; margin-left: -25px !important; }#tve_editor [data-css="tve-u-75b41c86a969aa"] p, #tve_editor [data-css="tve-u-75b41c86a969aa"] li, #tve_editor [data-css="tve-u-75b41c86a969aa"] blockquote, #tve_editor [data-css="tve-u-75b41c86a969aa"] address { color: rgb(123, 123, 123); }[data-css="tve-u-85b41c86a969ee"] { margin-top: 50px !important; margin-bottom: 0px !important; padding: 0px !important; }[data-css="tve-u-75b41c86a969aa"] p, [data-css="tve-u-75b41c86a969aa"] li, [data-css="tve-u-75b41c86a969aa"] blockquote, [data-css="tve-u-75b41c86a969aa"] address { text-decoration: none !important; }[data-css="tve-u-275b41c86a96eba"] { max-width: 700px; margin-top: 10px !important; }[data-css="tve-u-65b41c86a9695e"] { max-width: 49.3%; }[data-css="tve-u-35b41c86a96898"] { min-height: 560px; padding-top: 0px !important; padding-bottom: 0px !important; }[data-css="tve-u-25b41c86a96856"] { margin-top: 0px !important; margin-bottom: 0px !important; }[data-css="tve-u-05b41c86a967c2"] + div { clear: none; }[data-css="tve-u-05b41c86a967c2"] { width: 81px; position: absolute; z-index: 3; top: -10px; left: 20px; margin-top: 0px !important; margin-bottom: 0px !important; }[data-css="tve-u-55b41c86a9691c"] { float: none; width: 512px; margin: 86px 14px 0px 21px !important; padding-right: 21px !important; }[data-css="tve-u-vvwcdyy8u5qrx"] { overflow: hidden; max-width: 1040px !important; margin-left: 0px !important; margin-right: 0px !important; padding: 0px !important; border-radius: 3px !important; margin-top: 0px !important; background-color: rgba(255, 255, 255, 0) !important; background-image: linear-gradient(rgb(244, 244, 244), rgb(244, 244, 244)) !important; background-size: auto !important; background-position: 0px 0px !important; background-attachment: scroll !important; background-repeat: no-repeat !important; }[data-css="tve-u-215b41c86a96d40"] { max-width: 700px; margin-top: 10px !important; padding-top: 0px !important; }[data-css="tve-u-235b41c86a96dbe"] { max-width: 700px; margin-top: 20px !important; margin-bottom: 20px !important; }[data-css="tve-u-175b41c86a96c40"] { max-width: 404px; margin-top: 20px !important; padding: 0px !important; }[data-css="tve-u-145b41c86a96b7d"].thrv-divider .tve_sep { border-width: 1px; border-color: rgb(194, 194, 194); }[data-css="tve-u-145b41c86a96b7d"] { max-width: 50px; float: right; width: 100%; margin: 10px auto 0px !important; }[data-css="tve-u-255b41c86a96e3c"] { max-width: 700px; margin-top: 0px !important; }[data-css="tve-u-285b41c86a96efa"] { max-width: 700px; margin-top: 10px !important; padding-bottom: 0px !important; }#tve_editor [data-css="tve-u-305b41c86a96f7c"]:hover input { border: 1px solid rgb(222, 78, 64); }#tve_editor [data-css="tve-u-305b41c86a96f7c"] input { box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 1px inset; font-family: Lato; font-weight: 400; font-size: 15px; line-height: 22px; border: 1px solid rgb(255, 255, 255); color: rgb(41, 41, 41); padding-top: 20px !important; padding-bottom: 20px !important; background-color: rgb(255, 252, 211) !important; background-image: none !important; padding-left: 10px !important; }}@media (max-width: 1023px){[data-css="tve-u-105b41c86a96a75"] > .tcb-flex-col > .tcb-col { min-height: 0px; }[data-css="tve-u-35b41c86a96898"] > .tcb-flex-col > .tcb-col { min-height: 0px; }#tve_editor [data-css="tve-u-345b41c86a9707b"] button { margin-bottom: 10px !important; }[data-css="tve-u-295b41c86a96f3b"] { margin-bottom: 0px !important; padding: 1px !important; }[data-css="tve-u-165b41c86a96bff"] { margin-top: -34px !important; }#tve_editor [data-css="tve-u-225b41c86a96d7f"] { font-size: 24px !important; }#tve_editor [data-css="tve-u-245b41c86a96dfe"] { font-size: 40px !important; }[data-css="tve-u-75b41c86a969aa"] { padding-right: 10px !important; padding-left: 0px !important; }[data-css="tve-u-105b41c86a96a75"] { z-index: 0; min-height: inherit; padding-bottom: 0px !important; }[data-css="tve-u-35b41c86a96898"] { z-index: 0; min-height: inherit; padding-bottom: 0px !important; }[data-css="tve-u-05b41c86a967c2"] { right: 644px; bottom: 559px; }[data-css="tve-u-125b41c86a96af9"] { margin-right: 207px !important; }[data-css="tve-u-55b41c86a9691c"] { width: 267px; padding-right: 0px !important; margin-right: 0px !important; }[data-css="tve-u-205b41c86a96d01"] { max-width: 50px; margin-left: auto !important; margin-right: auto !important; }[data-css="tve-u-145b41c86a96b7d"] { max-width: 50px; margin: 0px auto 10px !important; }[data-css="tve-u-175b41c86a96c40"] { margin-left: auto !important; margin-right: auto !important; }[data-css="tve-u-15b41c86a9680e"] { position: absolute; top: 10px; right: 10px; }}@media (max-width: 767px){[data-css="tve-u-85b41c86a969ee"] { margin-top: 51px !important; }[data-css="tve-u-235b41c86a96dbe"] { margin-top: 7px !important; }[data-css="tve-u-215b41c86a96d40"] { margin-top: -8px !important; }[data-css="tve-u-175b41c86a96c40"] { margin-top: 3px !important; }[data-css="tve-u-135b41c86a96b3b"]::after { clear: both; }[data-css="tve-u-145b41c86a96b7d"] { float: right; width: 100%; margin-left: auto !important; padding-left: 1px !important; margin-right: auto !important; }[data-css="tve-u-15b41c86a9680e"] { position: absolute; z-index: 4; top: 10px; right: 10px; margin-left: -15px !important; }[data-css="tve-u-75b41c86a969aa"] { padding-left: 10px !important; padding-right: 10px !important; padding-top: 85px !important; }[data-css="tve-u-55b41c86a9691c"] { width: 340px; z-index: 0; padding-right: 0px !important; }}</style><style type="text/css" class="tve_user_custom_style">.tve-leads-conversion-object .thrv_heading h1,.tve-leads-conversion-object .thrv_heading h2,.tve-leads-conversion-object .thrv_heading h3{margin:0;padding:0}.tve-leads-conversion-object .thrv_text_element p,.tve-leads-conversion-object .thrv_text_element h1,.tve-leads-conversion-object .thrv_text_element h2,.tve-leads-conversion-object .thrv_text_element h3{margin:0}</style><style type="text/css" class="tve_global_style"></style><div class="tve-leads-conversion-object" data-tl-type="two_step_2792"><div class="tve_flt"><div id="tve_editor" class="tve_shortcode_editor"><div class="thrv_wrapper tve_image_caption" data-css="tve-u-05b41c86a967c2" style=""><span class="tve_image_frame"><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_lead_2s_lightbox&p=2792&tve=true&_key=2&r=5ae97f5b73866&tcbf=c1b77615c6','YddRYU7ik1',true,false,'Cm7SyPPwEK0');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_lead_2s_lightbox&p=2792&tve=true&_key=2&r=5ae97f5b73866&tcbf=c1b77615c6','YddRYU7ik1',true,false,'7wQIMwNIueQ');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_lead_2s_lightbox&p=2792&tve=true&_key=2&r=5ae9996bbc8cf&tcbf=c1b77615c6','YddRYU7ik1',true,false,'xXZZPtqhWTw');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_lead_2s_lightbox&p=2792&tve=true&_key=2&r=5aec264e7e102&tcbf=e58fd48293','YddRYU7ik1',true,false,'IauG8dorAvI');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_lead_2s_lightbox&p=2792&tve=true&tcbf=1c16b812fa&_key=2','YddRYU7ik1',true,false,'IKqHr3WuVvU');
+//]]></script><script pagespeed_no_defer="">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://code-maze.com/?post_type=tve_lead_2s_lightbox&p=2792&tve=true&tcbf=f87a56ac47&_key=2','YddRYU7ik1',true,false,'yfCZ0N84ahA');
+//]]></script><img class="tve_image wp-image-2407" alt="" width="81" height="105" title="set6_bookmark" data-id="2407" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/set6_bookmark.png" pagespeed_url_hash="1766231612" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></span></div><div class="thrv_wrapper thrv_icon tcb-icon-display tve_evt_manager_listen tve_et_click tve_ea_thrive_leads_form_close" data-css="tve-u-15b41c86a9680e" data-tcb-events="__TCB_EVENT_[{&quot;a&quot;:&quot;thrive_leads_form_close&quot;,&quot;t&quot;:&quot;click&quot;}]_TNEVE_BCT__" style=""><svg class="tcb-icon" viewBox="0 0 30 32" data-name="closeclose">
+<title>close</title>
+<path d="M0.655 2.801l1.257-1.257 27.655 27.655-1.257 1.257-27.655-27.655z"></path>
+<path d="M28.31 1.543l1.257 1.257-27.655 27.655-1.257-1.257 27.655-27.655z"></path>
+</svg></div><div class="thrv_wrapper thrv-columns" style="" data-css="tve-u-25b41c86a96856"><div class="tcb-flex-row tcb-resized tcb--cols--2" data-css="tve-u-35b41c86a96898"><div class="tcb-flex-col" data-css="tve-u-45b41c86a968da" style=""><div class="tcb-col tve_empty_dropzone" style=""><div class="thrv_wrapper tve_image_caption tcb-mobile-hidden" data-css="tve-u-55b41c86a9691c" style=""><span class="tve_image_frame" style="width: 100%;"><img class="tve_image wp-image-1508" alt="The Complete Guide to HTTP Book" width="350" height="364" title="The Complete Guide to HTTP Book" data-id="1508" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/The-Complete-Guide-to-HTTP-Book-Mini.png" style="width: 100%;" pagespeed_url_hash="3346392092" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></span></div></div></div><div class="tcb-flex-col" data-css="tve-u-65b41c86a9695e" style=""><div class="tcb-col tve_empty_dropzone" style="" data-css="tve-u-75b41c86a969aa"><div class="thrv_wrapper thrv_contentbox_shortcode thrv-content-box" style="" data-css="tve-u-85b41c86a969ee">
+<div class="tve-content-box-background"></div>
+<div class="tve-cb tve_empty_dropzone"><div class="thrv_wrapper thrv-columns" style="" data-css="tve-u-95b41c86a96a33"><div class="tcb-flex-row tcb-resized tcb--cols--3 tcb-medium-wrap" data-css="tve-u-105b41c86a96a75"><div class="tcb-flex-col" data-css="tve-u-115b41c86a96ab8" style=""><div class="tcb-col tve_empty_dropzone" style="" data-css="tve-u-125b41c86a96af9"><div class="tcb-clear" data-css="tve-u-135b41c86a96b3b"><div class="thrv_wrapper thrv-divider tcb-tablet-hidden tcb-mobile-hidden" data-style="tve_sep-1" data-thickness="1" data-color="rgb(194, 194, 194)" style="" data-css="tve-u-145b41c86a96b7d">
+<hr class="tve_sep tve_sep-1">
+</div></div></div></div><div class="tcb-flex-col" data-css="tve-u-155b41c86a96bc0" style=""><div class="tcb-col tve_empty_dropzone" style="" data-css="tve-u-165b41c86a96bff"><div class="thrv_wrapper thrv_text_element tve_empty_dropzone" style="" data-css="tve-u-175b41c86a96c40"><p data-css="tve-u-185b41c86a96c80" style="text-align: center;">Become an HTTP master</p></div></div></div><div class="tcb-flex-col" data-css="tve-u-195b41c86a96cc0" style=""><div class="tcb-col tve_empty_dropzone" style=""><div class="thrv_wrapper thrv-divider tcb-tablet-hidden tcb-mobile-hidden" data-style="tve_sep-1" data-thickness="1" data-color="rgb(194, 194, 194)" style="" data-css="tve-u-205b41c86a96d01">
+<hr class="tve_sep tve_sep-1">
+</div></div></div></div></div></div>
+</div><div class="thrv_wrapper thrv_text_element tve_empty_dropzone" style="" data-css="tve-u-215b41c86a96d40"><p data-css="tve-u-225b41c86a96d7f" style="text-align: center;"><strong>Download FREE eBook:</strong></p></div><div class="thrv_wrapper thrv_text_element tve_empty_dropzone" style="" data-css="tve-u-235b41c86a96dbe"><p data-css="tve-u-245b41c86a96dfe" style="text-align: center;"><strong>The Complete Guide to HTTP</strong></p></div><div class="thrv_wrapper thrv_text_element tve_empty_dropzone" style="" data-css="tve-u-255b41c86a96e3c"><p data-css="tve-u-265b41c86a96e7b" style="text-align: center;">Want to compete with the best?</p></div><div class="thrv_wrapper thrv_text_element tve_empty_dropzone" style="" data-css="tve-u-275b41c86a96eba"><p data-css="tve-u-265b41c86a96e7b" style="text-align: center;">This guide will help you get an edge over your competition</p></div><div class="thrv_wrapper thrv_text_element tve_empty_dropzone" style="" data-css="tve-u-285b41c86a96efa"><p data-css="tve-u-265b41c86a96e7b" style="text-align: center;">without the need to parse through endless RFCs.</p></div><div class="thrv_wrapper thrv_lead_generation" data-connection="api" style="" data-css="tve-u-295b41c86a96f3b"><input type="hidden" class="tve-lg-err-msg" value="{&quot;email&quot;:&quot;Email address invalid&quot;,&quot;phone&quot;:&quot;Phone number invalid&quot;,&quot;password&quot;:&quot;Password invalid&quot;,&quot;passwordmismatch&quot;:&quot;Password mismatch error&quot;,&quot;required&quot;:&quot;Required field missing&quot;}">
+<div class="thrv_lead_generation_container tve_clearfix">
+<form action="https://code-maze.com/enabling-cors-in-asp-net-core/#" method="post" novalidate="novalidate">
+<div class="tve_lead_generated_inputs_container tve_clearfix tve_empty_dropzone">
+<div class="tve_lg_input_container tve_lg_input tcb-icon-display tve_empty_dropzone" data-css="tve-u-305b41c86a96f7c"><div class="thrv_wrapper thrv_icon" data-css="tve-u-315b41c86a96fbc"><svg class="tcb-icon" viewBox="0 0 28 28" data-name="envelope">
+<path d="M28 11.094v12.406c0 1.375-1.125 2.5-2.5 2.5h-23c-1.375 0-2.5-1.125-2.5-2.5v-12.406c0.469 0.516 1 0.969 1.578 1.359 2.594 1.766 5.219 3.531 7.766 5.391 1.313 0.969 2.938 2.156 4.641 2.156h0.031c1.703 0 3.328-1.188 4.641-2.156 2.547-1.844 5.172-3.625 7.781-5.391 0.562-0.391 1.094-0.844 1.563-1.359zM28 6.5c0 1.75-1.297 3.328-2.672 4.281-2.438 1.687-4.891 3.375-7.313 5.078-1.016 0.703-2.734 2.141-4 2.141h-0.031c-1.266 0-2.984-1.437-4-2.141-2.422-1.703-4.875-3.391-7.297-5.078-1.109-0.75-2.688-2.516-2.688-3.938 0-1.531 0.828-2.844 2.5-2.844h23c1.359 0 2.5 1.125 2.5 2.5z"></path>
+</svg></div>
+<input type="email" data-field="email" data-required="1" data-validation="email" name="email" placeholder="Your email address" data-placeholder="Your email address" class="" style="">
+</div>
+<div class="tve_lg_input_container tve_lg_input tcb-icon-display tve_empty_dropzone" data-css="tve-u-325b41c86a96ffc"><div class="thrv_wrapper thrv_icon tcb-icon-display" style="" data-css="tve-u-335b41c86a9703c"><svg class="tcb-icon" viewBox="0 0 20 28" data-name="user">
+<path d="M20 21.859c0 2.281-1.5 4.141-3.328 4.141h-13.344c-1.828 0-3.328-1.859-3.328-4.141 0-4.109 1.016-8.859 5.109-8.859 1.266 1.234 2.984 2 4.891 2s3.625-0.766 4.891-2c4.094 0 5.109 4.75 5.109 8.859zM16 8c0 3.313-2.688 6-6 6s-6-2.688-6-6 2.688-6 6-6 6 2.688 6 6z"></path>
+</svg></div>
+<input type="text" data-field="name" data-required="1" data-validation="" name="name" placeholder="Your name" data-placeholder="Your name" class="" style="">
+</div><div class="tve_lg_input_container tve_submit_container tve_lg_submit" data-css="tve-u-345b41c86a9707b">
+<button type="submit" style="" class="tve-froala">Subscribe and Download!</button>
+</div>
+</div>
+<input type="hidden" name="__tcb_lg_fc" id="__tcb_lg_fc" value="YToxOntzOjk6Im1haWxjaGltcCI7czoxMDoiOGJmZWI4ZWQ1NiI7fQ=="><input id="_submit_option" type="hidden" name="_submit_option" value="message"><input id="__tcb_lg_msg" type="hidden" name="__tcb_lg_msg" value="YToyOntzOjU6ImVycm9yIjtzOjY6IkVycm9yISI7czo3OiJzdWNjZXNzIjtzOjc2OiJZb3UgaGF2ZSBzdWNjZXNzZnVsbHkgc3Vic2NyaWJlZCEgQ2hlY2sgeW91ciBlbWFpbCB0byBjbGFpbSB5b3VyIEZSRUUgZUJvb2shIjt9"><input type="hidden" id="mailchimp_groupin" class="tve-api-extra" name="mailchimp_groupin" value="bfa5d3e4fb"><input type="hidden" id="mailchimp_group" class="tve-api-extra" name="mailchimp_group" value="4bb19d9837"><input type="hidden" id="mailchimp_optin" class="tve-api-extra" name="mailchimp_optin" value="s"></form>
+</div>
+</div></div></div></div></div></div></div></div></article></div><a href="javascript:void(0)" class="tve_p_lb_close" style="display: none" title="Close">x</a></div></div></div></div></div>	<script type="text/javascript">
+	var sidebarOffset = 0;
+	var yOffset = 120;
+	var sidebar = jQuery(".et_pb_extra_column_sidebar");
+	setInterval(
+		(function x() {
+			if(jQuery(window).width() < 1025){
+				return x;
+			}
+			if(window.scrollY > yOffset)
+				if(window.scrollY < jQuery('#footer').position().top - sidebar.height() - 60){
+					sidebar.addClass('fixed-sidebar');
+					sidebar.css({top:10});
+				}else{
+					sidebar.removeClass('fixed-sidebar');
+					sidebar.css({top: jQuery('#footer').position().top - sidebar.height() - 180});
+				}
+			else if(window.scrollY <= yOffset){
+				sidebar.removeClass('fixed-sidebar');
+				sidebar.css({top:0});
+			}
+			return x;
+		})(), 30);
+</script>
+
+<script type="text/javascript">
+    window._mfq = window._mfq || [];
+    (function() {
+        var mf = document.createElement("script");
+        mf.type = "text/javascript"; mf.async = true;
+        mf.src = "//cdn.mouseflow.com/projects/5f3f40ed-62d9-4241-9d93-46d1e6991972.js";
+        document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+</script>
+
+
+<iframe id="google_osd_static_frame_5557265714280" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./How to Enable CORS in ASP.NET Core By Example - Code Maze Blog_files/saved_resource.html"></iframe></body></html>
