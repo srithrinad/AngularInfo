@@ -1,1 +1,0 @@
-OpenIddict is an open-source OpenID Connect authorization server that adds support for generating tokens in your API. ... There are a number of token authentication packages that add this functionality to ASP.NET core applications, and the one I'll use here is called OpenIddict.
