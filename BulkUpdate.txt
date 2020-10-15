@@ -1,0 +1,146 @@
+
+                // --------------
+                DataSet objDS = new DataSet();
+                objDS.Tables.Add(myTable);
+                System.Text.StringBuilder sb = new System.Text.StringBuilder(1000);
+                System.IO.StringWriter sw = new System.IO.StringWriter(sb);
+                foreach (DataColumn col in objDS.Tables[0].Columns)
+                {
+                    col.ColumnMapping = System.Data.MappingType.Attribute;
+                }
+                objDS.WriteXml(sw, System.Data.XmlWriteMode.WriteSchema);
+                //-----------------
+
+
+
+                //--------- Save At BackEnd
+                Invoices Obj_inv = new Invoices();
+                Obj_inv.SaveInvoiceDetails(StartDate, EndDate, PINSUSED, RETAILCOST, DISCOUNT, PINCOST, Convert.ToString(Session["UserId"]), FileName,                                  Convert.ToString(sb));
+
+              
+
+                   this.lbl_error.Text = "Invoices imported successfully";
+                //------------------
+
+
+
+
+public void SaveInvoiceDetails(string StartDate, string EndDate, string PINSUSED, string RETAILCOST, string DISCOUNT, string PINCOST, string UserId, string FileName, string sb)
+    {
+        SqlParameter[] arParams = new SqlParameter[9];
+        arParams[0] = new SqlParameter("@invoice_from_dt", (StartDate.Length > 0) ? Convert.ToDateTime(StartDate) : SqlDateTime.Null);
+        arParams[1] = new SqlParameter("@invoice_to_dt", (EndDate.Length > 0) ? Convert.ToDateTime(EndDate) : SqlDateTime.Null);
+        arParams[2] = new SqlParameter("@pins_used", (PINSUSED.Length > 0) ? Convert.ToInt32(PINSUSED) : SqlInt32.Null);
+        arParams[3] = new SqlParameter("@retail_cost", (RETAILCOST.Length > 0) ? Convert.ToDouble(RETAILCOST) : SqlDouble.Null);
+        arParams[4] = new SqlParameter("@discount", (DISCOUNT.Length > 0) ? Convert.ToDouble(DISCOUNT) : SqlDouble.Null);
+        arParams[5] = new SqlParameter("@pin_cost", (PINCOST.Length > 0) ? Convert.ToDouble(PINCOST) : SqlDouble.Null);
+        arParams[6] = new SqlParameter("@user_id", Convert.ToString(UserId));
+        arParams[7] = new SqlParameter("@FileName", FileName);
+        arParams[8] = new SqlParameter("@XmlData", System.Data.SqlDbType.NText);
+        arParams[8].Value = Convert.ToString(sb);
+        DataAccess.SqlHelper.ExecuteNonQuery(DataAccess.DSN.Connection("DBConnectionString"), CommandType.StoredProcedure, "Sp_InsertInvoices", arParams);
+
+    }
+
+
+---------------------------
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Srithrinad
+-- Create date: July 1,2009
+-- Description:	To insert Invoice and InvoiceDlts
+-- =============================================
+ALTER PROCEDURE [dbo].[Sp_InsertInvoices]
+(
+	@invoice_from_dt  AS DATETIME,
+	@invoice_to_dt  AS DATETIME,
+	@pins_used AS INT,
+	@retail_cost AS NUMERIC(18,2),
+	@discount AS NUMERIC(18,2),
+	@pin_cost AS NUMERIC(18,2),
+	@user_id AS VARCHAR(20),
+	@FileName AS VARCHAR(500),
+    @XmlData AS NText
+ 
+)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+DECLARE @InvoiceNumber  AS INT
+
+    INSERT INTO invoices
+           ([invoice_from_dt]
+           ,[invoice_to_dt]
+           ,[entry_date]
+           ,[pins_used]
+           ,[retail_cost]
+           ,[discount]
+           ,[pin_cost]
+		   ,[file_name]	
+           ,[user_id])
+     VALUES
+           (@invoice_from_dt, 
+           @invoice_to_dt,
+           GETDATE(),
+           @pins_used, 
+           @retail_cost, 
+           @discount,
+           @pin_cost, 
+		   @FileName,
+           @user_id)
+
+
+
+SELECT @InvoiceNumber = @@IDENTITY
+
+---------------
+DECLARE @hDoc int   
+EXEC  sp_xml_preparedocument @hDoc OUTPUT,@XmlData
+
+
+INSERT INTO invoice_dtl(invoice_nbr,card_brand_name,batch_nbr,sequence_nbr,face_value,pin_used_dt,location_id)
+SELECT   @InvoiceNumber,card_brand_name,batch_nbr,sequence_nbr,face_value,pin_used_dt,location_id
+FROM     OPENXML (@hdoc, '/NewDataSet/Table1',1)
+WITH (card_brand_name varchar(100),  batch_nbr Integer, sequence_nbr Integer,face_value Numeric(18,2),pin_used_dt DateTime,location_id Integer)  XMLRow
+
+
+
+EXEC sp_xml_removedocument @hDoc
+---------
+
+
+
+END
+
+
+-------------
+
+CREATE PROC sp_UpdateXML @empdata nText
+AS 
+ DECLARE @hDoc int   
+ exec sp_xml_preparedocument @hDoc OUTPUT,@empdata   
+
+--This code updates old data.
+ UPDATE Employee 
+ SET 
+   Employee.FirstName = XMLEmployee.FirstName,
+   Employee.LastName = XMLEmployee.LastName
+ FROM OPENXML(@hDoc, 'NewDataSet/Employee')   
+       WITH (EmployeeId Integer, FirstName varchar(100),  LastName varchar(100))  XMLEmployee
+WHERE    Employee.EmployeeId = XMLEmployee.EmployeeId
+
+--This code inserts new data.
+
+Insert Into Employee 
+SELECT   EmployeeId, FirstName, LastName
+	FROM       OPENXML (@hdoc, '/NewDataSet/Employee',1)
+WITH (EmployeeId Integer, FirstName varchar(100),  LastName varchar(100))  XMLEmployee
+Where XMLEmployee.EmployeeId Not IN (Select EmployeeID from Employee)
+
+EXEC sp_xml_removedocument @hDoc
+GO
